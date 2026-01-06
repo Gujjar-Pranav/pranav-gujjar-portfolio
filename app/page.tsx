@@ -511,7 +511,7 @@ export default function Home() {
               </div>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-black/70">
-                End-to-end machine learning systems engineered for reliability, explainability, and production deployment — from data pipelines to APIs and dashboards.
+                End-to-end machine learning systems engineered for reliability, explainability, and production deployment from data pipelines to APIs and dashboards.
               </p>
 
               {/* Premium quick links */}
@@ -582,7 +582,7 @@ export default function Home() {
       </Section>
 
       {/* 2) WHY HIRE ME */}
-      <Section id="why" title="Why Hire Me" subtitle="Impact + reliability + deployment readiness (short, evidence-based)." icon={<ShieldCheck className="h-5 w-5 text-black/70" />}>
+      <Section id="why" title="Why Hire Me" subtitle="Impact + reliability + deployment readiness." icon={<ShieldCheck className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-3">
           <Card>
             <h3 className="font-semibold">Production-ready delivery</h3>
@@ -608,7 +608,7 @@ export default function Home() {
       </Section>
 
       {/* 2.5) KEY ACHIEVEMENTS */}
-      <Section id="achievements" title="Key Achievements" subtitle="Recruiter-friendly highlights at a glance." icon={<BarChart3 className="h-5 w-5 text-black/70" />}>
+      <Section id="achievements" title="Key Achievements" subtitle="Highlights at a glance." icon={<BarChart3 className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {achievements.map((a) => (
             <div key={a.title} className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
@@ -625,7 +625,7 @@ export default function Home() {
       </Section>
 
       {/* 3) EXPERIENCE */}
-      <Section id="experience" title="Experience" subtitle="Expandable roles — easy to add more later." icon={<Briefcase className="h-5 w-5 text-black/70" />}>
+      <Section id="experience" title="Experience" subtitle="Expandable roles." icon={<Briefcase className="h-5 w-5 text-black/70" />}>
         <div className="space-y-4">
           {experience.map((job, idx) => (
             <Collapsible
@@ -645,7 +645,7 @@ export default function Home() {
       </Section>
 
       {/* 4) SKILLS */}
-      <Section id="skills" title="Skills" subtitle="Expandable categories — recruiter scan + ATS coverage." icon={<Wrench className="h-5 w-5 text-black/70" />}>
+      <Section id="skills" title="Skills" subtitle="Expandable categories." icon={<Wrench className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-2">
           {skillGroups.map((g, idx) => (
             <Collapsible key={g.title} title={g.title} subtitle={g.subtitle} defaultOpen={idx === 0}>
@@ -811,7 +811,7 @@ export default function Home() {
       </Section>
 
       {/* 7) CERTIFICATIONS */}
-      <Section id="certifications" title="Certifications & Courses" subtitle="ML-first grouping for recruiter scanning." icon={<Award className="h-5 w-5 text-black/70" />}>
+      <Section id="certifications" title="Certifications & Courses" subtitle="ML-first grouping." icon={<Award className="h-5 w-5 text-black/70" />}>
         <Card>
           <p className="text-sm leading-7 text-black/70">
             Selected certificates from my training portfolio. Full list is available on LinkedIn and my GitHub certificates repository.

@@ -122,7 +122,7 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       `Links:\n` +
       `- GitHub: ${LINKS.githubProfile}\n` +
       `- LinkedIn: ${LINKS.linkedin}\n` +
-      `- Download CV: ${LINKS.resumePdf}\n` +
+      `- Download CV: [Pranav_Gujjar_CV.pdf](${LINKS.resumePdf})\n` +
       `- WhatsApp: ${LINKS.whatsapp}\n` +
       `- Call: ${LINKS.phone}\n` +
       `- Email: ${LINKS.email}\n` +
