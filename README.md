@@ -5,11 +5,11 @@ A modern, production-focused portfolio built with Next.js (App Router) showcasin
 Live Demo (Vercel):
 https://your-project-name.vercel.app
 
-Overview
+### Overview
 
 This portfolio is designed to reflect how ML systems are built and shipped in production, not just modeled in notebooks.
 
-Key goals:
+### Key goals:
 
 Demonstrate end-to-end ML delivery
 
@@ -19,7 +19,7 @@ Provide recruiter-friendly navigation
 
 Enable interactive exploration via an offline AI assistant
 
-Key Features
+### Key Features
 
 Production-Ready ML Portfolio
 
@@ -63,7 +63,7 @@ Optimized for desktop and mobile viewing
 
 Lightweight and fast
 
-Tech Stack
+### Tech Stack
 
 Frontend
 
@@ -93,7 +93,7 @@ Vercel (free tier)
 
 Automatic CI/CD from GitHub
 
-Architecture
+### Architecture
 High-Level Architecture Flow
 
 User interacts with the portfolio UI or chat assistant
@@ -112,7 +112,7 @@ Responses are rendered using Markdown for clickable links
 
 App is deployed and served via Vercel CDN
 
-Project Structure
+### Project Structure
 
 app/
 
@@ -164,9 +164,9 @@ tailwind.config.ts
 
 next.config.js
 
-Offline AI Assistant – Capabilities
+### Offline AI Assistant – Capabilities
 
-The assistant can answer questions about:
+#### The assistant can answer questions about:
 
 Projects (details, GitHub links, demos)
 
@@ -182,7 +182,7 @@ GitHub repositories (real-time)
 
 Resume download
 
-Example queries:
+#### Example queries:
 
 “ReviewSense AI project details”
 
@@ -196,7 +196,7 @@ Example queries:
 
 If a query is out of scope, the assistant gently redirects the user.
 
-Screenshots
+### Screenshots
 
 Add your screenshots to public/screenshots/ and reference them here:
 
@@ -204,7 +204,7 @@ Add your screenshots to public/screenshots/ and reference them here:
 ![Portfolio Chat](public/screenshots/chat.png)
 ![Projects Section](public/screenshots/projects.png)
 
-Getting Started (Local Development)
+### Getting Started (Local Development)
 
 Install dependencies:
 
@@ -220,7 +220,7 @@ Open in browser:
 
 http://localhost:3000
 
-Deployment
+### Deployment
 
 This project is deployed on Vercel.
 
@@ -238,7 +238,7 @@ Deploy
 
 No custom domain is required.
 
-Why This Portfolio Stands Out
+### Why This Portfolio Stands Out
 
 Shows engineering maturity, not just models
 
@@ -250,7 +250,7 @@ Includes an interactive assistant
 
 Fully free, offline, and deterministic
 
-Author
+### Author
 
 Pranav Gujjar
 Machine Learning Engineer / Data Scientist
