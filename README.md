@@ -255,6 +255,7 @@ No custom domain is required.
 ### Author
 
 Pranav Gujjar
+
 Machine Learning Engineer / Data Scientist
 
 GitHub: https://github.com/Gujjar-Pranav
