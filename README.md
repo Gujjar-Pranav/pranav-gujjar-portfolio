@@ -11,176 +11,176 @@ This portfolio is designed to reflect how ML systems are built and shipped in pr
 
 ### Key goals:
 
-Demonstrate end-to-end ML delivery
+- Demonstrate end-to-end ML delivery
 
-Highlight measurable business impact
+- Highlight measurable business impact
 
-Provide recruiter-friendly navigation
+- Provide recruiter-friendly navigation
 
-Enable interactive exploration via an offline AI assistant
+- Enable interactive exploration via an offline AI assistant
 
 ### Key Features
 
-Production-Ready ML Portfolio
+1. Production-Ready ML Portfolio
 
-End-to-end projects with modeling, evaluation, deployment, and UI
+- End-to-end projects with modeling, evaluation, deployment, and UI
 
-FastAPI, Streamlit, Docker, CI/CD patterns reflected in content
+- FastAPI, Streamlit, Docker, CI/CD patterns reflected in content
 
-Offline AI Portfolio Assistant
+2. Offline AI Portfolio Assistant
 
-No paid APIs, no LLM calls
+- No paid APIs, no LLM calls
 
-Deterministic answers from a curated knowledge base
+- Deterministic answers from a curated knowledge base
 
-Fuzzy search and typo handling using Fuse.js
+- Fuzzy search and typo handling using Fuse.js
 
-Real-Time GitHub Integration
+3. Real-Time GitHub Integration
 
-Fetches repositories live from GitHub REST API
+- Fetches repositories live from GitHub REST API
 
-Supports:
+- Supports:
 
-Repo list
+  - Repo list
 
-Repo details
+  - Repo details
 
-Direct links
+  - Direct links
 
-No hardcoded repo data
+- No hardcoded repo data
 
-Recruiter & ATS Friendly
+4. Recruiter & ATS Friendly
 
-Clear section ordering
+- Clear section ordering
 
-Keyword-rich skills and experience
+- Keyword-rich skills and experience
 
-Clean, scannable layout
+- Clean, scannable layout
 
-Mobile-Responsive UI
+5. Mobile-Responsive UI
 
-Optimized for desktop and mobile viewing
+- Optimized for desktop and mobile viewing
 
-Lightweight and fast
+- Lightweight and fast
 
 ### Tech Stack
 
-Frontend
+1.Frontend
 
-Next.js 14 (App Router)
+- Next.js 14 (App Router)
 
-React
+- React
 
-TypeScript
+- TypeScript
 
-Tailwind CSS
+- Tailwind CSS
 
-AI / Search Logic
+2. AI / Search Logic
 
-Fuse.js (fuzzy matching)
+- Fuse.js (fuzzy matching)
 
-Structured knowledge base (TypeScript)
+- Structured knowledge base (TypeScript)
 
-Backend
+3. Backend
 
-Next.js API Routes
+- Next.js API Routes
 
-GitHub REST API
+- GitHub REST API
 
-Deployment
+4. Deployment
 
-Vercel (free tier)
+- Vercel (free tier)
 
-Automatic CI/CD from GitHub
+- Automatic CI/CD from GitHub
 
 ### Architecture
 High-Level Architecture Flow
 
-User interacts with the portfolio UI or chat assistant
+- User interacts with the portfolio UI or chat assistant
 
-Next.js App Router renders pages and components
+- Next.js App Router renders pages and components
 
-PortfolioChat component processes user intent
+- PortfolioChat component processes user intent
 
-Fuse.js matches queries against the knowledge base
+- Fuse.js matches queries against the knowledge base
 
-For GitHub requests:
+- For GitHub requests:
 
 /api/github fetches live data from GitHub REST API
 
-Responses are rendered using Markdown for clickable links
+- Responses are rendered using Markdown for clickable links
 
-App is deployed and served via Vercel CDN
+- App is deployed and served via Vercel CDN
 
 ### Project Structure
 
-app/
+1. app/
 
-Core Next.js App Router directory
+ Core Next.js App Router directory
 
-app/page.tsx
+2. app/page.tsx
 
-Main landing page
+ Main landing page
 
-Hero, sections, and chat trigger
+ Hero, sections, and chat trigger
 
-app/layout.tsx
+3. app/layout.tsx
 
-Global layout and metadata
+ Global layout and metadata
 
-app/api/github/route.ts
+4. app/api/github/route.ts
 
-Server-side GitHub API integration
+ Server-side GitHub API integration
 
-Fetches repositories in real time
+ Fetches repositories in real time
 
-components/PortfolioChat.tsx
+5. components/PortfolioChat.tsx
 
-Offline AI assistant
+ Offline AI assistant
 
-Intent detection and fuzzy matching
+ Intent detection and fuzzy matching
 
-data/knowledge.ts
+6. data/knowledge.ts
 
-Structured portfolio knowledge base
+ Structured portfolio knowledge base
 
-Projects, experience, education, certifications, links
+ Projects, experience, education, certifications, links
 
-public/
+7. public/
 
 Static assets
 
-public/Pranav_Gujjar_CV.pdf
+8. public/Pranav_Gujjar_CV.pdf
 
 Downloadable resume used by chat and UI
 
-Configuration Files
+9. Configuration Files
 
-package.json
+ package.json
 
-tsconfig.json
+ tsconfig.json
 
-tailwind.config.ts
+ tailwind.config.ts
 
-next.config.js
+ next.config.js
 
 ### Offline AI Assistant – Capabilities
 
 #### The assistant can answer questions about:
 
-Projects (details, GitHub links, demos)
+1. Projects (details, GitHub links, demos)
 
-Skills and technical stack
+2. Skills and technical stack
 
-Experience and achievements (ROI metrics)
+3. Experience and achievements (ROI metrics)
 
-Education and certifications
+4. Education and certifications
 
-Contact information
+5. Contact information
 
-GitHub repositories (real-time)
+6. GitHub repositories (real-time)
 
-Resume download
+7. Resume download
 
 #### Example queries:
 
@@ -197,26 +197,28 @@ Resume download
 If a query is out of scope, the assistant gently redirects the user.
 
 ### Screenshots
+<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 20" src="https://github.com/user-attachments/assets/019d8664-741c-49eb-a1e4-a0241b9be9f7" />
+<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 25 46" src="https://github.com/user-attachments/assets/f9c000c5-fc6c-4964-9fac-55770cf55571" />
+<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 26 02" src="https://github.com/user-attachments/assets/d72f7626-96e6-49e9-9520-a6da9a448687" />
+<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 41" src="https://github.com/user-attachments/assets/aecbd181-5450-4654-8438-7489a7856165" />
+<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 59" src="https://github.com/user-attachments/assets/01f5852b-601b-4461-9a92-b4668b646572" />
+<img width="300" height="200" alt="Screenshot 2026-01-06 at 23 25 17" src="https://github.com/user-attachments/assets/ec42cfae-d2ed-44a3-87d0-c0972cec6acd" />
+<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 25 34" src="https://github.com/user-attachments/assets/86fa3755-6013-4b8b-978c-67d62739244c" />
 
-Add your screenshots to public/screenshots/ and reference them here:
-
-![Homepage](public/screenshots/homepage.png)
-![Portfolio Chat](public/screenshots/chat.png)
-![Projects Section](public/screenshots/projects.png)
 
 ### Getting Started (Local Development)
 
-Install dependencies:
+1. Install dependencies:
 
 npm install
 
 
-Run the development server:
+2. Run the development server:
 
 npm run dev
 
 
-Open in browser:
+3. Open in browser:
 
 http://localhost:3000
 
@@ -226,29 +228,29 @@ This project is deployed on Vercel.
 
 Deployment steps:
 
-Push code to GitHub
+1. Push code to GitHub
 
-Import repository into Vercel
+2. Import repository into Vercel
 
-Set environment variable (optional):
+3. Set environment variable (optional):
 
-GITHUB_TOKEN (to avoid API rate limits)
+ GITHUB_TOKEN (to avoid API rate limits)
 
-Deploy
+4. Deploy
 
 No custom domain is required.
 
 ### Why This Portfolio Stands Out
 
-Shows engineering maturity, not just models
+1. Shows engineering maturity, not just models
 
-Demonstrates deployment readiness
+2. Demonstrates deployment readiness
 
-Uses real data and real APIs
+3. Uses real data and real APIs
 
-Includes an interactive assistant
+4. Includes an interactive assistant
 
-Fully free, offline, and deterministic
+5. Fully free, offline, and deterministic
 
 ### Author
 
