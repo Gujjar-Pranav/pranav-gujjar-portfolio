@@ -3,7 +3,7 @@ Pranav Gujjar – Machine Learning Engineer Portfolio
 A modern, production-focused portfolio built with Next.js (App Router) showcasing real-world Machine Learning engineering, deployment-ready projects, and an offline AI portfolio assistant with real-time GitHub integration.
 
 Live Demo (Vercel):
-https://your-project-name.vercel.app
+https://pranav-gujjar-portfolio.vercel.app
 
 ### Overview
 
