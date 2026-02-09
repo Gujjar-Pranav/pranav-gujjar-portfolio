@@ -33,6 +33,8 @@ import {
   ChevronDown,
   MessageCircle,
   Target,
+  Eye,
+  Lock,
 } from "lucide-react";
 
 type LinkSet = { code: string; demo?: string; docs?: string };
@@ -422,6 +424,58 @@ export default function Home() {
         "Streamlit UI → prediction + PDF report + patient history export",
       ],
     },
+
+    // ✅ NEW PROJECT (placed beside Diabetes app as requested)
+    {
+      title: "Retina-AI",
+      icon: <Eye className="h-5 w-5 text-black/70" />,
+      description:
+        "Clinical diabetic retinopathy screening MVP: patient & clinician registry → fundus upload → DR/No-DR inference with confidence + image-quality gates → risk stratification → Grad-CAM explainability → one-page clinical PDF reports, secured with role-based authentication.",
+      badges: [
+        { label: "Clinical AI", icon: <HeartPulse className="h-4 w-4" /> },
+        { label: "Explainability", icon: <Eye className="h-4 w-4" /> },
+        { label: "PDF Reports", icon: <FileText className="h-4 w-4" /> },
+        { label: "Auth + Roles", icon: <Lock className="h-4 w-4" /> },
+      ],
+      tags: [
+        "Python",
+        "Streamlit",
+        "PyTorch",
+        "Grad-CAM",
+        "OpenCV/Pillow",
+        "Risk Stratification",
+        "ReportLab",
+        "Ruff",
+        "GitHub Actions",
+        "Clinical Workflow",
+      ],
+      links: {
+        code: "https://github.com/Gujjar-Pranav/retina-ai",
+        demo: "https://retina-ai-zpkddbsb6m2rf6tfgd6rjh.streamlit.app",
+      },
+      // NOTE: add these images into /public/projects/ with these names
+      coverImage: "/projects/retina-ai_1.png",
+      screenshots: [
+        "/projects/retina-ai_1.png",
+        "/projects/retina-ai_2.png",
+        "/projects/retina-ai_3.png",
+        "/projects/retina-ai_4.png",
+      ],
+      highlights: [
+        "End-to-end screening workflow: Registry → Screening → Risk → Explainability → Reporting",
+        "PyTorch inference with confidence + image quality gating",
+        "Grad-CAM explainability embedded into clinical PDF reports",
+        "Role-based access control (Admin / Registry / Screening / Reports)",
+        "CI/CD via GitHub Actions (Ruff linting + import smoke tests)",
+      ],
+      architecture: [
+        "Streamlit UI → Auth + Roles → Registry / Screening / Reports tabs",
+        "Fundus upload → PyTorch model inference (DR/No-DR) + confidence scoring",
+        "Quality gates + risk stratification + clinical recommendations",
+        "Grad-CAM generation → PDF builder (ReportLab) → reports/*.pdf",
+      ],
+    },
+
     {
       title: "Glass Identification",
       icon: <FlaskConical className="h-5 w-5 text-black/70" />,
@@ -760,7 +814,7 @@ export default function Home() {
                       </a>
                     ) : null}
 
-                    {/* ✅ API Docs link added (only change) */}
+                    {/* ✅ API Docs link (kept as-is) */}
                     {p.links.docs ? (
                       <a
                         href={p.links.docs}

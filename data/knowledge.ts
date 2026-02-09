@@ -23,6 +23,9 @@ export const LINKS = {
   strategicIntelRepo: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
   strategicIntelDemo: "https://strategic-intelligence-stack.vercel.app",
   strategicIntelDocs: "https://strategic-intelligence-stack.onrender.com/docs",
+
+  retinaAiRepo: "https://github.com/Gujjar-Pranav/retina-ai",
+  retinaAiDemo: "https://retina-ai-zpkddbsb6m2rf6tfgd6rjh.streamlit.app",
 };
 
 export const KNOWLEDGE_BASE: KBItem[] = [
@@ -121,6 +124,7 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       "certifications link",
       "certificate link",
     ],
+    // ✅ As requested: "links" should NOT include specific project links
     answer:
       `Links:\n` +
       `- GitHub: ${LINKS.githubProfile}\n` +
@@ -154,7 +158,7 @@ export const KNOWLEDGE_BASE: KBItem[] = [
     title: "Projects",
     keywords: ["projects", "project", "portfolio", "work samples", "case studies", "project list"],
     answer:
-      "Projects (quick list):\n- Strategic Intelligence Stack — production-grade customer segmentation + decision intelligence\n- ReviewSense AI — sentiment + calibrated confidence/risk routing (GitHub + demo)\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow (GitHub + demo)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “Strategic Intelligence Stack”) for full details + links.",
+      "Projects (quick list):\n- Strategic Intelligence Stack — production-grade customer segmentation + decision intelligence\n- ReviewSense AI — sentiment + calibrated confidence/risk routing\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow\n- Retina-AI — clinical diabetic retinopathy screening (registry → screening → explainability → PDF reports)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “Retina-AI”) for full details + links.",
   },
 
   // --- Specific projects ---
@@ -187,6 +191,38 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       LINKS.strategicIntelDemo +
       "\nAPI Docs (Swagger): " +
       LINKS.strategicIntelDocs,
+  },
+
+  {
+    id: "retina-ai",
+    title: "Retina-AI",
+    keywords: [
+      "retina-ai",
+      "retina ai",
+      "retina",
+      "diabetic retinopathy",
+      "retinopathy",
+      "dr screening",
+      "fundus",
+      "fundus image",
+      "grad-cam",
+      "explainability",
+      "clinical pdf",
+      "pdf report",
+      "screening",
+      "registry",
+      "role based",
+      "authentication",
+      "pytorch",
+      "streamlit",
+    ],
+    link: LINKS.retinaAiRepo,
+    demo: LINKS.retinaAiDemo,
+    answer:
+      "Retina-AI — Clinical Diabetic Retinopathy Screening (MVP):\n- End-to-end workflow: patient/clinician registry → fundus upload → DR/No-DR inference\n- Confidence + image-quality gates + automatic risk stratification\n- Grad-CAM explainability integrated into the workflow\n- One-page clinical PDF reports (patient summary, prediction + confidence, risk factors, quality metrics, Grad-CAM, clinician notes)\n- Role-based authentication (Admin / Registry / Screening / Reports)\n- CI/CD via GitHub Actions (Ruff linting + import smoke tests)\n- Initial login details userid: admin & password: admin123\n\nGitHub: " +
+      LINKS.retinaAiRepo +
+      "\nLive Demo: " +
+      LINKS.retinaAiDemo,
   },
 
   {
