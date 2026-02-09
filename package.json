@@ -1,4 +1,13 @@
+
+
+
 {
+  "scripts": {
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "build": "next build"
+  },
+
   "name": "pranav-portfolio",
   "version": "0.1.0",
   "private": true,
@@ -28,3 +37,4 @@
     "typescript": "^5"
   }
 }
+
