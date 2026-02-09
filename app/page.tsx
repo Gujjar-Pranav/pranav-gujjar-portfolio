@@ -1,16 +1,135 @@
 "use client";
 
+import { useMemo, useState } from "react";
+
 import PortfolioChat from "./components/PortfolioChat";
 import Image from "next/image";
 
-import { Github, Linkedin, FileText, Mail, Phone, MapPin, MessageCircle, Sparkles, ShieldCheck, Briefcase, Wrench, FolderGit2, GraduationCap, Award, BarChart3 } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  FileText,
+  Mail,
+  Phone,
+  MapPin,
+  MessageCircle,
+  Sparkles,
+  ShieldCheck,
+  Briefcase,
+  Wrench,
+  FolderGit2,
+  GraduationCap,
+  Award,
+  BarChart3,
+} from "lucide-react";
 
-import { Card, Chip, Collapsible, Container, IconLink, NavLink, PrimaryLink, Section, Tag } from "./components/portfolio/ui";
+import {
+  Card,
+  Chip,
+  Collapsible,
+  Container,
+  IconLink,
+  NavLink,
+  PrimaryLink,
+  Section,
+  Tag,
+  ClickTag,
+  Modal,
+  ProjectListLink,
+} from "./components/portfolio/ui";
+
 import ProjectCard from "./components/portfolio/ProjectCard";
 
 import { NAV, achievements, certGroups, education, experience, projects, skillGroups } from "./components/portfolio/data";
 
+type ProjectMini = { title: string; href?: string };
+
+function normalizeSkillKey(s: string) {
+  return s.toLowerCase().trim();
+}
+
 export default function Home() {
+  // ✅ Skill → Related Projects mapping (edit here only in future)
+  // Keys must match EXACT skill text shown in the UI (case-insensitive handled).
+  const SKILL_TO_PROJECTS: Record<string, ProjectMini[]> = useMemo(
+    () => ({
+      // --- Core ---
+      "python": [
+        { title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" },
+        { title: "Diabetes Prediction App", href: "https://github.com/Gujjar-Pranav/Diabetes_Prediction_App" },
+        { title: "Retina-AI", href: "https://github.com/Gujjar-Pranav/retina-ai" },
+        { title: "Glass Identification", href: "https://github.com/Gujjar-Pranav/Glass_Identification" },
+        { title: "Meeting Task Assignment", href: "https://github.com/Gujjar-Pranav/Meeting_task_assignment" },
+      ],
+      "sql": [{ title: "Forecasting work (Vertexblue internship)" }],
+
+      "scikit-learn": [
+        { title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" },
+        { title: "Diabetes Prediction App", href: "https://github.com/Gujjar-Pranav/Diabetes_Prediction_App" },
+        { title: "Glass Identification", href: "https://github.com/Gujjar-Pranav/Glass_Identification" },
+      ],
+
+      "pytorch": [{ title: "Retina-AI", href: "https://github.com/Gujjar-Pranav/retina-ai" }],
+
+      "tensorflow": [{ title: "Retinal vessel segmentation (MSc dissertation)" }],
+
+      "fastapi": [
+        { title: "Strategic Intelligence Stack", href: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack" },
+        { title: "Glass Identification", href: "https://github.com/Gujjar-Pranav/Glass_Identification" },
+      ],
+
+      "streamlit": [
+        { title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" },
+        { title: "Diabetes Prediction App", href: "https://github.com/Gujjar-Pranav/Diabetes_Prediction_App" },
+        { title: "Retina-AI", href: "https://github.com/Gujjar-Pranav/retina-ai" },
+        { title: "Glass Identification", href: "https://github.com/Gujjar-Pranav/Glass_Identification" },
+      ],
+
+      "docker": [{ title: "Glass Identification", href: "https://github.com/Gujjar-Pranav/Glass_Identification" }],
+
+      // --- NLP & Speech ---
+      "tf-idf": [{ title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" }],
+      "linear svm": [{ title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" }],
+      "speech-to-text (whisper)": [{ title: "Meeting Task Assignment", href: "https://github.com/Gujjar-Pranav/Meeting_task_assignment" }],
+      "rule-based nlp": [
+        { title: "Meeting Task Assignment", href: "https://github.com/Gujjar-Pranav/Meeting_task_assignment" },
+        { title: "Retina-AI (workflow/rules)", href: "https://github.com/Gujjar-Pranav/retina-ai" },
+      ],
+
+      // --- CV ---
+      "u-net": [{ title: "Retinal vessel segmentation (MSc dissertation)" }],
+      "image segmentation": [{ title: "Retinal vessel segmentation (MSc dissertation)" }],
+
+      // --- Full-stack / dashboards ---
+      "next.js": [{ title: "Strategic Intelligence Stack", href: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack" }],
+      "plotly": [{ title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" }],
+
+      // --- MLOps ---
+      "ci/cd (github actions)": [
+        { title: "Retina-AI", href: "https://github.com/Gujjar-Pranav/retina-ai" },
+        { title: "Glass Identification", href: "https://github.com/Gujjar-Pranav/Glass_Identification" },
+        { title: "ReviewSense AI", href: "https://github.com/Gujjar-Pranav/review-sense-ai" },
+      ],
+    }),
+    []
+  );
+
+  const [skillModalOpen, setSkillModalOpen] = useState(false);
+  const [activeSkill, setActiveSkill] = useState<string>("");
+  const [activeProjects, setActiveProjects] = useState<ProjectMini[]>([]);
+
+  function openSkillProjects(skillLabel: string) {
+    const key = normalizeSkillKey(skillLabel);
+    const related = SKILL_TO_PROJECTS[key];
+
+    // If no mapping exists, keep current UI behavior (no modal).
+    if (!related || related.length === 0) return;
+
+    setActiveSkill(skillLabel);
+    setActiveProjects(related);
+    setSkillModalOpen(true);
+  }
+
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Top Nav */}
@@ -179,19 +298,50 @@ export default function Home() {
       </Section>
 
       {/* SKILLS */}
-      <Section id="skills" title="Skills" subtitle="Expandable categories." icon={<Wrench className="h-5 w-5 text-black/70" />}>
+      <Section id="skills" title="Skills" subtitle="Expandable categories. Click a skill to see related projects." icon={<Wrench className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-2">
           {skillGroups.map((g, idx) => (
             <Collapsible key={g.title} title={g.title} subtitle={g.subtitle} defaultOpen={idx === 0}>
               <div className="flex flex-wrap gap-2">
-                {g.items.map((t) => (
-                  <Tag key={t}>{t}</Tag>
-                ))}
+                {g.items.map((t) => {
+                  const hasLinks = Boolean(SKILL_TO_PROJECTS[normalizeSkillKey(t)]?.length);
+
+                  // If there is no mapping, keep the same Tag behavior (no click, no visual change).
+                  if (!hasLinks) return <Tag key={t}>{t}</Tag>;
+
+                  return (
+                    <ClickTag
+                      key={t}
+                      onClick={() => openSkillProjects(t)}
+                      title="Click to see related projects"
+                      aria-label={`Show projects related to ${t}`}
+                    >
+                      {t}
+                    </ClickTag>
+                  );
+                })}
               </div>
             </Collapsible>
           ))}
         </div>
       </Section>
+
+      {/* ✅ Skill → Projects modal */}
+      <Modal open={skillModalOpen} title={`Projects using: ${activeSkill}`} onClose={() => setSkillModalOpen(false)}>
+        <div className="space-y-3">
+          <div className="text-sm text-black/70">Related projects:</div>
+
+          <div className="space-y-2">
+            {activeProjects.map((p) => (
+              <div key={p.title} className="rounded-xl border border-black/10 bg-white px-4 py-3">
+                <ProjectListLink title={p.title} href={p.href} />
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-2 text-xs text-black/50">Tip: add/update mappings inside <code>SKILL_TO_PROJECTS</code> in <code>page.tsx</code>.</div>
+        </div>
+      </Modal>
 
       {/* PROJECTS */}
       <Section id="projects" title="Projects" subtitle="Clean cards + expandable evidence (screenshots, highlights, architecture)." icon={<FolderGit2 className="h-5 w-5 text-black/70" />}>

@@ -107,7 +107,9 @@ export default function ProjectCard({ p }: { p: Project }) {
           <div className="mt-6">
             <details className="group rounded-2xl border border-black/10 bg-white">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3">
-                <span className="text-sm font-semibold text-black/80">Read more (evidence, screenshots, architecture)</span>
+                <span className="text-sm font-semibold text-black/80">
+                  Read more (evidence, screenshots, architecture)
+                </span>
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white text-black/60 shadow-sm transition group-open:rotate-180">
                   <ChevronDown className="h-4 w-4" />
                 </div>
@@ -122,7 +124,7 @@ export default function ProjectCard({ p }: { p: Project }) {
                       {images.slice(0, 4).map((src, i) => (
                         <button
                           type="button"
-                          key={src}
+                          key={`${src}-${i}`}
                           onClick={() => openAt(i)}
                           className="relative aspect-[4/3] overflow-hidden rounded-xl border border-black/10 bg-black/[0.02] focus:outline-none focus:ring-2 focus:ring-black/20"
                           aria-label={`Open ${p.title} screenshot ${i + 1}`}

@@ -68,7 +68,10 @@ export const education: Education[] = [
     degree: "MSc in Data Science (Distinction)",
     school: "University of East Anglia, UK",
     period: "Sept 2023 — Sept 2024",
-    notes: ["Focus: Machine Learning, NLP, Computer Vision, and Time Series", "Dissertation: Retinal vessel segmentation (U-Net / Dense U-Net)"],
+    notes: [
+      "Focus: Machine Learning, NLP, Computer Vision, and Time Series",
+      "Dissertation: Retinal vessel segmentation (U-Net / Dense U-Net)",
+    ],
   },
 ];
 
@@ -107,12 +110,7 @@ export const projects: Project[] = [
       docs: "https://strategic-intelligence-stack.onrender.com/docs",
     },
     coverImage: "/projects/strategic-intelligence_1.png",
-    screenshots: [
-      "/projects/strategic-intelligence_1.png",
-      "/projects/strategic-intelligence_2.png",
-      "/projects/strategic-intelligence_3.png",
-      "/projects/strategic-intelligence_4.png",
-    ],
+    screenshots: ["/projects/strategic-intelligence_1.png", "/projects/strategic-intelligence_2.png", "/projects/strategic-intelligence_3.png", "/projects/strategic-intelligence_4.png"],
     highlights: [
       "Deterministic, reproducible segmentation runs (run ID + persisted artifacts)",
       "Decision-oriented insights: revenue share, promo responsiveness, discount-risk, channel mix",
@@ -130,8 +128,7 @@ export const projects: Project[] = [
   {
     title: "ReviewSense AI",
     icon: <ShieldCheck className="h-5 w-5 text-black/70" />,
-    description:
-      "Trust-aware review intelligence dashboard: sentiment + calibrated confidence, risk routing, tricky-review detection, and executive insights in Streamlit.",
+    description: "Trust-aware review intelligence dashboard: sentiment + calibrated confidence, risk routing, tricky-review detection, and executive insights in Streamlit.",
     badges: [
       { label: "Trust-aware", icon: <Shield className="h-4 w-4" /> },
       { label: "Dashboard", icon: <LayoutDashboard className="h-4 w-4" /> },
@@ -142,8 +139,19 @@ export const projects: Project[] = [
     links: { code: "https://github.com/Gujjar-Pranav/review-sense-ai", demo: "https://review-sense-ai-mvvd48vdsasmys7ecjenpa.streamlit.app/" },
     coverImage: "/projects/review-sense-ai_1.png",
     screenshots: ["/projects/review-sense-ai_1.png", "/projects/review-sense-ai_2.png", "/projects/review-sense-ai_3.png", "/projects/review-sense-ai_4.png"],
-    highlights: ["Confidence + risk scoring to route auto-approve vs manual review", "Detection of tricky reviews (negation, mixed sentiment, vague wording)", "Executive insights + explainability dashboards", "CI quality gates and artifact validation"],
-    architecture: ["Raw reviews → preprocessing → TF-IDF feature extraction", "Model training + benchmarking → best model selection", "Probability calibration → confidence scoring", "Risk routing → auto-approve vs manual review", "Reports (misclassifications, comparisons) → Streamlit dashboard"],
+    highlights: [
+      "Confidence + risk scoring to route auto-approve vs manual review",
+      "Detection of tricky reviews (negation, mixed sentiment, vague wording)",
+      "Executive insights + explainability dashboards",
+      "CI quality gates and artifact validation",
+    ],
+    architecture: [
+      "Raw reviews → preprocessing → TF-IDF feature extraction",
+      "Model training + benchmarking → best model selection",
+      "Probability calibration → confidence scoring",
+      "Risk routing → auto-approve vs manual review",
+      "Reports (misclassifications, comparisons) → Streamlit dashboard",
+    ],
   },
 
   {
@@ -161,8 +169,18 @@ export const projects: Project[] = [
     links: { code: "https://github.com/Gujjar-Pranav/Diabetes_Prediction_App", demo: "https://diabetespredictionapp-ffcfgbmn3xxxe9ah7dl3rw.streamlit.app/" },
     coverImage: "/projects/diabetic_1.png",
     screenshots: ["/projects/diabetic_1.png", "/projects/diabetic_2.png", "/projects/diabetic_3.png", "/projects/diabetic_4.png"],
-    highlights: ["Risk level + probability output for decision support", "PDF reports with patient ID + QR + timestamp", "Patient history tracking + Excel export", "Automated ML pipeline (EDA → train → evaluate → app)"],
-    architecture: ["Dataset → preprocessing → scaling (StandardScaler)", "Train Logistic Regression → evaluation + metrics", "Persist model + scaler → app inference", "Streamlit UI → prediction + PDF report + patient history export"],
+    highlights: [
+      "Risk level + probability output for decision support",
+      "PDF reports with patient ID + QR + timestamp",
+      "Patient history tracking + Excel export",
+      "Automated ML pipeline (EDA → train → evaluate → app)",
+    ],
+    architecture: [
+      "Dataset → preprocessing → scaling (StandardScaler)",
+      "Train Logistic Regression → evaluation + metrics",
+      "Persist model + scaler → app inference",
+      "Streamlit UI → prediction + PDF report + patient history export",
+    ],
   },
 
   {
@@ -198,8 +216,7 @@ export const projects: Project[] = [
   {
     title: "Glass Identification",
     icon: <FlaskConical className="h-5 w-5 text-black/70" />,
-    description:
-      "Production-style ML system: stacking ensemble + reproducible inference pipeline, FastAPI backend, Streamlit UI, Docker Compose, and CI/CD automation.",
+    description: "Production-style ML system: stacking ensemble + reproducible inference pipeline, FastAPI backend, Streamlit UI, Docker Compose, and CI/CD automation.",
     badges: [
       { label: "API", icon: <Code2 className="h-4 w-4" /> },
       { label: "Docker", icon: <ExternalLink className="h-4 w-4" /> },
@@ -228,8 +245,16 @@ export const projects: Project[] = [
     links: { code: "https://github.com/Gujjar-Pranav/Meeting_task_assignment" },
     coverImage: "/projects/task_identification_output.png",
     screenshots: ["/projects/task_identification_output.png"],
-    highlights: ["Audio (.m4a) → transcript → task candidates → JSON output", "Team-member aware assignment logic via skills mapping", "Runs fully locally with ffmpeg + Whisper"],
-    architecture: ["Meeting audio → Whisper STT → transcript.txt", "Sentence splitting → rule-based task identification", "Feature extraction → task objects → tasks_output.json"],
+    highlights: [
+      "Audio (.m4a) → transcript → task candidates → JSON output",
+      "Team-member aware assignment logic via skills mapping",
+      "Runs fully locally with ffmpeg + Whisper",
+    ],
+    architecture: [
+      "Meeting audio → Whisper STT → transcript.txt",
+      "Sentence splitting → rule-based task identification",
+      "Feature extraction → task objects → tasks_output.json",
+    ],
   },
 ];
 
@@ -245,3 +270,63 @@ export const skillGroups: SkillGroup[] = [
   { title: "Data & Analytics", subtitle: "Pipelines + BI + visualization", items: ["pandas", "NumPy", "PostgreSQL", "MongoDB", "Matplotlib", "Plotly", "Power BI", "Tableau"] },
   { title: "MLOps", subtitle: "Production readiness + repeatability", items: ["CI/CD (GitHub Actions)", "Model Persistence", "APIs", "Training–Inference Parity", "Reproducible Pipelines"] },
 ];
+
+/**
+ * ✅ Project-linked skills
+ * Used by the Skills UI: click a skill chip → show related projects.
+ * (We keep it here so you only update this file to maintain mappings.)
+ */
+export type SkillToProjectsMap = Record<string, string[]>;
+
+const PROJECT_TITLES = new Set(projects.map((p) => p.title));
+const pick = (...titles: string[]) => titles.filter((t) => PROJECT_TITLES.has(t));
+
+export const SKILL_TO_PROJECTS: SkillToProjectsMap = {
+  // Core tools
+  Python: pick("Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification", "Meeting Task Assignment"),
+  SQL: pick("Strategic Intelligence Stack"),
+  "scikit-learn": pick("ReviewSense AI", "Diabetes Prediction App", "Glass Identification"),
+  PyTorch: pick("Retina-AI"),
+  TensorFlow: pick(),
+  FastAPI: pick("Strategic Intelligence Stack", "Glass Identification"),
+  Streamlit: pick("ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"),
+  Docker: pick("Glass Identification"),
+
+  // ML concepts
+  "Supervised/Unsupervised Learning": pick("Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"),
+  "Feature Engineering": pick("Strategic Intelligence Stack", "Glass Identification", "ReviewSense AI"),
+  "Model Evaluation (ROC-AUC, Precision/Recall)": pick("ReviewSense AI", "Diabetes Prediction App", "Glass Identification"),
+  "Calibration & Confidence Scoring": pick("ReviewSense AI", "Retina-AI"),
+  "Hyperparameter Tuning": pick("Glass Identification", "ReviewSense AI"),
+
+  // NLP & Speech
+  "TF-IDF": pick("ReviewSense AI"),
+  "Linear SVM": pick("ReviewSense AI"),
+  "Text Preprocessing": pick("ReviewSense AI"),
+  "Rule-based NLP": pick("Meeting Task Assignment"),
+  "Speech-to-Text (Whisper)": pick("Meeting Task Assignment"),
+
+  // CV
+  "U-Net": pick(),
+  "Image Segmentation": pick(),
+  Augmentation: pick(),
+  "Dice/IoU": pick(),
+  "Preprocessing (CLAHE)": pick(),
+
+  // Data & Analytics
+  pandas: pick("Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"),
+  NumPy: pick("Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"),
+  PostgreSQL: pick("Strategic Intelligence Stack"),
+  MongoDB: pick(),
+  Matplotlib: pick("ReviewSense AI", "Diabetes Prediction App", "Glass Identification"),
+  Plotly: pick("ReviewSense AI", "Strategic Intelligence Stack"),
+  "Power BI": pick(),
+  Tableau: pick(),
+
+  // MLOps
+  "CI/CD (GitHub Actions)": pick("Strategic Intelligence Stack", "Retina-AI", "Glass Identification"),
+  "Model Persistence": pick("Strategic Intelligence Stack", "Diabetes Prediction App", "Glass Identification", "ReviewSense AI"),
+  APIs: pick("Strategic Intelligence Stack", "Glass Identification"),
+  "Training–Inference Parity": pick("Strategic Intelligence Stack", "Glass Identification", "Retina-AI"),
+  "Reproducible Pipelines": pick("Strategic Intelligence Stack", "Glass Identification", "Retina-AI"),
+};

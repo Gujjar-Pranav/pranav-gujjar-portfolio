@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Fuse from "fuse.js";
 import { MessageCircle, X, Send, Sparkles, HelpCircle } from "lucide-react";
-import { KNOWLEDGE_BASE, LINKS, type KBItem } from "@/data/knowledge";
+import { KNOWLEDGE_BASE, LINKS, SKILL_PROJECT_MAP, type KBItem } from "@/data/knowledge";
 
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -39,6 +39,7 @@ function looksLikeCv(q: string) {
 
 function wantsRepoList(q: string) {
   const n = normalize(q);
+  // IMPORTANT: do NOT match bare "repo" here, otherwise it blocks other intents.
   return (
     n.includes("repo list") ||
     n.includes("repos list") ||
@@ -46,8 +47,7 @@ function wantsRepoList(q: string) {
     n.includes("show repos") ||
     n.includes("show repositories") ||
     n.includes("github repos") ||
-    n.includes("githhub repo list")||
-    n.includes("repo")||
+    n.includes("githhub repo list") ||
     n === "all repo" ||
     n === "all repos" ||
     n === "all repositories"
@@ -87,7 +87,7 @@ function outOfScopeReply() {
     `- **Education / certifications**\n` +
     `- **Contact / relocation**\n` +
     `- **Links** (GitHub, LinkedIn, CV)\n\n` +
-    `Try: “projects”, “ReviewSense AI”, “education”, “certifications”, “repo list”, “download cv”, “contact”.`
+    `Try: “projects”, “ReviewSense AI”, “education”, “certifications”, “repo list”, “download cv”, “contact”, “FastAPI projects”.`
   );
 }
 
@@ -95,11 +95,12 @@ export default function PortfolioChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [showHelp, setShowHelp] = useState(false);
+
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
       text:
-        "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.",
+        "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.\n\nTip: Ask a skill (e.g., **FastAPI**, **Streamlit**, **PyTorch**) to see related projects.",
     },
   ]);
 
@@ -117,12 +118,12 @@ export default function PortfolioChat() {
       {
         role: "assistant",
         text:
-          "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.",
+          "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.\n\nTip: Ask a skill (e.g., **FastAPI**, **Streamlit**, **PyTorch**) to see related projects.",
       },
     ]);
   }
 
-  // Fuse: typo handling + flexible queries
+  // Fuse: typo handling + flexible KB queries
   const kbFuse = useMemo(() => {
     return new Fuse(KNOWLEDGE_BASE, {
       includeScore: true,
@@ -139,6 +140,15 @@ export default function PortfolioChat() {
     const map: Record<string, KBItem> = {};
     for (const item of KNOWLEDGE_BASE) map[item.id] = item;
     return map;
+  }, []);
+
+  // ✅ Skill matching (typos like "pytroch", "stream-lit")
+  const skillFuse = useMemo(() => {
+    const skills = Object.keys(SKILL_PROJECT_MAP || {});
+    return new Fuse(
+      skills.map((s) => ({ skill: s })),
+      { includeScore: true, threshold: 0.4, keys: ["skill"] }
+    );
   }, []);
 
   async function fetchRepos(): Promise<GhRepo[] | null> {
@@ -174,14 +184,68 @@ export default function PortfolioChat() {
     return n === "project" || n === "projects" || n === "repo" || n === "repos";
   }
 
+  function formatSkillProjects(skill: string) {
+    const projects = SKILL_PROJECT_MAP?.[skill] || [];
+    if (!projects.length) {
+      return `I couldn’t find projects mapped to **${skill}** yet.\n\nTry: **Streamlit**, **FastAPI**, **PyTorch**, **Docker**, **Grad-CAM**.`;
+    }
+
+    const unique = Array.from(new Set(projects));
+    const list = unique.map((p) => `- ${p}`).join("\n");
+    return `**${skill} → Related projects:**\n\n${list}\n\nWant links? Ask a project by name (example: “Retina-AI”).`;
+  }
+
+  function extractSkillFromQuery(userText: string) {
+    const n = normalize(userText);
+
+    // Remove common wrappers; keep skill words
+    const cleaned = n
+      .replace("skill projects", "")
+      .replace("projects by skill", "")
+      .replace("related projects", "")
+      .replace("which projects use", "")
+      .replace("projects using", "")
+      .replace("projects with", "")
+      .replace("projects", "")
+      .trim();
+
+    const hit = skillFuse.search(cleaned)[0]?.item?.skill ?? skillFuse.search(userText)[0]?.item?.skill;
+    return hit || "";
+  }
+
+  function isSkillIntent(userText: string) {
+    const n = normalize(userText);
+
+    // Explicit intents
+    if (n.includes("skill projects") || n.includes("projects by skill") || n.includes("related projects") || n.includes("which projects use")) return true;
+
+    // “projects using X”, “X projects”
+    if (n.includes("projects using") || n.includes("projects with") || n.endsWith(" projects")) return true;
+
+    // If user just types the skill name (or typo)
+    const match = skillFuse.search(userText)[0]?.item?.skill;
+    return Boolean(match);
+  }
+
   async function buildReply(userText: string): Promise<string> {
     const q = normalize(userText);
+
+    // ✅ Skill → projects comes FIRST so it won’t get swallowed by KB
+    if (isSkillIntent(userText)) {
+      const skill = extractSkillFromQuery(userText);
+      if (!skill) {
+        return (
+          `Tell me a skill and I’ll show the related projects.\n\n` +
+          `Examples: **Streamlit**, **FastAPI**, **PyTorch**, **Docker**, **Grad-CAM**, **TF-IDF**, **Whisper**.`
+        );
+      }
+      return formatSkillProjects(skill);
+    }
 
     // Direct link intents
     if (looksLikeJustGithub(userText)) return `GitHub: ${LINKS.githubProfile}`;
     if (looksLikeLinkedIn(userText)) return `LinkedIn: ${LINKS.linkedin}`;
-    if (looksLikeCv(userText)) {return `**Download Resume (PDF):** [Pranav_Gujjar_CV.pdf](${LINKS.resumePdf})`;}
-
+    if (looksLikeCv(userText)) return `**Download Resume (PDF):** [Pranav_Gujjar_CV.pdf](${LINKS.resumePdf})`;
 
     // Repo list only when user asks for list
     if (wantsRepoList(userText)) {
@@ -248,6 +312,10 @@ export default function PortfolioChat() {
     "projects",
     "review sense ai",
     "diabatic app",
+    "retina-ai",
+    "streamlit projects",
+    "fastapi projects",
+    "pytorch projects",
     "repo list",
     "repo details review-sense-ai",
     "education",
@@ -291,11 +359,7 @@ export default function PortfolioChat() {
                   <HelpCircle className="h-5 w-5 text-black/70" />
                 </button>
 
-                <button
-                  onClick={closeAndReset}
-                  className="rounded-lg p-2 hover:bg-black/[0.04]"
-                  aria-label="Close chat"
-                >
+                <button onClick={closeAndReset} className="rounded-lg p-2 hover:bg-black/[0.04]" aria-label="Close chat">
                   <X className="h-5 w-5 text-black/70" />
                 </button>
               </div>
@@ -331,12 +395,7 @@ export default function PortfolioChat() {
                         remarkPlugins={[remarkGfm]}
                         components={{
                           a: ({ children, ...props }) => (
-                            <a
-                              {...props}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="underline decoration-black/20 underline-offset-4 hover:text-black"
-                            >
+                            <a {...props} target="_blank" rel="noreferrer" className="underline decoration-black/20 underline-offset-4 hover:text-black">
                               {children}
                             </a>
                           ),
@@ -364,11 +423,7 @@ export default function PortfolioChat() {
                   placeholder="Ask about Pranav’s portfolio..."
                   className="w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:border-black/30"
                 />
-                <button
-                  onClick={send}
-                  className="inline-flex items-center justify-center rounded-xl bg-black px-3 py-2 text-white hover:bg-black/90"
-                  aria-label="Send"
-                >
+                <button onClick={send} className="inline-flex items-center justify-center rounded-xl bg-black px-3 py-2 text-white hover:bg-black/90" aria-label="Send">
                   <Send className="h-4 w-4" />
                 </button>
               </div>

@@ -5,8 +5,13 @@ export type KBItem = {
   title: string;
   keywords: string[];
   answer: string;
+
+  // Only used in project-specific replies
   link?: string;
   demo?: string;
+
+  // Optional: lets UI (PortfolioChat) show “related projects” chips if you decide to render them
+  relatedProjects?: string[];
 };
 
 export const LINKS = {
@@ -19,13 +24,68 @@ export const LINKS = {
   linkedinCertifications: "https://www.linkedin.com/in/pranav-b-gujjar/details/certifications/",
   githubCertificatesRepo: "https://github.com/Gujjar-Pranav/Data-Science-Traning-Certificates",
 
-  // Project links (used only in project-specific replies)
+  // Project links (used ONLY in project-specific replies)
   strategicIntelRepo: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
   strategicIntelDemo: "https://strategic-intelligence-stack.vercel.app",
   strategicIntelDocs: "https://strategic-intelligence-stack.onrender.com/docs",
 
   retinaAiRepo: "https://github.com/Gujjar-Pranav/retina-ai",
   retinaAiDemo: "https://retina-ai-zpkddbsb6m2rf6tfgd6rjh.streamlit.app",
+};
+
+/**
+ * Skill → related projects mapping (NO links here).
+ * Used for “click a skill → show related projects” AND “FastAPI projects?” style chat queries.
+ */
+export const SKILL_PROJECT_MAP: Record<string, string[]> = {
+  // Core
+  Python: ["ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification", "Meeting Task Assignment"],
+  SQL: ["Vertexblue Internship (Forecasting)"],
+  "scikit-learn": ["ReviewSense AI", "Diabetes Prediction App", "Glass Identification"],
+  PyTorch: ["Retina-AI"],
+  TensorFlow: ["(Academic / coursework focus)"],
+  FastAPI: ["Strategic Intelligence Stack", "Glass Identification"],
+  Streamlit: ["ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"],
+  Docker: ["Glass Identification"],
+
+  // ML
+  "Supervised/Unsupervised Learning": ["Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Glass Identification"],
+  "Feature Engineering": ["Glass Identification", "Vertexblue Internship (Forecasting)"],
+  "Model Evaluation (ROC-AUC, Precision/Recall)": ["ReviewSense AI", "Diabetes Prediction App"],
+  "Calibration & Confidence Scoring": ["ReviewSense AI", "Retina-AI"],
+  "Hyperparameter Tuning": ["Glass Identification", "ReviewSense AI"],
+
+  // NLP & Speech
+  "TF-IDF": ["ReviewSense AI"],
+  "Linear SVM": ["ReviewSense AI"],
+  "Text Preprocessing": ["ReviewSense AI", "Meeting Task Assignment"],
+  "Rule-based NLP": ["Meeting Task Assignment"],
+  "Speech-to-Text (Whisper)": ["Meeting Task Assignment"],
+
+  // CV
+  "Image Segmentation": ["(MSc Dissertation: Retinal vessel segmentation)"],
+  "U-Net": ["(MSc Dissertation: Retinal vessel segmentation)"],
+  Augmentation: ["(MSc Dissertation / CV work)"],
+  "Dice/IoU": ["(MSc Dissertation / CV work)"],
+  "Preprocessing (CLAHE)": ["(MSc Dissertation / CV work)"],
+  "Grad-CAM": ["Retina-AI"],
+
+  // Data & Analytics
+  pandas: ["Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"],
+  NumPy: ["Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"],
+  PostgreSQL: ["Vertexblue Internship (Forecasting)"],
+  MongoDB: ["(Project / learning experience)"],
+  Matplotlib: ["ReviewSense AI", "Diabetes Prediction App", "Glass Identification"],
+  Plotly: ["ReviewSense AI"],
+  "Power BI": ["(Analytics / BI work)"],
+  Tableau: ["(Analytics / BI work)"],
+
+  // MLOps
+  "CI/CD (GitHub Actions)": ["Glass Identification", "Retina-AI"],
+  "Model Persistence": ["Diabetes Prediction App", "Glass Identification", "ReviewSense AI"],
+  APIs: ["Strategic Intelligence Stack", "Glass Identification"],
+  "Training–Inference Parity": ["Glass Identification", "Strategic Intelligence Stack"],
+  "Reproducible Pipelines": ["Strategic Intelligence Stack", "Glass Identification", "Retina-AI"],
 };
 
 export const KNOWLEDGE_BASE: KBItem[] = [
@@ -124,7 +184,7 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       "certifications link",
       "certificate link",
     ],
-    // ✅ As requested: "links" should NOT include specific project links
+    // As requested: "links" should NOT include specific project links
     answer:
       `Links:\n` +
       `- GitHub: ${LINKS.githubProfile}\n` +
@@ -150,7 +210,46 @@ export const KNOWLEDGE_BASE: KBItem[] = [
     title: "Skills",
     keywords: ["skills", "skill", "stack", "tech", "mlops", "deployment", "ats", "tools"],
     answer:
-      "Key skills:\n- Languages: Python, SQL\n- ML: classification/regression/clustering, feature engineering, evaluation (ROC-AUC, Precision/Recall, F1)\n- DL: TensorFlow, PyTorch\n- NLP/Speech: TF-IDF, Linear SVM, rule-based NLP, Whisper ASR\n- Deployment/MLOps: FastAPI, Streamlit, Docker, CI/CD (GitHub Actions), model persistence\n- Full-stack (project work): Next.js, REST APIs, Swagger, Vercel/Render deployments",
+      "Skills (portfolio-aligned):\n\n" +
+      "Core (Primary tools used across projects):\n" +
+      "- Python, SQL, scikit-learn, PyTorch, TensorFlow, FastAPI, Streamlit, Docker\n\n" +
+      "Machine Learning (Modeling + evaluation in real workflows):\n" +
+      "- Supervised/Unsupervised Learning\n" +
+      "- Feature Engineering\n" +
+      "- Model Evaluation (ROC-AUC, Precision/Recall)\n" +
+      "- Calibration & Confidence Scoring\n" +
+      "- Hyperparameter Tuning\n\n" +
+      "NLP & Speech (Text pipelines + speech-to-text):\n" +
+      "- TF-IDF, Linear SVM, Text Preprocessing, Rule-based NLP, Speech-to-Text (Whisper)\n\n" +
+      "Computer Vision (Segmentation + image workflows):\n" +
+      "- U-Net, Image Segmentation, Augmentation, Dice/IoU, Preprocessing (CLAHE)\n\n" +
+      "Data & Analytics (Pipelines + BI + visualization):\n" +
+      "- pandas, NumPy, PostgreSQL, MongoDB, Matplotlib, Plotly, Power BI, Tableau\n\n" +
+      "MLOps (Production readiness + repeatability):\n" +
+      "- CI/CD (GitHub Actions), Model Persistence, APIs, Training–Inference Parity, Reproducible Pipelines\n\n" +
+      "Tip: Ask a skill name (e.g., “FastAPI” or “Grad-CAM”) and I’ll show the related projects (no links unless you ask for a specific project).",
+  },
+
+  {
+    id: "skill-projects",
+    title: "Skill → Projects",
+    keywords: [
+      "skill projects",
+      "skill to project",
+      "projects by skill",
+      "related projects",
+      "which projects use",
+      "fastapi projects",
+      "streamlit projects",
+      "pytorch projects",
+      "docker projects",
+      "ci/cd projects",
+      "github actions projects",
+      "grad-cam projects",
+    ],
+    answer:
+      "Tell me a skill (example: “Streamlit”, “FastAPI”, “PyTorch”, “Grad-CAM”, “CI/CD”), and I’ll list the related projects.\n" +
+      "Note: I won’t include project links unless you ask for a specific project by name.",
   },
 
   {
