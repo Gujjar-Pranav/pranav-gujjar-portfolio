@@ -2,604 +2,15 @@
 
 import PortfolioChat from "./components/PortfolioChat";
 import Image from "next/image";
-import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
-import {
-  Github,
-  Linkedin,
-  FileText,
-  Mail,
-  Phone,
-  MapPin,
-  ExternalLink,
-  Sparkles,
-  ShieldCheck,
-  Briefcase,
-  Wrench,
-  FolderGit2,
-  GraduationCap,
-  Award,
-  Code2,
-  HeartPulse,
-  FlaskConical,
-  Mic,
-  BarChart3,
-  LayoutDashboard,
-  LineChart,
-  Shield,
-  ClipboardList,
-  Cpu,
-  Database,
-  Boxes,
-  ChevronDown,
-  MessageCircle,
-  Target,
-  Eye,
-  Lock,
-  X,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
 
-type LinkSet = { code: string; demo?: string; docs?: string };
+import { Github, Linkedin, FileText, Mail, Phone, MapPin, MessageCircle, Sparkles, ShieldCheck, Briefcase, Wrench, FolderGit2, GraduationCap, Award, BarChart3 } from "lucide-react";
 
-type Project = {
-  title: string;
-  description: string;
-  tags: string[];
-  links: LinkSet;
-  badges?: { label: string; icon: ReactNode }[];
-  highlights?: string[];
-  architecture?: string[];
-  coverImage?: string;
-  screenshots?: string[];
-  icon?: ReactNode;
-};
+import { Card, Chip, Collapsible, Container, IconLink, NavLink, PrimaryLink, Section, Tag } from "./components/portfolio/ui";
+import ProjectCard from "./components/portfolio/ProjectCard";
 
-type Experience = {
-  role: string;
-  company?: string;
-  period: string;
-  bullets: string[];
-};
-
-type Education = {
-  degree: string;
-  school: string;
-  period: string;
-  notes?: string[];
-};
-
-function Container({ children }: { children: ReactNode }) {
-  return <div className="mx-auto w-full max-w-6xl px-6">{children}</div>;
-}
-
-function Section({
-  id,
-  title,
-  subtitle,
-  icon,
-  children,
-}: {
-  id: string;
-  title: string;
-  subtitle?: string;
-  icon?: ReactNode;
-  children: ReactNode;
-}) {
-  return (
-    <section id={id} className="scroll-mt-24 py-14">
-      <Container>
-        <div className="flex items-start gap-3">
-          {icon ? (
-            <div className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white shadow-sm">
-              {icon}
-            </div>
-          ) : null}
-
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-black">{title}</h2>
-            {subtitle ? <p className="mt-1 text-sm text-black/60">{subtitle}</p> : null}
-          </div>
-        </div>
-
-        <div className="mt-6">{children}</div>
-      </Container>
-    </section>
-  );
-}
-
-function Card({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-2xl border border-black/10 bg-white shadow-sm">
-      <div className="p-6">{children}</div>
-    </div>
-  );
-}
-
-function Chip({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-full border border-black/10 bg-white px-3 py-1 text-xs text-black/70 shadow-sm">
-      {children}
-    </span>
-  );
-}
-
-function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-black/[0.02] px-3 py-1 text-xs text-black/70">
-      {children}
-    </span>
-  );
-}
-
-function IconLink({
-  href,
-  children,
-  icon,
-}: {
-  href: string;
-  children: ReactNode;
-  icon?: ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target={href.startsWith("#") ? undefined : "_blank"}
-      rel={href.startsWith("#") ? undefined : "noreferrer"}
-      className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-2 text-sm text-black shadow-sm transition hover:border-black/20 hover:shadow"
-    >
-      {icon ? <span className="h-4 w-4">{icon}</span> : null}
-      <span>{children}</span>
-    </a>
-  );
-}
-
-function PrimaryLink({
-  href,
-  children,
-  icon,
-}: {
-  href: string;
-  children: ReactNode;
-  icon?: ReactNode;
-}) {
-  return (
-    <a
-      href={href}
-      target={href.startsWith("#") ? undefined : "_blank"}
-      rel={href.startsWith("#") ? undefined : "noreferrer"}
-      className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-black/90"
-    >
-      {icon ? <span className="h-4 w-4">{icon}</span> : null}
-      <span>{children}</span>
-    </a>
-  );
-}
-
-function NavLink({ href, label, icon }: { href: string; label: string; icon?: ReactNode }) {
-  return (
-    <a
-      href={href}
-      className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm text-black/70 transition hover:bg-black/[0.04] hover:text-black"
-    >
-      {icon ? <span className="h-4 w-4">{icon}</span> : null}
-      <span>{label}</span>
-    </a>
-  );
-}
-
-/**
- * Premium collapsible: native <details> (fast + accessible)
- * NOTE: React does NOT support "defaultOpen" on <details>.
- * We conditionally set the valid "open" attribute instead.
- */
-function Collapsible({
-  title,
-  subtitle,
-  children,
-  defaultOpen,
-}: {
-  title: string;
-  subtitle?: string;
-  children: ReactNode;
-  defaultOpen?: boolean;
-}) {
-  return (
-    <details
-      className="group rounded-2xl border border-black/10 bg-white shadow-sm"
-      {...(defaultOpen ? { open: true } : {})}
-    >
-      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-6">
-        <div>
-          <div className="text-base font-semibold text-black">{title}</div>
-          {subtitle ? <div className="mt-1 text-sm text-black/60">{subtitle}</div> : null}
-        </div>
-
-        <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white text-black/60 shadow-sm transition group-open:rotate-180">
-          <ChevronDown className="h-4 w-4" />
-        </div>
-      </summary>
-
-      <div className="px-6 pb-6">{children}</div>
-    </details>
-  );
-}
+import { NAV, achievements, certGroups, education, experience, projects, skillGroups } from "./components/portfolio/data";
 
 export default function Home() {
-  // ====== LIGHTBOX (screenshots) ======
-  const [lb, setLb] = useState<{ images: string[]; index: number; title?: string } | null>(null);
-
-  useEffect(() => {
-    if (!lb) return;
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLb(null);
-
-      if (e.key === "ArrowLeft") {
-        setLb((prev) => {
-          if (!prev) return prev;
-          const nextIndex = (prev.index - 1 + prev.images.length) % prev.images.length;
-          return { ...prev, index: nextIndex };
-        });
-      }
-
-      if (e.key === "ArrowRight") {
-        setLb((prev) => {
-          if (!prev) return prev;
-          const nextIndex = (prev.index + 1) % prev.images.length;
-          return { ...prev, index: nextIndex };
-        });
-      }
-    };
-
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [lb]);
-
-  // ====== DATA ======
-
-  const experience: Experience[] = [
-    {
-      role: "Machine Learning Engineer — Freelance",
-      period: "Aug 2025 — Present",
-      bullets: [
-        "Built end-to-end ML pipelines (data prep → modeling → evaluation → deployment) with reproducible artifacts and clean project structure.",
-        "Delivered production-style inference services (FastAPI) and interactive dashboards (Streamlit) for explainability and confidence-based decision support.",
-        "Focused on training–inference parity, versioned outputs, and maintainable code (not notebook-only work).",
-      ],
-    },
-    {
-      role: "Data Science Intern",
-      company: "Vertexblue Pvt Ltd (India)",
-      period: "Jun 2022 — Dec 2022",
-      bullets: [
-        "Improved forecasting accuracy by ~15% using Python/SQL predictive modeling and evaluation workflows.",
-        "Supported 10%+ operational cost reduction via data-driven recommendations and insights.",
-        "Reduced manual processing by ~30% by automating reporting and repeatable analytics pipelines.",
-      ],
-    },
-  ];
-
-  const education: Education[] = [
-    {
-      degree: "MSc in Data Science (Distinction)",
-      school: "University of East Anglia, UK",
-      period: "Sept 2023 — Sept 2024",
-      notes: [
-        "Focus: Machine Learning, NLP, Computer Vision, and Time Series",
-        "Dissertation: Retinal vessel segmentation (U-Net / Dense U-Net)",
-      ],
-    },
-  ];
-
-  // Grouped certifications (ML-first scanning)
-  const certGroups: { title: string; items: string[] }[] = [
-    {
-      title: "Advanced (ML / DL)",
-      items: ["Machine Learning and Deep Learning in Python & R", "Intermediate Machine Learning"],
-    },
-    {
-      title: "Foundations (Core ML + Python)",
-      items: [
-        "Machine Learning A–Z: Python & R",
-        "Python for Data Science and Machine Learning Bootcamp",
-        "Introduction to Machine Learning",
-        "Python Programming",
-      ],
-    },
-    {
-      title: "Applied (Data / Analytics)",
-      items: ["Pandas for Data Analysis", "PostgreSQL Essentials", "Data Visualization", "CV Masterclass"],
-    },
-  ];
-
-  const achievements = [
-    {
-      title: "~15% forecasting improvement",
-      note: "Built + evaluated predictive models in Python/SQL",
-      icon: <Target className="h-5 w-5 text-black/70" />,
-    },
-    {
-      title: "10%+ cost reduction impact",
-      note: "Operational insights → measurable savings",
-      icon: <BarChart3 className="h-5 w-5 text-black/70" />,
-    },
-    {
-      title: "~30% automation gain",
-      note: "Reduced manual processing via repeatable pipelines",
-      icon: <Wrench className="h-5 w-5 text-black/70" />,
-    },
-    {
-      title: "Production ML systems",
-      note: "FastAPI + Streamlit + Docker + CI/CD",
-      icon: <ShieldCheck className="h-5 w-5 text-black/70" />,
-    },
-  ];
-
-  const projects: Project[] = [
-    {
-      title: "Strategic Intelligence Stack",
-      icon: <BarChart3 className="h-5 w-5 text-black/70" />,
-      description:
-        "Production-grade customer segmentation and decision intelligence platform: deterministic clustering runs, segment personas and KPI insights, and scenario simulations without retraining — delivered via FastAPI APIs and an executive-ready Next.js dashboard.",
-      badges: [
-        { label: "Decision Intelligence", icon: <Target className="h-4 w-4" /> },
-        { label: "Dashboards", icon: <LayoutDashboard className="h-4 w-4" /> },
-        { label: "Simulation", icon: <LineChart className="h-4 w-4" /> },
-        { label: "Run Versioning", icon: <ShieldCheck className="h-4 w-4" /> },
-      ],
-      tags: [
-        "Next.js",
-        "FastAPI",
-        "Customer Segmentation",
-        "Clustering",
-        "Run Management",
-        "Simulation Engine",
-        "REST APIs",
-        "Swagger",
-        "Vercel",
-        "Render",
-      ],
-      links: {
-        code: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
-        demo: "https://strategic-intelligence-stack.vercel.app",
-        docs: "https://strategic-intelligence-stack.onrender.com/docs",
-      },
-      coverImage: "/projects/strategic-intelligence_1.png",
-      screenshots: [
-        "/projects/strategic-intelligence_1.png",
-        "/projects/strategic-intelligence_2.png",
-        "/projects/strategic-intelligence_3.png",
-        "/projects/strategic-intelligence_4.png",
-      ],
-      highlights: [
-        "Deterministic, reproducible segmentation runs (run ID + persisted artifacts)",
-        "Decision-oriented insights: revenue share, promo responsiveness, discount-risk, channel mix",
-        "Scenario simulations operate on persisted runs (no retraining required)",
-        "Executive-first UI with print-optimized exports",
-      ],
-      architecture: [
-        "Dataset ingestion → validation + normalization → clustering pipeline",
-        "Cluster analytics + persona generation → persisted run artifacts (run_id)",
-        "Simulation engine applies business-rule transformations on persisted results",
-        "Next.js frontend consumes run data via REST APIs → dashboards + exports",
-      ],
-    },
-    {
-      title: "ReviewSense AI",
-      icon: <ShieldCheck className="h-5 w-5 text-black/70" />,
-      description:
-        "Trust-aware review intelligence dashboard: sentiment + calibrated confidence, risk routing, tricky-review detection, and executive insights in Streamlit.",
-      badges: [
-        { label: "Trust-aware", icon: <Shield className="h-4 w-4" /> },
-        { label: "Dashboard", icon: <LayoutDashboard className="h-4 w-4" /> },
-        { label: "Insights", icon: <LineChart className="h-4 w-4" /> },
-        { label: "Metrics", icon: <BarChart3 className="h-4 w-4" /> },
-      ],
-      tags: ["Python", "NLP", "TF-IDF", "Linear SVM", "Model Calibration", "Streamlit", "Plotly", "scikit-learn", "Responsible AI"],
-      links: {
-        code: "https://github.com/Gujjar-Pranav/review-sense-ai",
-        demo: "https://review-sense-ai-mvvd48vdsasmys7ecjenpa.streamlit.app/",
-      },
-      coverImage: "/projects/review-sense-ai_1.png",
-      screenshots: [
-        "/projects/review-sense-ai_1.png",
-        "/projects/review-sense-ai_2.png",
-        "/projects/review-sense-ai_3.png",
-        "/projects/review-sense-ai_4.png",
-      ],
-      highlights: [
-        "Confidence + risk scoring to route auto-approve vs manual review",
-        "Detection of tricky reviews (negation, mixed sentiment, vague wording)",
-        "Executive insights + explainability dashboards",
-        "CI quality gates and artifact validation",
-      ],
-      architecture: [
-        "Raw reviews → preprocessing → TF-IDF feature extraction",
-        "Model training + benchmarking → best model selection",
-        "Probability calibration → confidence scoring",
-        "Risk routing → auto-approve vs manual review",
-        "Reports (misclassifications, comparisons) → Streamlit dashboard",
-      ],
-    },
-    {
-      title: "Diabetes Prediction App",
-      icon: <HeartPulse className="h-5 w-5 text-black/70" />,
-      description:
-        "End-to-end diabetes risk prediction with probability output, Low/Medium/High risk stratification, patient history, Excel export, and PDF report generation.",
-      badges: [
-        { label: "Healthcare", icon: <HeartPulse className="h-4 w-4" /> },
-        { label: "PDF Reports", icon: <FileText className="h-4 w-4" /> },
-        { label: "History", icon: <ClipboardList className="h-4 w-4" /> },
-        { label: "Metrics", icon: <BarChart3 className="h-4 w-4" /> },
-      ],
-      tags: ["Python", "Logistic Regression", "Streamlit", "scikit-learn", "StandardScaler", "PDF", "Excel Export"],
-      links: {
-        code: "https://github.com/Gujjar-Pranav/Diabetes_Prediction_App",
-        demo: "https://diabetespredictionapp-ffcfgbmn3xxxe9ah7dl3rw.streamlit.app/",
-      },
-      coverImage: "/projects/diabetic_1.png",
-      screenshots: ["/projects/diabetic_1.png", "/projects/diabetic_2.png", "/projects/diabetic_3.png", "/projects/diabetic_4.png"],
-      highlights: [
-        "Risk level + probability output for decision support",
-        "PDF reports with patient ID + QR + timestamp",
-        "Patient history tracking + Excel export",
-        "Automated ML pipeline (EDA → train → evaluate → app)",
-      ],
-      architecture: [
-        "Dataset → preprocessing → scaling (StandardScaler)",
-        "Train Logistic Regression → evaluation + metrics",
-        "Persist model + scaler → app inference",
-        "Streamlit UI → prediction + PDF report + patient history export",
-      ],
-    },
-    {
-      title: "Retina-AI",
-      icon: <Eye className="h-5 w-5 text-black/70" />,
-      description:
-        "Clinical diabetic retinopathy screening MVP: patient & clinician registry → fundus upload → DR/No-DR inference with confidence + image-quality gates → risk stratification → Grad-CAM explainability → one-page clinical PDF reports, secured with role-based authentication.",
-      badges: [
-        { label: "Clinical AI", icon: <HeartPulse className="h-4 w-4" /> },
-        { label: "Explainability", icon: <Eye className="h-4 w-4" /> },
-        { label: "PDF Reports", icon: <FileText className="h-4 w-4" /> },
-        { label: "Auth + Roles", icon: <Lock className="h-4 w-4" /> },
-      ],
-      tags: [
-        "Python",
-        "Streamlit",
-        "PyTorch",
-        "Grad-CAM",
-        "OpenCV/Pillow",
-        "Risk Stratification",
-        "ReportLab",
-        "Ruff",
-        "GitHub Actions",
-        "Clinical Workflow",
-      ],
-      links: {
-        code: "https://github.com/Gujjar-Pranav/retina-ai",
-        demo: "https://retina-ai-zpkddbsb6m2rf6tfgd6rjh.streamlit.app",
-      },
-      coverImage: "/projects/retina-ai_1.png",
-      screenshots: ["/projects/retina-ai_1.png", "/projects/retina-ai_2.png", "/projects/retina-ai_3.png", "/projects/retina-ai_4.png"],
-      highlights: [
-        "End-to-end screening workflow: Registry → Screening → Risk → Explainability → Reporting",
-        "PyTorch inference with confidence + image quality gating",
-        "Grad-CAM explainability embedded into clinical PDF reports",
-        "Role-based access control (Admin / Registry / Screening / Reports)",
-        "CI/CD via GitHub Actions (Ruff linting + import smoke tests)",
-      ],
-      architecture: [
-        "Streamlit UI → Auth + Roles → Registry / Screening / Reports tabs",
-        "Fundus upload → PyTorch model inference (DR/No-DR) + confidence scoring",
-        "Quality gates + risk stratification + clinical recommendations",
-        "Grad-CAM generation → PDF builder (ReportLab) → reports/*.pdf",
-      ],
-    },
-    {
-      title: "Glass Identification",
-      icon: <FlaskConical className="h-5 w-5 text-black/70" />,
-      description:
-        "Production-style ML system: stacking ensemble + reproducible inference pipeline, FastAPI backend, Streamlit UI, Docker Compose, and CI/CD automation.",
-      badges: [
-        { label: "API", icon: <Code2 className="h-4 w-4" /> },
-        { label: "Docker", icon: <Boxes className="h-4 w-4" /> },
-        { label: "CI/CD", icon: <Wrench className="h-4 w-4" /> },
-        { label: "Deployment", icon: <ExternalLink className="h-4 w-4" /> },
-      ],
-      tags: ["Python", "Ensembles", "Stacking", "SMOTE", "FastAPI", "Streamlit", "Docker", "GitHub Actions"],
-      links: {
-        code: "https://github.com/Gujjar-Pranav/Glass_Identification",
-      },
-      coverImage: "/projects/glass_indetification_1.png",
-      screenshots: [
-        "/projects/glass_indetification_1.png",
-        "/projects/glass_indetification_2.png",
-        "/projects/glass_indetification_3.png",
-        "/projects/glass_indetification_4.png",
-      ],
-      highlights: [
-        "Advanced feature engineering + imbalance handling",
-        "Stacking ensemble selected over tuned baselines",
-        "FastAPI inference service with trained artifacts",
-        "Dockerized services with CI builds",
-      ],
-      architecture: [
-        "UCI data → cleaning → outlier handling → features",
-        "Scaling + stratified split + SMOTE → training/eval",
-        "Persist model + scaler + schema artifacts",
-        "FastAPI /predict endpoint → Streamlit UI calls API",
-      ],
-    },
-    {
-      title: "Meeting Task Assignment",
-      icon: <Mic className="h-5 w-5 text-black/70" />,
-      description:
-        "Local-only pipeline that turns meeting audio into structured task JSON using offline Whisper speech-to-text + rule-based NLP (no cloud/APIs).",
-      badges: [
-        { label: "Audio → Text", icon: <Mic className="h-4 w-4" /> },
-        { label: "Task Extraction", icon: <ClipboardList className="h-4 w-4" /> },
-        { label: "NLP", icon: <Cpu className="h-4 w-4" /> },
-        { label: "JSON Output", icon: <Database className="h-4 w-4" /> },
-      ],
-      tags: ["Python", "Whisper", "NLP", "Automation", "Offline", "JSON"],
-      links: { code: "https://github.com/Gujjar-Pranav/Meeting_task_assignment" },
-      coverImage: "/projects/task_identification_output.png",
-      screenshots: ["/projects/task_identification_output.png"],
-      highlights: [
-        "Audio (.m4a) → transcript → task candidates → JSON output",
-        "Team-member aware assignment logic via skills mapping",
-        "Runs fully locally with ffmpeg + Whisper",
-      ],
-      architecture: [
-        "Meeting audio → Whisper STT → transcript.txt",
-        "Sentence splitting → rule-based task identification",
-        "Feature extraction → task objects → tasks_output.json",
-      ],
-    },
-  ];
-
-  const skillGroups: { title: string; subtitle: string; items: string[] }[] = [
-    {
-      title: "Core",
-      subtitle: "Primary tools used across projects",
-      items: ["Python", "SQL", "scikit-learn", "PyTorch", "TensorFlow", "FastAPI", "Streamlit", "Docker"],
-    },
-    {
-      title: "Machine Learning",
-      subtitle: "Modeling + evaluation in real workflows",
-      items: [
-        "Supervised/Unsupervised Learning",
-        "Feature Engineering",
-        "Model Evaluation (ROC-AUC, Precision/Recall)",
-        "Calibration & Confidence Scoring",
-        "Hyperparameter Tuning",
-      ],
-    },
-    {
-      title: "NLP & Speech",
-      subtitle: "Text pipelines + speech-to-text",
-      items: ["TF-IDF", "Linear SVM", "Text Preprocessing", "Rule-based NLP", "Speech-to-Text (Whisper)"],
-    },
-    {
-      title: "Computer Vision",
-      subtitle: "Segmentation + image workflows",
-      items: ["U-Net", "Image Segmentation", "Augmentation", "Dice/IoU", "Preprocessing (CLAHE)"],
-    },
-    {
-      title: "Data & Analytics",
-      subtitle: "Pipelines + BI + visualization",
-      items: ["pandas", "NumPy", "PostgreSQL", "MongoDB", "Matplotlib", "Plotly", "Power BI", "Tableau"],
-    },
-    {
-      title: "MLOps",
-      subtitle: "Production readiness + repeatability",
-      items: ["CI/CD (GitHub Actions)", "Model Persistence", "APIs", "Training–Inference Parity", "Reproducible Pipelines"],
-    },
-  ];
-
-  // ====== PAGE ======
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Top Nav */}
@@ -611,15 +22,9 @@ export default function Home() {
             </a>
 
             <nav className="hidden items-center gap-1 md:flex">
-              <NavLink href="#about" label="About" icon={<Sparkles className="h-4 w-4" />} />
-              <NavLink href="#why" label="Why Hire Me" icon={<ShieldCheck className="h-4 w-4" />} />
-              <NavLink href="#achievements" label="Achievements" icon={<BarChart3 className="h-4 w-4" />} />
-              <NavLink href="#experience" label="Experience" icon={<Briefcase className="h-4 w-4" />} />
-              <NavLink href="#skills" label="Skills" icon={<Wrench className="h-4 w-4" />} />
-              <NavLink href="#projects" label="Projects" icon={<FolderGit2 className="h-4 w-4" />} />
-              <NavLink href="#education" label="Education" icon={<GraduationCap className="h-4 w-4" />} />
-              <NavLink href="#certifications" label="Certifications" icon={<Award className="h-4 w-4" />} />
-              <NavLink href="#contact" label="Contact" icon={<Mail className="h-4 w-4" />} />
+              {NAV.map((n) => (
+                <NavLink key={n.href} href={n.href} label={n.label} icon={n.icon} />
+              ))}
             </nav>
           </div>
         </Container>
@@ -649,7 +54,6 @@ export default function Home() {
                 End-to-end machine learning systems engineered for reliability, explainability, and production deployment from data pipelines to APIs and dashboards.
               </p>
 
-              {/* Premium quick links */}
               <div className="mt-8 flex flex-wrap gap-3">
                 <IconLink href="mailto:mr.pranavgujjar@gmail.com" icon={<Mail className="h-4 w-4" />}>
                   Email
@@ -694,7 +98,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* 1) ABOUT */}
+      {/* ABOUT */}
       <Section id="about" title="About" subtitle="Scannable summary + what you get when hiring me." icon={<Sparkles className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-2">
           <Card>
@@ -716,7 +120,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 2) WHY HIRE ME */}
+      {/* WHY */}
       <Section id="why" title="Why Hire Me" subtitle="Impact + reliability + deployment readiness." icon={<ShieldCheck className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-3">
           <Card>
@@ -742,7 +146,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 2.5) KEY ACHIEVEMENTS */}
+      {/* ACHIEVEMENTS */}
       <Section id="achievements" title="Key Achievements" subtitle="Highlights at a glance." icon={<BarChart3 className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {achievements.map((a) => (
@@ -759,16 +163,11 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 3) EXPERIENCE */}
+      {/* EXPERIENCE */}
       <Section id="experience" title="Experience" subtitle="Expandable roles." icon={<Briefcase className="h-5 w-5 text-black/70" />}>
         <div className="space-y-4">
           {experience.map((job, idx) => (
-            <Collapsible
-              key={job.role}
-              title={`${job.role}${job.company ? ` · ${job.company}` : ""}`}
-              subtitle={job.period}
-              defaultOpen={idx === 0}
-            >
+            <Collapsible key={job.role} title={`${job.role}${job.company ? ` · ${job.company}` : ""}`} subtitle={job.period} defaultOpen={idx === 0}>
               <ul className="list-disc space-y-2 pl-5 text-sm text-black/70">
                 {job.bullets.map((b) => (
                   <li key={b}>{b}</li>
@@ -779,7 +178,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 4) SKILLS */}
+      {/* SKILLS */}
       <Section id="skills" title="Skills" subtitle="Expandable categories." icon={<Wrench className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-4 md:grid-cols-2">
           {skillGroups.map((g, idx) => (
@@ -794,151 +193,16 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 5) PROJECTS */}
+      {/* PROJECTS */}
       <Section id="projects" title="Projects" subtitle="Clean cards + expandable evidence (screenshots, highlights, architecture)." icon={<FolderGit2 className="h-5 w-5 text-black/70" />}>
         <div className="grid gap-6 lg:grid-cols-2">
           {projects.map((p) => (
-            <div key={p.title} className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-              {p.coverImage ? (
-                <div className="relative aspect-[16/9] w-full bg-black/[0.02]">
-                  <Image src={p.coverImage} alt={`${p.title} cover`} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-                </div>
-              ) : null}
-
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 bg-white shadow-sm">
-                      {p.icon ?? <FolderGit2 className="h-5 w-5 text-black/70" />}
-                    </div>
-                    <h3 className="text-lg font-semibold">{p.title}</h3>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-sm">
-                    <a
-                      href={p.links.code}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 text-black/70 underline decoration-black/20 underline-offset-4 hover:text-black"
-                    >
-                      <Code2 className="h-4 w-4" />
-                      Code
-                    </a>
-
-                    {p.links.demo ? (
-                      <a
-                        href={p.links.demo}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-black/70 underline decoration-black/20 underline-offset-4 hover:text-black"
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                        Demo
-                      </a>
-                    ) : null}
-
-                    {p.links.docs ? (
-                      <a
-                        href={p.links.docs}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 text-black/70 underline decoration-black/20 underline-offset-4 hover:text-black"
-                      >
-                        <FileText className="h-4 w-4" />
-                        API Docs
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-
-                <p className="mt-3 text-sm leading-7 text-black/70">{p.description}</p>
-
-                {p.badges?.length ? (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {p.badges.map((b) => (
-                      <Tag key={b.label}>
-                        <span className="inline-flex items-center gap-2">
-                          <span className="text-black/60">{b.icon}</span>
-                          {b.label}
-                        </span>
-                      </Tag>
-                    ))}
-                  </div>
-                ) : null}
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <Tag key={t}>{t}</Tag>
-                  ))}
-                </div>
-
-                {/* Collapsible "Read more" */}
-                <div className="mt-6">
-                  <details className="group rounded-2xl border border-black/10 bg-white">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-3">
-                      <span className="text-sm font-semibold text-black/80">Read more (evidence, screenshots, architecture)</span>
-                      <div className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white text-black/60 shadow-sm transition group-open:rotate-180">
-                        <ChevronDown className="h-4 w-4" />
-                      </div>
-                    </summary>
-
-                    <div className="px-4 pb-4">
-                      {p.screenshots?.length ? (
-                        <div className="mt-2">
-                          <p className="text-xs font-semibold text-black/60">Screenshots</p>
-                          <div className="mt-3 grid grid-cols-4 gap-3">
-                            {p.screenshots.slice(0, 4).map((src, i) => (
-                              <button
-                                key={src}
-                                type="button"
-                                className="relative aspect-[4/3] overflow-hidden rounded-xl border border-black/10 bg-black/[0.02] focus:outline-none focus:ring-2 focus:ring-black/20"
-                                onClick={() => setLb({ images: p.screenshots ?? [], index: i, title: p.title })}
-                                aria-label={`Open ${p.title} screenshot ${i + 1}`}
-                              >
-                                <Image
-                                  src={src}
-                                  alt={`${p.title} screenshot`}
-                                  fill
-                                  className="object-cover transition hover:opacity-90"
-                                  sizes="(max-width: 1024px) 25vw, 12vw"
-                                />
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      ) : null}
-
-                      {p.highlights?.length ? (
-                        <div className="mt-5">
-                          <p className="text-xs font-semibold text-black/60">Highlights</p>
-                          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-black/70">
-                            {p.highlights.map((h) => (
-                              <li key={h}>{h}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
-
-                      {p.architecture?.length ? (
-                        <div className="mt-5">
-                          <p className="text-xs font-semibold text-black/60">Architecture</p>
-                          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-black/70">
-                            {p.architecture.map((a) => (
-                              <li key={a}>{a}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
-                    </div>
-                  </details>
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={p.title} p={p} />
           ))}
         </div>
       </Section>
 
-      {/* 6) EDUCATION */}
+      {/* EDUCATION */}
       <Section id="education" title="Education" subtitle="Academic foundation aligned to applied ML engineering." icon={<GraduationCap className="h-5 w-5 text-black/70" />}>
         <div className="space-y-4">
           {education.map((e) => (
@@ -963,7 +227,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 7) CERTIFICATIONS */}
+      {/* CERTIFICATIONS */}
       <Section id="certifications" title="Certifications & Courses" subtitle="ML-first grouping." icon={<Award className="h-5 w-5 text-black/70" />}>
         <Card>
           <p className="text-sm leading-7 text-black/70">
@@ -996,7 +260,7 @@ export default function Home() {
         </Card>
       </Section>
 
-      {/* 8) CONTACT */}
+      {/* CONTACT */}
       <Section id="contact" title="Contact" subtitle="Fastest way to reach me: email or WhatsApp." icon={<Mail className="h-5 w-5 text-black/70" />}>
         <Card>
           <div className="grid gap-4 md:grid-cols-2">
@@ -1024,24 +288,14 @@ export default function Home() {
             <div className="space-y-3 text-sm text-black/70">
               <div className="flex items-center gap-3">
                 <Github className="h-4 w-4 text-black/60" />
-                <a
-                  className="underline decoration-black/20 underline-offset-4 hover:text-black"
-                  href="https://github.com/Gujjar-Pranav"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a className="underline decoration-black/20 underline-offset-4 hover:text-black" href="https://github.com/Gujjar-Pranav" target="_blank" rel="noreferrer">
                   github.com/Gujjar-Pranav
                 </a>
               </div>
 
               <div className="flex items-center gap-3">
                 <Linkedin className="h-4 w-4 text-black/60" />
-                <a
-                  className="underline decoration-black/20 underline-offset-4 hover:text-black"
-                  href="https://www.linkedin.com/in/pranav-b-gujjar"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a className="underline decoration-black/20 underline-offset-4 hover:text-black" href="https://www.linkedin.com/in/pranav-b-gujjar" target="_blank" rel="noreferrer">
                   linkedin.com/in/pranav-b-gujjar
                 </a>
               </div>
@@ -1059,81 +313,6 @@ export default function Home() {
 
       <footer className="border-t border-black/10 py-10 text-center text-sm text-black/50">© {new Date().getFullYear()} Pranav Gujjar</footer>
 
-      {/* ✅ Screenshot Lightbox (full view) */}
-      {lb ? (
-        <div
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setLb(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={lb.title ? `${lb.title} screenshots` : "Screenshot viewer"}
-        >
-          <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <div className="text-sm text-white/80">
-                {lb.title ? <span className="font-medium text-white">{lb.title}</span> : null}
-                <span className="ml-2">
-                  ({lb.index + 1}/{lb.images.length})
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setLb(null)}
-                className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 p-2 text-white hover:bg-white/20"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 shadow-2xl">
-              <img src={lb.images[lb.index]} alt="Screenshot preview" className="max-h-[75vh] w-full object-contain" />
-
-              {lb.images.length > 1 ? (
-                <>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setLb((prev) => {
-                        if (!prev) return prev;
-                        const nextIndex = (prev.index - 1 + prev.images.length) % prev.images.length;
-                        return { ...prev, index: nextIndex };
-                      })
-                    }
-                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-xl border border-white/20 bg-white/10 p-2 text-white hover:bg-white/20"
-                    aria-label="Previous"
-                  >
-                    <ChevronLeft className="h-5 w-5" />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setLb((prev) => {
-                        if (!prev) return prev;
-                        const nextIndex = (prev.index + 1) % prev.images.length;
-                        return { ...prev, index: nextIndex };
-                      })
-                    }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-xl border border-white/20 bg-white/10 p-2 text-white hover:bg-white/20"
-                    aria-label="Next"
-                  >
-                    <ChevronRight className="h-5 w-5" />
-                  </button>
-                </>
-              ) : null}
-            </div>
-
-            <div className="mt-3 text-xs text-white/60">
-              Tip: Use <span className="text-white/80">←</span> / <span className="text-white/80">→</span> keys to navigate,{" "}
-              <span className="text-white/80">Esc</span> to close.
-            </div>
-          </div>
-        </div>
-      ) : null}
-
-      {/* Floating AI chat (keep it here so it overlays the site properly) */}
       <PortfolioChat />
     </div>
   );
