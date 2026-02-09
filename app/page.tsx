@@ -3,6 +3,7 @@
 import PortfolioChat from "./components/PortfolioChat";
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import {
   Github,
   Linkedin,
@@ -35,6 +36,9 @@ import {
   Target,
   Eye,
   Lock,
+  X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 type LinkSet = { code: string; demo?: string; docs?: string };
@@ -223,6 +227,36 @@ function Collapsible({
 }
 
 export default function Home() {
+  // ====== LIGHTBOX (screenshots) ======
+  const [lb, setLb] = useState<{ images: string[]; index: number; title?: string } | null>(null);
+
+  useEffect(() => {
+    if (!lb) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLb(null);
+
+      if (e.key === "ArrowLeft") {
+        setLb((prev) => {
+          if (!prev) return prev;
+          const nextIndex = (prev.index - 1 + prev.images.length) % prev.images.length;
+          return { ...prev, index: nextIndex };
+        });
+      }
+
+      if (e.key === "ArrowRight") {
+        setLb((prev) => {
+          if (!prev) return prev;
+          const nextIndex = (prev.index + 1) % prev.images.length;
+          return { ...prev, index: nextIndex };
+        });
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [lb]);
+
   // ====== DATA ======
 
   const experience: Experience[] = [
@@ -304,7 +338,6 @@ export default function Home() {
   ];
 
   const projects: Project[] = [
-    // ===== NEW PROJECT ADDED (no other changes) =====
     {
       title: "Strategic Intelligence Stack",
       icon: <BarChart3 className="h-5 w-5 text-black/70" />,
@@ -333,7 +366,6 @@ export default function Home() {
         demo: "https://strategic-intelligence-stack.vercel.app",
         docs: "https://strategic-intelligence-stack.onrender.com/docs",
       },
-      // NOTE: add these images into /public/projects/ with these names
       coverImage: "/projects/strategic-intelligence_1.png",
       screenshots: [
         "/projects/strategic-intelligence_1.png",
@@ -354,8 +386,6 @@ export default function Home() {
         "Next.js frontend consumes run data via REST APIs → dashboards + exports",
       ],
     },
-
-    // ===== EXISTING PROJECTS (unchanged) =====
     {
       title: "ReviewSense AI",
       icon: <ShieldCheck className="h-5 w-5 text-black/70" />,
@@ -424,8 +454,6 @@ export default function Home() {
         "Streamlit UI → prediction + PDF report + patient history export",
       ],
     },
-
-    // ✅ NEW PROJECT (placed beside Diabetes app as requested)
     {
       title: "Retina-AI",
       icon: <Eye className="h-5 w-5 text-black/70" />,
@@ -453,14 +481,8 @@ export default function Home() {
         code: "https://github.com/Gujjar-Pranav/retina-ai",
         demo: "https://retina-ai-zpkddbsb6m2rf6tfgd6rjh.streamlit.app",
       },
-      // NOTE: add these images into /public/projects/ with these names
       coverImage: "/projects/retina-ai_1.png",
-      screenshots: [
-        "/projects/retina-ai_1.png",
-        "/projects/retina-ai_2.png",
-        "/projects/retina-ai_3.png",
-        "/projects/retina-ai_4.png",
-      ],
+      screenshots: ["/projects/retina-ai_1.png", "/projects/retina-ai_2.png", "/projects/retina-ai_3.png", "/projects/retina-ai_4.png"],
       highlights: [
         "End-to-end screening workflow: Registry → Screening → Risk → Explainability → Reporting",
         "PyTorch inference with confidence + image quality gating",
@@ -475,7 +497,6 @@ export default function Home() {
         "Grad-CAM generation → PDF builder (ReportLab) → reports/*.pdf",
       ],
     },
-
     {
       title: "Glass Identification",
       icon: <FlaskConical className="h-5 w-5 text-black/70" />,
@@ -526,8 +547,16 @@ export default function Home() {
       links: { code: "https://github.com/Gujjar-Pranav/Meeting_task_assignment" },
       coverImage: "/projects/task_identification_output.png",
       screenshots: ["/projects/task_identification_output.png"],
-      highlights: ["Audio (.m4a) → transcript → task candidates → JSON output", "Team-member aware assignment logic via skills mapping", "Runs fully locally with ffmpeg + Whisper"],
-      architecture: ["Meeting audio → Whisper STT → transcript.txt", "Sentence splitting → rule-based task identification", "Feature extraction → task objects → tasks_output.json"],
+      highlights: [
+        "Audio (.m4a) → transcript → task candidates → JSON output",
+        "Team-member aware assignment logic via skills mapping",
+        "Runs fully locally with ffmpeg + Whisper",
+      ],
+      architecture: [
+        "Meeting audio → Whisper STT → transcript.txt",
+        "Sentence splitting → rule-based task identification",
+        "Feature extraction → task objects → tasks_output.json",
+      ],
     },
   ];
 
@@ -772,13 +801,7 @@ export default function Home() {
             <div key={p.title} className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
               {p.coverImage ? (
                 <div className="relative aspect-[16/9] w-full bg-black/[0.02]">
-                  <Image
-                    src={p.coverImage}
-                    alt={`${p.title} cover`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
+                  <Image src={p.coverImage} alt={`${p.title} cover`} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
                 </div>
               ) : null}
 
@@ -814,7 +837,6 @@ export default function Home() {
                       </a>
                     ) : null}
 
-                    {/* ✅ API Docs link (kept as-is) */}
                     {p.links.docs ? (
                       <a
                         href={p.links.docs}
@@ -865,10 +887,22 @@ export default function Home() {
                         <div className="mt-2">
                           <p className="text-xs font-semibold text-black/60">Screenshots</p>
                           <div className="mt-3 grid grid-cols-4 gap-3">
-                            {p.screenshots.slice(0, 4).map((src) => (
-                              <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-xl border border-black/10 bg-black/[0.02]">
-                                <Image src={src} alt={`${p.title} screenshot`} fill className="object-cover" sizes="(max-width: 1024px) 25vw, 12vw" />
-                              </div>
+                            {p.screenshots.slice(0, 4).map((src, i) => (
+                              <button
+                                key={src}
+                                type="button"
+                                className="relative aspect-[4/3] overflow-hidden rounded-xl border border-black/10 bg-black/[0.02] focus:outline-none focus:ring-2 focus:ring-black/20"
+                                onClick={() => setLb({ images: p.screenshots ?? [], index: i, title: p.title })}
+                                aria-label={`Open ${p.title} screenshot ${i + 1}`}
+                              >
+                                <Image
+                                  src={src}
+                                  alt={`${p.title} screenshot`}
+                                  fill
+                                  className="object-cover transition hover:opacity-90"
+                                  sizes="(max-width: 1024px) 25vw, 12vw"
+                                />
+                              </button>
                             ))}
                           </div>
                         </div>
@@ -990,14 +1024,24 @@ export default function Home() {
             <div className="space-y-3 text-sm text-black/70">
               <div className="flex items-center gap-3">
                 <Github className="h-4 w-4 text-black/60" />
-                <a className="underline decoration-black/20 underline-offset-4 hover:text-black" href="https://github.com/Gujjar-Pranav" target="_blank" rel="noreferrer">
+                <a
+                  className="underline decoration-black/20 underline-offset-4 hover:text-black"
+                  href="https://github.com/Gujjar-Pranav"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   github.com/Gujjar-Pranav
                 </a>
               </div>
 
               <div className="flex items-center gap-3">
                 <Linkedin className="h-4 w-4 text-black/60" />
-                <a className="underline decoration-black/20 underline-offset-4 hover:text-black" href="https://www.linkedin.com/in/pranav-b-gujjar" target="_blank" rel="noreferrer">
+                <a
+                  className="underline decoration-black/20 underline-offset-4 hover:text-black"
+                  href="https://www.linkedin.com/in/pranav-b-gujjar"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   linkedin.com/in/pranav-b-gujjar
                 </a>
               </div>
@@ -1014,6 +1058,80 @@ export default function Home() {
       </Section>
 
       <footer className="border-t border-black/10 py-10 text-center text-sm text-black/50">© {new Date().getFullYear()} Pranav Gujjar</footer>
+
+      {/* ✅ Screenshot Lightbox (full view) */}
+      {lb ? (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setLb(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={lb.title ? `${lb.title} screenshots` : "Screenshot viewer"}
+        >
+          <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div className="text-sm text-white/80">
+                {lb.title ? <span className="font-medium text-white">{lb.title}</span> : null}
+                <span className="ml-2">
+                  ({lb.index + 1}/{lb.images.length})
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setLb(null)}
+                className="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 p-2 text-white hover:bg-white/20"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/30 shadow-2xl">
+              <img src={lb.images[lb.index]} alt="Screenshot preview" className="max-h-[75vh] w-full object-contain" />
+
+              {lb.images.length > 1 ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLb((prev) => {
+                        if (!prev) return prev;
+                        const nextIndex = (prev.index - 1 + prev.images.length) % prev.images.length;
+                        return { ...prev, index: nextIndex };
+                      })
+                    }
+                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-xl border border-white/20 bg-white/10 p-2 text-white hover:bg-white/20"
+                    aria-label="Previous"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setLb((prev) => {
+                        if (!prev) return prev;
+                        const nextIndex = (prev.index + 1) % prev.images.length;
+                        return { ...prev, index: nextIndex };
+                      })
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-xl border border-white/20 bg-white/10 p-2 text-white hover:bg-white/20"
+                    aria-label="Next"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </>
+              ) : null}
+            </div>
+
+            <div className="mt-3 text-xs text-white/60">
+              Tip: Use <span className="text-white/80">←</span> / <span className="text-white/80">→</span> keys to navigate,{" "}
+              <span className="text-white/80">Esc</span> to close.
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {/* Floating AI chat (keep it here so it overlays the site properly) */}
       <PortfolioChat />
