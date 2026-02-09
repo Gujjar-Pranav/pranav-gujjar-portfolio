@@ -18,6 +18,11 @@ export const LINKS = {
   email: "mailto:mr.pranavgujjar@gmail.com",
   linkedinCertifications: "https://www.linkedin.com/in/pranav-b-gujjar/details/certifications/",
   githubCertificatesRepo: "https://github.com/Gujjar-Pranav/Data-Science-Traning-Certificates",
+
+  // Project links (used only in project-specific replies)
+  strategicIntelRepo: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
+  strategicIntelDemo: "https://strategic-intelligence-stack.vercel.app",
+  strategicIntelDocs: "https://strategic-intelligence-stack.onrender.com/docs",
 };
 
 export const KNOWLEDGE_BASE: KBItem[] = [
@@ -53,7 +58,6 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       "Achievements / ROI:\n- ~15% forecasting improvement\n- 10%+ operational cost reduction contribution\n- ~30% reduction in manual processing via automation\n- Production ML systems: FastAPI + Streamlit + Docker + CI/CD",
   },
 
-  // ✅ NEW: EDUCATION
   {
     id: "education",
     title: "Education",
@@ -76,7 +80,6 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       "Education:\n- MSc in Data Science (Distinction) — University of East Anglia, UK (Sept 2023 – Sept 2024)\n  • Focus: Machine Learning, NLP, Computer Vision, Time Series\n  • Dissertation: Retinal vessel segmentation (U-Net / Dense U-Net)",
   },
 
-  // NEW: CERTIFICATIONS
   {
     id: "certifications",
     title: "Certifications",
@@ -143,7 +146,7 @@ export const KNOWLEDGE_BASE: KBItem[] = [
     title: "Skills",
     keywords: ["skills", "skill", "stack", "tech", "mlops", "deployment", "ats", "tools"],
     answer:
-      "Key skills (ATS-friendly):\n- Languages: Python, SQL\n- ML: classification/regression/clustering, feature engineering, evaluation (ROC-AUC, Precision/Recall, F1)\n- DL: TensorFlow, PyTorch\n- NLP/Speech: TF-IDF, Linear SVM, rule-based NLP, Whisper ASR\n- Deployment/MLOps: FastAPI, Streamlit, Docker, CI/CD (GitHub Actions), model persistence",
+      "Key skills:\n- Languages: Python, SQL\n- ML: classification/regression/clustering, feature engineering, evaluation (ROC-AUC, Precision/Recall, F1)\n- DL: TensorFlow, PyTorch\n- NLP/Speech: TF-IDF, Linear SVM, rule-based NLP, Whisper ASR\n- Deployment/MLOps: FastAPI, Streamlit, Docker, CI/CD (GitHub Actions), model persistence\n- Full-stack (project work): Next.js, REST APIs, Swagger, Vercel/Render deployments",
   },
 
   {
@@ -151,10 +154,41 @@ export const KNOWLEDGE_BASE: KBItem[] = [
     title: "Projects",
     keywords: ["projects", "project", "portfolio", "work samples", "case studies", "project list"],
     answer:
-      "Projects (quick list):\n- ReviewSense AI — sentiment + calibrated confidence/risk routing (GitHub + demo)\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow (GitHub + demo)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “ReviewSense AI”) for full details + link.",
+      "Projects (quick list):\n- Strategic Intelligence Stack — production-grade customer segmentation + decision intelligence\n- ReviewSense AI — sentiment + calibrated confidence/risk routing (GitHub + demo)\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow (GitHub + demo)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “Strategic Intelligence Stack”) for full details + links.",
   },
 
   // --- Specific projects ---
+  {
+    id: "strategic-intelligence",
+    title: "Strategic Intelligence Stack",
+    keywords: [
+      "strategic intelligence",
+      "strategic intelligence stack",
+      "segmentation",
+      "customer segmentation",
+      "decision intelligence",
+      "clustering",
+      "run management",
+      "simulation",
+      "scenario simulation",
+      "fastapi",
+      "nextjs",
+      "vercel",
+      "render",
+      "swagger",
+      "api docs",
+    ],
+    link: LINKS.strategicIntelRepo,
+    demo: LINKS.strategicIntelDemo,
+    answer:
+      "Strategic Intelligence Stack:\n- Production-grade customer segmentation + decision intelligence system\n- Deterministic segmentation runs with persisted artifacts (run_id)\n- Segment personas + KPI insights (revenue share, promo responsiveness, discount risk, channel mix)\n- Scenario simulations on persisted runs (no retraining)\n- FastAPI backend + Swagger API docs; Next.js executive-ready dashboard\n\nGitHub: " +
+      LINKS.strategicIntelRepo +
+      "\nLive App: " +
+      LINKS.strategicIntelDemo +
+      "\nAPI Docs (Swagger): " +
+      LINKS.strategicIntelDocs,
+  },
+
   {
     id: "reviewsense",
     title: "ReviewSense AI",

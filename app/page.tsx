@@ -302,6 +302,58 @@ export default function Home() {
   ];
 
   const projects: Project[] = [
+    // ===== NEW PROJECT ADDED (no other changes) =====
+    {
+      title: "Strategic Intelligence Stack",
+      icon: <BarChart3 className="h-5 w-5 text-black/70" />,
+      description:
+        "Production-grade customer segmentation and decision intelligence platform: deterministic clustering runs, segment personas and KPI insights, and scenario simulations without retraining — delivered via FastAPI APIs and an executive-ready Next.js dashboard.",
+      badges: [
+        { label: "Decision Intelligence", icon: <Target className="h-4 w-4" /> },
+        { label: "Dashboards", icon: <LayoutDashboard className="h-4 w-4" /> },
+        { label: "Simulation", icon: <LineChart className="h-4 w-4" /> },
+        { label: "Run Versioning", icon: <ShieldCheck className="h-4 w-4" /> },
+      ],
+      tags: [
+        "Next.js",
+        "FastAPI",
+        "Customer Segmentation",
+        "Clustering",
+        "Run Management",
+        "Simulation Engine",
+        "REST APIs",
+        "Swagger",
+        "Vercel",
+        "Render",
+      ],
+      links: {
+        code: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
+        demo: "https://strategic-intelligence-stack.vercel.app",
+        docs: "https://strategic-intelligence-stack.onrender.com/docs",
+      },
+      // NOTE: add these images into /public/projects/ with these names
+      coverImage: "/projects/strategic-intelligence_1.png",
+      screenshots: [
+        "/projects/strategic-intelligence_1.png",
+        "/projects/strategic-intelligence_2.png",
+        "/projects/strategic-intelligence_3.png",
+        "/projects/strategic-intelligence_4.png",
+      ],
+      highlights: [
+        "Deterministic, reproducible segmentation runs (run ID + persisted artifacts)",
+        "Decision-oriented insights: revenue share, promo responsiveness, discount-risk, channel mix",
+        "Scenario simulations operate on persisted runs (no retraining required)",
+        "Executive-first UI with print-optimized exports",
+      ],
+      architecture: [
+        "Dataset ingestion → validation + normalization → clustering pipeline",
+        "Cluster analytics + persona generation → persisted run artifacts (run_id)",
+        "Simulation engine applies business-rule transformations on persisted results",
+        "Next.js frontend consumes run data via REST APIs → dashboards + exports",
+      ],
+    },
+
+    // ===== EXISTING PROJECTS (unchanged) =====
     {
       title: "ReviewSense AI",
       icon: <ShieldCheck className="h-5 w-5 text-black/70" />,
@@ -705,6 +757,19 @@ export default function Home() {
                       >
                         <ExternalLink className="h-4 w-4" />
                         Demo
+                      </a>
+                    ) : null}
+
+                    {/* ✅ API Docs link added (only change) */}
+                    {p.links.docs ? (
+                      <a
+                        href={p.links.docs}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-black/70 underline decoration-black/20 underline-offset-4 hover:text-black"
+                      >
+                        <FileText className="h-4 w-4" />
+                        API Docs
                       </a>
                     ) : null}
                   </div>
