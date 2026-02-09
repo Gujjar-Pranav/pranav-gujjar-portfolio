@@ -40,7 +40,6 @@ This portfolio is designed to reflect how ML systems are built and shipped in pr
 - Fetches repositories live from GitHub REST API
 
 - Supports:
-
   - Repo list
 
   - Repo details
@@ -94,6 +93,7 @@ This portfolio is designed to reflect how ML systems are built and shipped in pr
 - Automatic CI/CD from GitHub
 
 ### Architecture
+
 High-Level Architecture Flow
 
 - User interacts with the portfolio UI or chat assistant
@@ -116,35 +116,35 @@ High-Level Architecture Flow
 
 1. app/
 
- Core Next.js App Router directory
+Core Next.js App Router directory
 
 2. app/page.tsx
 
- Main landing page
+Main landing page
 
- Hero, sections, and chat trigger
+Hero, sections, and chat trigger
 
 3. app/layout.tsx
 
- Global layout and metadata
+Global layout and metadata
 
 4. app/api/github/route.ts
 
- Server-side GitHub API integration
+Server-side GitHub API integration
 
- Fetches repositories in real time
+Fetches repositories in real time
 
 5. components/PortfolioChat.tsx
 
- Offline AI assistant
+Offline AI assistant
 
- Intent detection and fuzzy matching
+Intent detection and fuzzy matching
 
 6. data/knowledge.ts
 
- Structured portfolio knowledge base
+Structured portfolio knowledge base
 
- Projects, experience, education, certifications, links
+Projects, experience, education, certifications, links
 
 7. public/
 
@@ -156,13 +156,13 @@ Downloadable resume used by chat and UI
 
 9. Configuration Files
 
- package.json
+package.json
 
- tsconfig.json
+tsconfig.json
 
- tailwind.config.ts
+tailwind.config.ts
 
- next.config.js
+next.config.js
 
 ### Offline AI Assistant – Capabilities
 
@@ -197,6 +197,7 @@ Downloadable resume used by chat and UI
 If a query is out of scope, the assistant gently redirects the user.
 
 ### Screenshots
+
 <img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 20" src="https://github.com/user-attachments/assets/019d8664-741c-49eb-a1e4-a0241b9be9f7" />
 <img width="300" height="300" alt="Screenshot 2026-01-06 at 23 25 46" src="https://github.com/user-attachments/assets/f9c000c5-fc6c-4964-9fac-55770cf55571" />
 <img width="300" height="300" alt="Screenshot 2026-01-06 at 23 26 02" src="https://github.com/user-attachments/assets/d72f7626-96e6-49e9-9520-a6da9a448687" />
@@ -205,18 +206,15 @@ If a query is out of scope, the assistant gently redirects the user.
 <img width="300" height="200" alt="Screenshot 2026-01-06 at 23 25 17" src="https://github.com/user-attachments/assets/ec42cfae-d2ed-44a3-87d0-c0972cec6acd" />
 <img width="300" height="300" alt="Screenshot 2026-01-06 at 23 25 34" src="https://github.com/user-attachments/assets/86fa3755-6013-4b8b-978c-67d62739244c" />
 
-
 ### Getting Started (Local Development)
 
 1. Install dependencies:
 
 npm install
 
-
 2. Run the development server:
 
 npm run dev
-
 
 3. Open in browser:
 
@@ -234,7 +232,7 @@ Deployment steps:
 
 3. Set environment variable (optional):
 
- GITHUB_TOKEN (to avoid API rate limits)
+GITHUB_TOKEN (to avoid API rate limits)
 
 4. Deploy
 

@@ -31,8 +31,12 @@ export function Section({
           ) : null}
 
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-black">{title}</h2>
-            {subtitle ? <p className="mt-1 text-sm text-black/60">{subtitle}</p> : null}
+            <h2 className="text-2xl font-semibold tracking-tight text-black">
+              {title}
+            </h2>
+            {subtitle ? (
+              <p className="mt-1 text-sm text-black/60">{subtitle}</p>
+            ) : null}
           </div>
         </div>
 
@@ -92,7 +96,7 @@ export function ClickTag({
       onClick={onClick}
       title={title}
       aria-label={ariaLabel}
-      className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-black/[0.02] px-3 py-1 text-xs text-black/70 transition hover:border-black/20 hover:bg-black/[0.04] focus:outline-none focus:ring-2 focus:ring-black/20"
+      className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-black/[0.02] px-3 py-1 text-xs text-black/70 transition hover:border-black/20 hover:bg-black/[0.04] focus:ring-2 focus:ring-black/20 focus:outline-none"
     >
       {children}
     </button>
@@ -119,12 +123,22 @@ export function Modal({
 
   return (
     <div className="fixed inset-0 z-[80] flex items-end justify-end p-4 sm:items-center sm:justify-center">
-      <div className="absolute inset-0 bg-black/30" onClick={onClose} aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-black/30"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
       <div className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl">
         <div className="flex items-center justify-between border-b border-black/10 px-4 py-3">
-          <div className="text-sm font-semibold text-black">{title ?? "Details"}</div>
-          <button onClick={onClose} className="rounded-lg p-2 hover:bg-black/[0.04]" aria-label="Close">
+          <div className="text-sm font-semibold text-black">
+            {title ?? "Details"}
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-lg p-2 hover:bg-black/[0.04]"
+            aria-label="Close"
+          >
             <X className="h-5 w-5 text-black/70" />
           </button>
         </div>
@@ -179,7 +193,15 @@ export function PrimaryLink({
   );
 }
 
-export function NavLink({ href, label, icon }: { href: string; label: string; icon?: ReactNode }) {
+export function NavLink({
+  href,
+  label,
+  icon,
+}: {
+  href: string;
+  label: string;
+  icon?: ReactNode;
+}) {
   return (
     <a
       href={href}
@@ -215,7 +237,9 @@ export function Collapsible({
       <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-6">
         <div>
           <div className="text-base font-semibold text-black">{title}</div>
-          {subtitle ? <div className="mt-1 text-sm text-black/60">{subtitle}</div> : null}
+          {subtitle ? (
+            <div className="mt-1 text-sm text-black/60">{subtitle}</div>
+          ) : null}
         </div>
 
         <div className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-white text-black/60 shadow-sm transition group-open:rotate-180">

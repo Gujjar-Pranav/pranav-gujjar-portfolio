@@ -5,7 +5,12 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Fuse from "fuse.js";
 import { MessageCircle, X, Send, Sparkles, HelpCircle } from "lucide-react";
-import { KNOWLEDGE_BASE, LINKS, SKILL_PROJECT_MAP, type KBItem } from "@/data/knowledge";
+import {
+  KNOWLEDGE_BASE,
+  LINKS,
+  SKILL_PROJECT_MAP,
+  type KBItem,
+} from "@/data/knowledge";
 
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -19,22 +24,40 @@ type GhRepo = {
 };
 
 function normalize(s: string) {
-  return s.toLowerCase().replace(/[^a-z0-9\s.+-]/g, " ").replace(/\s+/g, " ").trim();
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9\s.+-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function looksLikeJustGithub(q: string) {
   const n = normalize(q);
-  return n === "github" || n === "github link" || n === "github profile" || n === "github url";
+  return (
+    n === "github" ||
+    n === "github link" ||
+    n === "github profile" ||
+    n === "github url"
+  );
 }
 
 function looksLikeLinkedIn(q: string) {
   const n = normalize(q);
-  return n === "linkedin" || n.includes("linkedin link") || n.includes("linkedin url");
+  return (
+    n === "linkedin" ||
+    n.includes("linkedin link") ||
+    n.includes("linkedin url")
+  );
 }
 
 function looksLikeCv(q: string) {
   const n = normalize(q);
-  return n === "cv" || n === "resume" || n.includes("download cv") || n.includes("download resume");
+  return (
+    n === "cv" ||
+    n === "resume" ||
+    n.includes("download cv") ||
+    n.includes("download resume")
+  );
 }
 
 function wantsRepoList(q: string) {
@@ -99,8 +122,7 @@ export default function PortfolioChat() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
-      text:
-        "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.\n\nTip: Ask a skill (e.g., **FastAPI**, **Streamlit**, **PyTorch**) to see related projects.",
+      text: "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.\n\nTip: Ask a skill (e.g., **FastAPI**, **Streamlit**, **PyTorch**) to see related projects.",
     },
   ]);
 
@@ -117,8 +139,7 @@ export default function PortfolioChat() {
     setMessages([
       {
         role: "assistant",
-        text:
-          "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.\n\nTip: Ask a skill (e.g., **FastAPI**, **Streamlit**, **PyTorch**) to see related projects.",
+        text: "Hi! I’m **Pranav’s portfolio assistant** (free + offline).\n\nAsk about **projects, repo list/details, skills, strengths, achievements, experience, education, certifications, contact, GitHub/LinkedIn, or CV download**.\n\nTip: Ask a skill (e.g., **FastAPI**, **Streamlit**, **PyTorch**) to see related projects.",
       },
     ]);
   }
@@ -147,7 +168,7 @@ export default function PortfolioChat() {
     const skills = Object.keys(SKILL_PROJECT_MAP || {});
     return new Fuse(
       skills.map((s) => ({ skill: s })),
-      { includeScore: true, threshold: 0.4, keys: ["skill"] }
+      { includeScore: true, threshold: 0.4, keys: ["skill"] },
     );
   }, []);
 
@@ -166,7 +187,9 @@ export default function PortfolioChat() {
     const top = repos.slice(0, max);
 
     const lines = top.map((r) => {
-      const meta = [r.language || "—", `★ ${r.stars}`].filter(Boolean).join(" · ");
+      const meta = [r.language || "—", `★ ${r.stars}`]
+        .filter(Boolean)
+        .join(" · ");
       const desc = r.description ? `\n  ${r.description}` : "";
       return `- **${r.name}** (${meta})\n  ${r.url}${desc}`;
     });
@@ -175,7 +198,9 @@ export default function PortfolioChat() {
   }
 
   function formatRepoDetails(repo: GhRepo) {
-    const meta = [repo.language || "—", `★ ${repo.stars}`].filter(Boolean).join(" · ");
+    const meta = [repo.language || "—", `★ ${repo.stars}`]
+      .filter(Boolean)
+      .join(" · ");
     return `**${repo.name}** (${meta})\n\n- Repo: ${repo.url}\n${repo.description ? `- About: ${repo.description}\n` : ""}- Updated: ${repo.updatedAt}`;
   }
 
@@ -209,7 +234,9 @@ export default function PortfolioChat() {
       .replace("projects", "")
       .trim();
 
-    const hit = skillFuse.search(cleaned)[0]?.item?.skill ?? skillFuse.search(userText)[0]?.item?.skill;
+    const hit =
+      skillFuse.search(cleaned)[0]?.item?.skill ??
+      skillFuse.search(userText)[0]?.item?.skill;
     return hit || "";
   }
 
@@ -217,10 +244,21 @@ export default function PortfolioChat() {
     const n = normalize(userText);
 
     // Explicit intents
-    if (n.includes("skill projects") || n.includes("projects by skill") || n.includes("related projects") || n.includes("which projects use")) return true;
+    if (
+      n.includes("skill projects") ||
+      n.includes("projects by skill") ||
+      n.includes("related projects") ||
+      n.includes("which projects use")
+    )
+      return true;
 
     // “projects using X”, “X projects”
-    if (n.includes("projects using") || n.includes("projects with") || n.endsWith(" projects")) return true;
+    if (
+      n.includes("projects using") ||
+      n.includes("projects with") ||
+      n.endsWith(" projects")
+    )
+      return true;
 
     // If user just types the skill name (or typo)
     const match = skillFuse.search(userText)[0]?.item?.skill;
@@ -245,22 +283,26 @@ export default function PortfolioChat() {
     // Direct link intents
     if (looksLikeJustGithub(userText)) return `GitHub: ${LINKS.githubProfile}`;
     if (looksLikeLinkedIn(userText)) return `LinkedIn: ${LINKS.linkedin}`;
-    if (looksLikeCv(userText)) return `**Download Resume (PDF):** [Pranav_Gujjar_CV.pdf](${LINKS.resumePdf})`;
+    if (looksLikeCv(userText))
+      return `**Download Resume (PDF):** [Pranav_Gujjar_CV.pdf](${LINKS.resumePdf})`;
 
     // Repo list only when user asks for list
     if (wantsRepoList(userText)) {
       const repos = await fetchRepos();
-      if (!repos) return `I couldn’t fetch repos right now.\n\nGitHub profile: ${LINKS.githubProfile}`;
+      if (!repos)
+        return `I couldn’t fetch repos right now.\n\nGitHub profile: ${LINKS.githubProfile}`;
       return formatRepoList(repos, 25);
     }
 
     // Repo details only when user asks for details
     if (wantsRepoDetails(userText)) {
       const repos = await fetchRepos();
-      if (!repos) return `I couldn’t fetch repos right now.\n\nGitHub profile: ${LINKS.githubProfile}`;
+      if (!repos)
+        return `I couldn’t fetch repos right now.\n\nGitHub profile: ${LINKS.githubProfile}`;
 
       const repoName = extractRepoName(userText);
-      if (!repoName) return `Tell me the repo name.\nExample: “repo details review-sense-ai”`;
+      if (!repoName)
+        return `Tell me the repo name.\nExample: “repo details review-sense-ai”`;
 
       const repoFuse = new Fuse(repos, {
         includeScore: true,
@@ -269,14 +311,24 @@ export default function PortfolioChat() {
       });
 
       const match = repoFuse.search(repoName)[0]?.item;
-      if (!match) return `I couldn’t find that repo. Try “repo list” or paste the repo name.`;
+      if (!match)
+        return `I couldn’t find that repo. Try “repo list” or paste the repo name.`;
 
       return formatRepoDetails(match);
     }
 
     // Contact intent (quick)
-    if (q.includes("contact") || q.includes("whatsapp") || q.includes("call") || q.includes("phone") || q.includes("email")) {
-      return kbById["contact"]?.answer ?? `WhatsApp: ${LINKS.whatsapp}\nCall: ${LINKS.phone}\nEmail: ${LINKS.email}`;
+    if (
+      q.includes("contact") ||
+      q.includes("whatsapp") ||
+      q.includes("call") ||
+      q.includes("phone") ||
+      q.includes("email")
+    ) {
+      return (
+        kbById["contact"]?.answer ??
+        `WhatsApp: ${LINKS.whatsapp}\nCall: ${LINKS.phone}\nEmail: ${LINKS.email}`
+      );
     }
 
     // "projects" should show the projects KB (NOT fallback)
@@ -329,7 +381,7 @@ export default function PortfolioChat() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white shadow-lg transition hover:bg-black/90"
+        className="fixed right-6 bottom-6 z-50 inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white shadow-lg transition hover:bg-black/90"
         aria-label="Open portfolio chat"
       >
         <MessageCircle className="h-5 w-5" />
@@ -338,15 +390,23 @@ export default function PortfolioChat() {
 
       {open ? (
         <div className="fixed inset-0 z-[60] flex items-end justify-end p-4 sm:items-center sm:justify-center">
-          <div className="absolute inset-0 bg-black/30" onClick={closeAndReset} aria-hidden="true" />
+          <div
+            className="absolute inset-0 bg-black/30"
+            onClick={closeAndReset}
+            aria-hidden="true"
+          />
 
           <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl">
             <div className="flex items-center justify-between border-b border-black/10 px-4 py-3">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-black/70" />
                 <div>
-                  <div className="text-sm font-semibold">Ask Pranav (Offline)</div>
-                  <div className="text-xs text-black/60">Portfolio + CV knowledge</div>
+                  <div className="text-sm font-semibold">
+                    Ask Pranav (Offline)
+                  </div>
+                  <div className="text-xs text-black/60">
+                    Portfolio + CV knowledge
+                  </div>
                 </div>
               </div>
 
@@ -359,7 +419,11 @@ export default function PortfolioChat() {
                   <HelpCircle className="h-5 w-5 text-black/70" />
                 </button>
 
-                <button onClick={closeAndReset} className="rounded-lg p-2 hover:bg-black/[0.04]" aria-label="Close chat">
+                <button
+                  onClick={closeAndReset}
+                  className="rounded-lg p-2 hover:bg-black/[0.04]"
+                  aria-label="Close chat"
+                >
                   <X className="h-5 w-5 text-black/70" />
                 </button>
               </div>
@@ -367,7 +431,9 @@ export default function PortfolioChat() {
 
             {showHelp ? (
               <div className="border-b border-black/10 px-4 py-3">
-                <div className="mb-2 text-xs font-semibold text-black/60">Examples (optional):</div>
+                <div className="mb-2 text-xs font-semibold text-black/60">
+                  Examples (optional):
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {TOPIC_CHIPS.map((t) => (
                     <button
@@ -384,10 +450,15 @@ export default function PortfolioChat() {
 
             <div className="max-h-[55vh] space-y-3 overflow-auto px-4 py-4">
               {messages.map((m, idx) => (
-                <div key={idx} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div
+                  key={idx}
+                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+                >
                   <div
-                    className={`max-w-[85%] whitespace-pre-line rounded-2xl px-4 py-3 text-sm leading-6 ${
-                      m.role === "user" ? "bg-black text-white" : "bg-black/[0.04] text-black"
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 whitespace-pre-line ${
+                      m.role === "user"
+                        ? "bg-black text-white"
+                        : "bg-black/[0.04] text-black"
                     }`}
                   >
                     {m.role === "assistant" ? (
@@ -395,12 +466,21 @@ export default function PortfolioChat() {
                         remarkPlugins={[remarkGfm]}
                         components={{
                           a: ({ children, ...props }) => (
-                            <a {...props} target="_blank" rel="noreferrer" className="underline decoration-black/20 underline-offset-4 hover:text-black">
+                            <a
+                              {...props}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="underline decoration-black/20 underline-offset-4 hover:text-black"
+                            >
                               {children}
                             </a>
                           ),
-                          ul: ({ children }) => <ul className="list-disc pl-5">{children}</ul>,
-                          li: ({ children }) => <li className="mt-1">{children}</li>,
+                          ul: ({ children }) => (
+                            <ul className="list-disc pl-5">{children}</ul>
+                          ),
+                          li: ({ children }) => (
+                            <li className="mt-1">{children}</li>
+                          ),
                         }}
                       >
                         {m.text}
@@ -423,13 +503,18 @@ export default function PortfolioChat() {
                   placeholder="Ask about Pranav’s portfolio..."
                   className="w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:border-black/30"
                 />
-                <button onClick={send} className="inline-flex items-center justify-center rounded-xl bg-black px-3 py-2 text-white hover:bg-black/90" aria-label="Send">
+                <button
+                  onClick={send}
+                  className="inline-flex items-center justify-center rounded-xl bg-black px-3 py-2 text-white hover:bg-black/90"
+                  aria-label="Send"
+                >
                   <Send className="h-4 w-4" />
                 </button>
               </div>
 
               <div className="mt-2 text-[11px] text-black/50">
-                Offline assistant. GitHub repo list/details are fetched via <code>/api/github</code>.
+                Offline assistant. GitHub repo list/details are fetched via{" "}
+                <code>/api/github</code>.
               </div>
             </div>
           </div>

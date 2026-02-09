@@ -4,7 +4,13 @@ import Image from "next/image";
 import { useCallback, useMemo, useState } from "react";
 import type { Project } from "./types";
 import { Tag } from "./ui";
-import { Code2, ExternalLink, FileText, FolderGit2, ChevronDown } from "lucide-react";
+import {
+  Code2,
+  ExternalLink,
+  FileText,
+  FolderGit2,
+  ChevronDown,
+} from "lucide-react";
 import Lightbox from "./Lightbox";
 
 export default function ProjectCard({ p }: { p: Project }) {
@@ -83,7 +89,9 @@ export default function ProjectCard({ p }: { p: Project }) {
             </div>
           </div>
 
-          <p className="mt-3 text-sm leading-7 text-black/70">{p.description}</p>
+          <p className="mt-3 text-sm leading-7 text-black/70">
+            {p.description}
+          </p>
 
           {p.badges?.length ? (
             <div className="mt-4 flex flex-wrap gap-2">
@@ -118,7 +126,9 @@ export default function ProjectCard({ p }: { p: Project }) {
               <div className="px-4 pb-4">
                 {images.length ? (
                   <div className="mt-2">
-                    <p className="text-xs font-semibold text-black/60">Screenshots</p>
+                    <p className="text-xs font-semibold text-black/60">
+                      Screenshots
+                    </p>
 
                     <div className="mt-3 grid grid-cols-4 gap-3">
                       {images.slice(0, 4).map((src, i) => (
@@ -126,7 +136,7 @@ export default function ProjectCard({ p }: { p: Project }) {
                           type="button"
                           key={`${src}-${i}`}
                           onClick={() => openAt(i)}
-                          className="relative aspect-[4/3] overflow-hidden rounded-xl border border-black/10 bg-black/[0.02] focus:outline-none focus:ring-2 focus:ring-black/20"
+                          className="relative aspect-[4/3] overflow-hidden rounded-xl border border-black/10 bg-black/[0.02] focus:ring-2 focus:ring-black/20 focus:outline-none"
                           aria-label={`Open ${p.title} screenshot ${i + 1}`}
                         >
                           <Image
@@ -140,13 +150,17 @@ export default function ProjectCard({ p }: { p: Project }) {
                       ))}
                     </div>
 
-                    <p className="mt-2 text-xs text-black/50">Tip: click to zoom, swipe or use arrows for next/prev.</p>
+                    <p className="mt-2 text-xs text-black/50">
+                      Tip: click to zoom, swipe or use arrows for next/prev.
+                    </p>
                   </div>
                 ) : null}
 
                 {p.highlights?.length ? (
                   <div className="mt-5">
-                    <p className="text-xs font-semibold text-black/60">Highlights</p>
+                    <p className="text-xs font-semibold text-black/60">
+                      Highlights
+                    </p>
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-black/70">
                       {p.highlights.map((h) => (
                         <li key={h}>{h}</li>
@@ -157,7 +171,9 @@ export default function ProjectCard({ p }: { p: Project }) {
 
                 {p.architecture?.length ? (
                   <div className="mt-5">
-                    <p className="text-xs font-semibold text-black/60">Architecture</p>
+                    <p className="text-xs font-semibold text-black/60">
+                      Architecture
+                    </p>
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-black/70">
                       {p.architecture.map((a) => (
                         <li key={a}>{a}</li>

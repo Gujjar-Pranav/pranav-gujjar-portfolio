@@ -18,13 +18,13 @@ export async function GET() {
         },
         // Next.js caching control:
         next: { revalidate: 60 }, // same as export const revalidate
-      }
+      },
     );
 
     if (!res.ok) {
       return NextResponse.json(
         { ok: false, error: `GitHub API failed: ${res.status}` },
-        { status: 200 }
+        { status: 200 },
       );
     }
 
@@ -47,7 +47,7 @@ export async function GET() {
   } catch (e: any) {
     return NextResponse.json(
       { ok: false, error: e?.message ?? "Unknown error" },
-      { status: 200 }
+      { status: 200 },
     );
   }
 }

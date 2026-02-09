@@ -21,11 +21,14 @@ export const LINKS = {
   whatsapp: "https://wa.me/919008913366",
   phone: "tel:+919008913366",
   email: "mailto:mr.pranavgujjar@gmail.com",
-  linkedinCertifications: "https://www.linkedin.com/in/pranav-b-gujjar/details/certifications/",
-  githubCertificatesRepo: "https://github.com/Gujjar-Pranav/Data-Science-Traning-Certificates",
+  linkedinCertifications:
+    "https://www.linkedin.com/in/pranav-b-gujjar/details/certifications/",
+  githubCertificatesRepo:
+    "https://github.com/Gujjar-Pranav/Data-Science-Traning-Certificates",
 
   // Project links (used ONLY in project-specific replies)
-  strategicIntelRepo: "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
+  strategicIntelRepo:
+    "https://github.com/Gujjar-Pranav/strategic-intelligence-stack",
   strategicIntelDemo: "https://strategic-intelligence-stack.vercel.app",
   strategicIntelDocs: "https://strategic-intelligence-stack.onrender.com/docs",
 
@@ -39,19 +42,45 @@ export const LINKS = {
  */
 export const SKILL_PROJECT_MAP: Record<string, string[]> = {
   // Core
-  Python: ["ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification", "Meeting Task Assignment"],
+  Python: [
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Retina-AI",
+    "Glass Identification",
+    "Meeting Task Assignment",
+  ],
   SQL: ["Vertexblue Internship (Forecasting)"],
-  "scikit-learn": ["ReviewSense AI", "Diabetes Prediction App", "Glass Identification"],
+  "scikit-learn": [
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Glass Identification",
+  ],
   PyTorch: ["Retina-AI"],
   TensorFlow: ["(Academic / coursework focus)"],
   FastAPI: ["Strategic Intelligence Stack", "Glass Identification"],
-  Streamlit: ["ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"],
+  Streamlit: [
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Retina-AI",
+    "Glass Identification",
+  ],
   Docker: ["Glass Identification"],
 
   // ML
-  "Supervised/Unsupervised Learning": ["Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Glass Identification"],
-  "Feature Engineering": ["Glass Identification", "Vertexblue Internship (Forecasting)"],
-  "Model Evaluation (ROC-AUC, Precision/Recall)": ["ReviewSense AI", "Diabetes Prediction App"],
+  "Supervised/Unsupervised Learning": [
+    "Strategic Intelligence Stack",
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Glass Identification",
+  ],
+  "Feature Engineering": [
+    "Glass Identification",
+    "Vertexblue Internship (Forecasting)",
+  ],
+  "Model Evaluation (ROC-AUC, Precision/Recall)": [
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+  ],
   "Calibration & Confidence Scoring": ["ReviewSense AI", "Retina-AI"],
   "Hyperparameter Tuning": ["Glass Identification", "ReviewSense AI"],
 
@@ -71,28 +100,64 @@ export const SKILL_PROJECT_MAP: Record<string, string[]> = {
   "Grad-CAM": ["Retina-AI"],
 
   // Data & Analytics
-  pandas: ["Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"],
-  NumPy: ["Strategic Intelligence Stack", "ReviewSense AI", "Diabetes Prediction App", "Retina-AI", "Glass Identification"],
+  pandas: [
+    "Strategic Intelligence Stack",
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Retina-AI",
+    "Glass Identification",
+  ],
+  NumPy: [
+    "Strategic Intelligence Stack",
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Retina-AI",
+    "Glass Identification",
+  ],
   PostgreSQL: ["Vertexblue Internship (Forecasting)"],
   MongoDB: ["(Project / learning experience)"],
-  Matplotlib: ["ReviewSense AI", "Diabetes Prediction App", "Glass Identification"],
+  Matplotlib: [
+    "ReviewSense AI",
+    "Diabetes Prediction App",
+    "Glass Identification",
+  ],
   Plotly: ["ReviewSense AI"],
   "Power BI": ["(Analytics / BI work)"],
   Tableau: ["(Analytics / BI work)"],
 
   // MLOps
   "CI/CD (GitHub Actions)": ["Glass Identification", "Retina-AI"],
-  "Model Persistence": ["Diabetes Prediction App", "Glass Identification", "ReviewSense AI"],
+  "Model Persistence": [
+    "Diabetes Prediction App",
+    "Glass Identification",
+    "ReviewSense AI",
+  ],
   APIs: ["Strategic Intelligence Stack", "Glass Identification"],
-  "Training–Inference Parity": ["Glass Identification", "Strategic Intelligence Stack"],
-  "Reproducible Pipelines": ["Strategic Intelligence Stack", "Glass Identification", "Retina-AI"],
+  "Training–Inference Parity": [
+    "Glass Identification",
+    "Strategic Intelligence Stack",
+  ],
+  "Reproducible Pipelines": [
+    "Strategic Intelligence Stack",
+    "Glass Identification",
+    "Retina-AI",
+  ],
 };
 
 export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "about",
     title: "About",
-    keywords: ["about", "summary", "profile", "who is pranav", "who are you", "tell me about", "bio", "introduction"],
+    keywords: [
+      "about",
+      "summary",
+      "profile",
+      "who is pranav",
+      "who are you",
+      "tell me about",
+      "bio",
+      "introduction",
+    ],
     answer:
       "Pranav Gujjar is a Machine Learning Engineer / Data Scientist (MSc Data Science, Distinction) building production-ready ML systems end-to-end: data → modeling → evaluation → deployment. Strong in explainability, confidence/risk scoring, and deployment using FastAPI, Streamlit, Docker, and CI/CD.",
   },
@@ -100,7 +165,16 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "whyhire",
     title: "Why hire",
-    keywords: ["why hire", "hire", "why should we hire", "strength", "strengths", "why pranav", "value", "fit"],
+    keywords: [
+      "why hire",
+      "hire",
+      "why should we hire",
+      "strength",
+      "strengths",
+      "why pranav",
+      "value",
+      "fit",
+    ],
     answer:
       "Why hire Pranav:\n- Production-ready delivery: APIs + dashboards + persisted artifacts\n- Reliable ML: calibration, confidence scoring, risk routing, human-in-the-loop\n- Measurable ROI: forecasting gains, cost reduction, automation improvements\n- Engineering mindset: reproducibility, training–inference parity, CI checks",
   },
@@ -108,7 +182,16 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "experience",
     title: "Experience",
-    keywords: ["experience", "exp", "work", "intern", "internship", "freelance", "career", "job"],
+    keywords: [
+      "experience",
+      "exp",
+      "work",
+      "intern",
+      "internship",
+      "freelance",
+      "career",
+      "job",
+    ],
     answer:
       "Experience:\n- ML Engineer — Freelance (Aug 2025 – Present): end-to-end ML pipelines, FastAPI inference, Streamlit dashboards, reproducible artifacts.\n- Data Science Intern — Vertexblue (Jun 2022 – Dec 2022): ~15% forecasting improvement, 10%+ cost reduction support, ~30% automation gain.",
   },
@@ -116,7 +199,18 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "achievements",
     title: "Achievements / ROI",
-    keywords: ["achievement", "achievements", "roi", "impact", "metrics", "results", "numbers", "forecasting", "cost reduction", "automation"],
+    keywords: [
+      "achievement",
+      "achievements",
+      "roi",
+      "impact",
+      "metrics",
+      "results",
+      "numbers",
+      "forecasting",
+      "cost reduction",
+      "automation",
+    ],
     answer:
       "Achievements / ROI:\n- ~15% forecasting improvement\n- 10%+ operational cost reduction contribution\n- ~30% reduction in manual processing via automation\n- Production ML systems: FastAPI + Streamlit + Docker + CI/CD",
   },
@@ -200,15 +294,31 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "contact",
     title: "Contact",
-    keywords: ["contact", "email", "phone", "call", "whatsapp", "reach", "message"],
-    answer:
-      `Contact Pranav:\n- Email: ${LINKS.email}\n- WhatsApp: ${LINKS.whatsapp}\n- Call: ${LINKS.phone}\n- Location: Bangalore, India (open to relocation & remote)`,
+    keywords: [
+      "contact",
+      "email",
+      "phone",
+      "call",
+      "whatsapp",
+      "reach",
+      "message",
+    ],
+    answer: `Contact Pranav:\n- Email: ${LINKS.email}\n- WhatsApp: ${LINKS.whatsapp}\n- Call: ${LINKS.phone}\n- Location: Bangalore, India (open to relocation & remote)`,
   },
 
   {
     id: "skills",
     title: "Skills",
-    keywords: ["skills", "skill", "stack", "tech", "mlops", "deployment", "ats", "tools"],
+    keywords: [
+      "skills",
+      "skill",
+      "stack",
+      "tech",
+      "mlops",
+      "deployment",
+      "ats",
+      "tools",
+    ],
     answer:
       "Skills (portfolio-aligned):\n\n" +
       "Core (Primary tools used across projects):\n" +
@@ -255,7 +365,14 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "projects",
     title: "Projects",
-    keywords: ["projects", "project", "portfolio", "work samples", "case studies", "project list"],
+    keywords: [
+      "projects",
+      "project",
+      "portfolio",
+      "work samples",
+      "case studies",
+      "project list",
+    ],
     answer:
       "Projects (quick list):\n- Strategic Intelligence Stack — production-grade customer segmentation + decision intelligence\n- ReviewSense AI — sentiment + calibrated confidence/risk routing\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow\n- Retina-AI — clinical diabetic retinopathy screening (registry → screening → explainability → PDF reports)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “Retina-AI”) for full details + links.",
   },
@@ -327,7 +444,15 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "reviewsense",
     title: "ReviewSense AI",
-    keywords: ["reviewsense", "review sense", "review-sense", "sentiment dashboard", "confidence", "calibration", "risk routing"],
+    keywords: [
+      "reviewsense",
+      "review sense",
+      "review-sense",
+      "sentiment dashboard",
+      "confidence",
+      "calibration",
+      "risk routing",
+    ],
     link: "https://github.com/Gujjar-Pranav/review-sense-ai",
     demo: "https://review-sense-ai-mvvd48vdsasmys7ecjenpa.streamlit.app/",
     answer:
@@ -337,7 +462,16 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "glass",
     title: "Glass Identification",
-    keywords: ["glass", "glass identification", "stacking", "smote", "fastapi", "docker", "cicd", "glass_identification"],
+    keywords: [
+      "glass",
+      "glass identification",
+      "stacking",
+      "smote",
+      "fastapi",
+      "docker",
+      "cicd",
+      "glass_identification",
+    ],
     link: "https://github.com/Gujjar-Pranav/Glass_Identification",
     answer:
       "Glass Identification:\n- Stacking ensemble + SMOTE (imbalance handling)\n- FastAPI backend + Streamlit UI\n- Docker / Compose + CI/CD automation\n\nGitHub: https://github.com/Gujjar-Pranav/Glass_Identification",
@@ -368,7 +502,16 @@ export const KNOWLEDGE_BASE: KBItem[] = [
   {
     id: "meeting",
     title: "Meeting Task Assignment",
-    keywords: ["meeting", "whisper", "audio", "task assignment", "stt", "asr", "json tasks", "meeting_task_assignment"],
+    keywords: [
+      "meeting",
+      "whisper",
+      "audio",
+      "task assignment",
+      "stt",
+      "asr",
+      "json tasks",
+      "meeting_task_assignment",
+    ],
     link: "https://github.com/Gujjar-Pranav/Meeting_task_assignment",
     answer:
       "Meeting Task Assignment:\n- Offline Whisper speech-to-text + rule-based NLP\n- Meeting audio → transcript → tasks_output.json\n- Fully local (no cloud)\n\nGitHub: https://github.com/Gujjar-Pranav/Meeting_task_assignment",

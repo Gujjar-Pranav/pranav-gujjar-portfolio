@@ -16,9 +16,19 @@ function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
 }
 
-export default function Lightbox({ open, images, index, title, onClose, onIndexChange }: Props) {
+export default function Lightbox({
+  open,
+  images,
+  index,
+  title,
+  onClose,
+  onIndexChange,
+}: Props) {
   const hasImages = images?.length > 0;
-  const safeIndex = useMemo(() => clamp(index, 0, Math.max(0, images.length - 1)), [index, images.length]);
+  const safeIndex = useMemo(
+    () => clamp(index, 0, Math.max(0, images.length - 1)),
+    [index, images.length],
+  );
   const src = hasImages ? images[safeIndex] : "";
 
   // Zoom + pan state
@@ -127,9 +137,15 @@ export default function Lightbox({ open, images, index, title, onClose, onIndexC
           <div className="min-w-0">
             <div className="truncate text-sm font-semibold">
               {title ? title : "Screenshots"}{" "}
-              {hasImages ? <span className="text-white/70">· {safeIndex + 1}/{images.length}</span> : null}
+              {hasImages ? (
+                <span className="text-white/70">
+                  · {safeIndex + 1}/{images.length}
+                </span>
+              ) : null}
             </div>
-            <div className="text-xs text-white/70">Swipe to navigate · wheel/double click to zoom</div>
+            <div className="text-xs text-white/70">
+              Swipe to navigate · wheel/double click to zoom
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
@@ -173,7 +189,7 @@ export default function Lightbox({ open, images, index, title, onClose, onIndexC
               <button
                 type="button"
                 onClick={prev}
-                className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/15"
+                className="absolute top-1/2 left-3 z-10 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/15"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -182,7 +198,7 @@ export default function Lightbox({ open, images, index, title, onClose, onIndexC
               <button
                 type="button"
                 onClick={next}
-                className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/15"
+                className="absolute top-1/2 right-3 z-10 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/15"
                 aria-label="Next image"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -193,7 +209,7 @@ export default function Lightbox({ open, images, index, title, onClose, onIndexC
           {/* Image area */}
           <div
             ref={containerRef}
-            className="absolute inset-0 flex items-center justify-center touch-pan-y"
+            className="absolute inset-0 flex touch-pan-y items-center justify-center"
             style={{
               // allow custom gestures
               touchAction: scale > 1 ? "none" : "pan-y",
@@ -288,13 +304,20 @@ export default function Lightbox({ open, images, index, title, onClose, onIndexC
             {hasImages ? (
               <img
                 src={src}
-                alt={title ? `${title} screenshot ${safeIndex + 1}` : `Screenshot ${safeIndex + 1}`}
+                alt={
+                  title
+                    ? `${title} screenshot ${safeIndex + 1}`
+                    : `Screenshot ${safeIndex + 1}`
+                }
                 className="max-h-[85vh] max-w-[95vw] select-none"
                 draggable={false}
                 style={{
                   transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
                   transformOrigin: "center center",
-                  transition: pointers.current.size === 2 ? "none" : "transform 80ms linear",
+                  transition:
+                    pointers.current.size === 2
+                      ? "none"
+                      : "transform 80ms linear",
                   cursor: scale > 1 ? "grab" : "zoom-in",
                 }}
                 onDoubleClick={(e) => {
