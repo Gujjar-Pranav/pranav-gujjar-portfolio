@@ -1,3 +1,5 @@
+![CI](https://github.com/Gujjar-Pranav/pranav-gujjar-portfolio/actions/workflows/ci.yml/badge.svg)
+
 # Pranav Gujjar – Machine Learning Engineer Portfolio
 
 A modern, production-focused portfolio built with Next.js (App Router) showcasing real-world Machine Learning engineering, deployment-ready projects, and an offline AI portfolio assistant with real-time GitHub integration.
@@ -25,7 +27,7 @@ This portfolio reflects how ML systems are designed, built, evaluated, deployed,
 1. Production-Ready ML Portfolio
    - End-to-end projects (data → modeling → evaluation → deployment → UI)
    - FastAPI, Streamlit, Docker, CI/CD patterns reflected in real implementations
-   - Architecture diagrams, screenshots, and highlights for each project
+   - Screenshots, and highlights for each project
 
 2. Offline AI Portfolio Assistant
    - No paid APIs, no LLM calls
@@ -58,6 +60,19 @@ This portfolio reflects how ML systems are designed, built, evaluated, deployed,
    - Optimized for desktop and mobile
 
    - Lightweight and fast
+
+6. Engineering Highlights
+
+   - Production ML pipelines (notebooks → APIs → dashboards)
+     
+   - Offline AI assistant with deterministic knowledge base
+     
+   - Real-time GitHub API integration
+     
+   - CI pipeline with lint + typecheck + formatting + build
+     
+   - Fully typed Next.js App Router architecture
+
 
 🛠 Tech Stack
 
