@@ -1,261 +1,217 @@
-Pranav Gujjar – Machine Learning Engineer Portfolio
+# Pranav Gujjar – Machine Learning Engineer Portfolio
 
 A modern, production-focused portfolio built with Next.js (App Router) showcasing real-world Machine Learning engineering, deployment-ready projects, and an offline AI portfolio assistant with real-time GitHub integration.
 
-Live Demo (Vercel):
+## 🔗 Live Demo (Vercel):
 https://pranav-gujjar-portfolio.vercel.app
 
-### Overview
+## 📌 Overview
 
-This portfolio is designed to reflect how ML systems are built and shipped in production, not just modeled in notebooks.
+This portfolio reflects how ML systems are designed, built, evaluated, deployed, and maintained in production — not just modeled in notebooks.
 
-### Key goals:
+## Core goals:
 
-- Demonstrate end-to-end ML delivery
+ - Demonstrate end-to-end ML delivery
 
-- Highlight measurable business impact
+ - Highlight measurable business impact
 
-- Provide recruiter-friendly navigation
+ - Provide recruiter-friendly navigation
 
 - Enable interactive exploration via an offline AI assistant
 
-### Key Features
-
+## ✨ Key Features
 1. Production-Ready ML Portfolio
 
-- End-to-end projects with modeling, evaluation, deployment, and UI
-
-- FastAPI, Streamlit, Docker, CI/CD patterns reflected in content
+    - End-to-end projects (data → modeling → evaluation → deployment → UI)
+  
+    - FastAPI, Streamlit, Docker, CI/CD patterns reflected in real implementations
+  
+    - Architecture diagrams, screenshots, and highlights for each project
 
 2. Offline AI Portfolio Assistant
 
-- No paid APIs, no LLM calls
+    - No paid APIs, no LLM calls
 
-- Deterministic answers from a curated knowledge base
+    - Deterministic answers from a curated knowledge base
 
-- Fuzzy search and typo handling using Fuse.js
+    - Fuzzy search + typo tolerance via Fuse.js
+
+    - Supports skill → project mapping
 
 3. Real-Time GitHub Integration
 
-- Fetches repositories live from GitHub REST API
+    - Live repository data via GitHub REST API:
 
-- Supports:
-  - Repo list
+    - Repository list
 
-  - Repo details
+    - Repository details
 
-  - Direct links
+    - Direct links
 
-- No hardcoded repo data
+    - No hardcoded repo metadata.
 
 4. Recruiter & ATS Friendly
 
-- Clear section ordering
+    - Clear section ordering
 
-- Keyword-rich skills and experience
+    - Keyword-rich skills and experience
 
-- Clean, scannable layout
+    - Clean, scannable layout
 
 5. Mobile-Responsive UI
 
-- Optimized for desktop and mobile viewing
+    - Optimized for desktop and mobile
 
-- Lightweight and fast
+    - Lightweight and fast
 
-### Tech Stack
+🛠 Tech Stack
+ - Frontend
 
-1.Frontend
+ - Next.js (App Router)
 
-- Next.js 14 (App Router)
+ - React
 
-- React
+ - TypeScript
 
-- TypeScript
+ - Tailwind CSS
 
-- Tailwind CSS
+ - AI / Search Logic
 
-2. AI / Search Logic
+ - Fuse.js (fuzzy matching)
 
-- Fuse.js (fuzzy matching)
+ - Structured TypeScript knowledge base
 
-- Structured knowledge base (TypeScript)
+ - Backend
 
-3. Backend
+ - Next.js API Routes
 
-- Next.js API Routes
+ - GitHub REST API
 
-- GitHub REST API
+ - Deployment
 
-4. Deployment
+ - Vercel (free tier)
 
-- Vercel (free tier)
+ - GitHub Actions CI
 
-- Automatic CI/CD from GitHub
+ - Automatic deployments
 
-### Architecture
+🧱 Architecture
+ - High-Level Flow
 
-High-Level Architecture Flow
+ - User interacts with portfolio UI or chat assistant
 
-- User interacts with the portfolio UI or chat assistant
+ - Next.js App Router renders pages and components
 
-- Next.js App Router renders pages and components
+ - PortfolioChat processes user intent
 
-- PortfolioChat component processes user intent
+ - Fuse.js matches queries against the knowledge base
 
-- Fuse.js matches queries against the knowledge base
+ - GitHub requests are routed through /api/github
 
-- For GitHub requests:
+ - Responses render via Markdown
 
-/api/github fetches live data from GitHub REST API
+ - App is deployed globally via Vercel CDN
 
-- Responses are rendered using Markdown for clickable links
+📁 Project Structure
+-
+ - app/
+    - page.tsx              # Main landing page
+    - layout.tsx           # Global layout + metadata
+    - api/github/route.ts  # GitHub REST API integration
 
-- App is deployed and served via Vercel CDN
+ - components/
+    - PortfolioChat.tsx    # Offline AI assistant
 
-### Project Structure
+ - data/
+    - knowledge.ts         # Structured portfolio knowledge base
 
-1. app/
+ - public/
+    - Pranav_Gujjar_CV.pdf # Downloadable resume
 
-Core Next.js App Router directory
+ - Configuration:
+    - package.json
+    - tsconfig.json
+    - tailwind.config.ts
+    - next.config.ts
 
-2. app/page.tsx
+🤖 Offline AI Assistant – Capabilities
 
-Main landing page
+ - The assistant answers questions about:
 
-Hero, sections, and chat trigger
+ - Projects (details, GitHub links, demos)
 
-3. app/layout.tsx
+ - Skills and technical stack
 
-Global layout and metadata
+ - Experience and achievements (ROI metrics)
 
-4. app/api/github/route.ts
+ - Education and certifications
 
-Server-side GitHub API integration
+ - Contact information
 
-Fetches repositories in real time
+ - GitHub repositories (real-time)
 
-5. components/PortfolioChat.tsx
+ - Resume download
 
-Offline AI assistant
+ - Example queries:
 
-Intent detection and fuzzy matching
+    - “ReviewSense AI project details”
 
-6. data/knowledge.ts
+    - “Repo list”
 
-Structured portfolio knowledge base
+    - “Why hire Pranav”
 
-Projects, experience, education, certifications, links
+    - “Download CV”
 
-7. public/
+    - “Contact Pranav on WhatsApp”
 
-Static assets
+ - Out-of-scope queries are gracefully redirected.
 
-8. public/Pranav_Gujjar_CV.pdf
+📸 Screenshots
 
-Downloadable resume used by chat and UI
+(UI, dashboards, chat assistant, and projects)
 
-9. Configuration Files
+<img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/019d8664-741c-49eb-a1e4-a0241b9be9f7" /> <img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/f9c000c5-fc6c-4964-9fac-55770cf55571" /> <img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/d72f7626-96e6-49e9-9520-a6da9a448687" /> <img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/aecbd181-5450-4654-8438-7489a7856165" /> <img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/01f5852b-601b-4461-9a92-b4668b646572" /> <img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/ec42cfae-d2ed-44a3-87d0-c0972cec6acd" /> <img width="300" alt="Screenshot" src="https://github.com/user-attachments/assets/86fa3755-6013-4b8b-978c-67d62739244c" />
 
-package.json
+## Getting Started (Local Development)
+ - npm install
+ - npm run dev
+ - Open:
+  - http://localhost:3000
 
-tsconfig.json
+## ☁ Deployment
+ - Hosted on Vercel.
 
-tailwind.config.ts
+### Steps:
+ - Push code to GitHub
 
-next.config.js
+ - Import repo into Vercel
 
-### Offline AI Assistant – Capabilities
+ - (Optional) Set environment variable:
 
-#### The assistant can answer questions about:
+ - GITHUB_TOKEN
 
-1. Projects (details, GitHub links, demos)
+ - Deploy
 
-2. Skills and technical stack
+ - No custom domain required.
 
-3. Experience and achievements (ROI metrics)
+## ⭐ Why This Portfolio Stands Out
 
-4. Education and certifications
+  - Demonstrates full ML lifecycle ownership
 
-5. Contact information
+  - Shows deployment readiness
 
-6. GitHub repositories (real-time)
+  - Uses real APIs and real data
 
-7. Resume download
+  - Includes an interactive assistant
 
-#### Example queries:
+  - Fully free, deterministic, and offline
 
-“ReviewSense AI project details”
-
-“Repo list”
-
-“Why hire Pranav”
-
-“Download CV”
-
-“Contact Pranav on WhatsApp”
-
-If a query is out of scope, the assistant gently redirects the user.
-
-### Screenshots
-
-<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 20" src="https://github.com/user-attachments/assets/019d8664-741c-49eb-a1e4-a0241b9be9f7" />
-<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 25 46" src="https://github.com/user-attachments/assets/f9c000c5-fc6c-4964-9fac-55770cf55571" />
-<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 26 02" src="https://github.com/user-attachments/assets/d72f7626-96e6-49e9-9520-a6da9a448687" />
-<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 41" src="https://github.com/user-attachments/assets/aecbd181-5450-4654-8438-7489a7856165" />
-<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 24 59" src="https://github.com/user-attachments/assets/01f5852b-601b-4461-9a92-b4668b646572" />
-<img width="300" height="200" alt="Screenshot 2026-01-06 at 23 25 17" src="https://github.com/user-attachments/assets/ec42cfae-d2ed-44a3-87d0-c0972cec6acd" />
-<img width="300" height="300" alt="Screenshot 2026-01-06 at 23 25 34" src="https://github.com/user-attachments/assets/86fa3755-6013-4b8b-978c-67d62739244c" />
-
-### Getting Started (Local Development)
-
-1. Install dependencies:
-
-npm install
-
-2. Run the development server:
-
-npm run dev
-
-3. Open in browser:
-
-http://localhost:3000
-
-### Deployment
-
-This project is deployed on Vercel.
-
-Deployment steps:
-
-1. Push code to GitHub
-
-2. Import repository into Vercel
-
-3. Set environment variable (optional):
-
-GITHUB_TOKEN (to avoid API rate limits)
-
-4. Deploy
-
-No custom domain is required.
-
-### Why This Portfolio Stands Out
-
-1. Shows engineering maturity, not just models
-
-2. Demonstrates deployment readiness
-
-3. Uses real data and real APIs
-
-4. Includes an interactive assistant
-
-5. Fully free, offline, and deterministic
-
-### Author
+## 👤 Author
 
 Pranav Gujjar
 
 Machine Learning Engineer / Data Scientist
 
-GitHub: https://github.com/Gujjar-Pranav
+ - GitHub: https://github.com/Gujjar-Pranav
 
-LinkedIn: https://www.linkedin.com/in/pranav-b-gujjar
+ - LinkedIn: https://www.linkedin.com/in/pranav-b-gujjar
