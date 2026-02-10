@@ -367,22 +367,39 @@ export default function Home() {
             <h3 className="text-base font-semibold text-black">
               Professional Summary
             </h3>
-            <p className="mt-3 text-sm leading-7 text-black/70 text-justify">
-              Machine Learning Engineer (MSc Data Science, Distinction) focused on building production-ready ML systems end-to-end:
-              data → modeling → evaluation → deployment. I’ve shipped decision intelligence and segmentation systems (Next.js + FastAPI),
-              trust-aware NLP dashboards with calibrated confidence/risk routing, clinical-style CV workflows with explainability (Grad-CAM)
-              and PDF reporting, and fully local speech-to-text automation pipelines. Strong in reproducibility, clear evaluation,
-              training–inference parity, and deployment using FastAPI, Streamlit, Docker, and CI/CD.
+            <p className="mt-3 text-justify text-sm leading-7 text-black/70">
+              Machine Learning Engineer (MSc Data Science, Distinction) focused
+              on building production-ready ML systems end-to-end: data →
+              modeling → evaluation → deployment. I’ve shipped decision
+              intelligence and segmentation systems (Next.js + FastAPI),
+              trust-aware NLP dashboards with calibrated confidence/risk
+              routing, clinical-style CV workflows with explainability
+              (Grad-CAM) and PDF reporting, and fully local speech-to-text
+              automation pipelines. Strong in reproducibility, clear evaluation,
+              training–inference parity, and deployment using FastAPI,
+              Streamlit, Docker, and CI/CD.
             </p>
           </Card>
 
           <Card>
             <h3 className="text-base font-semibold text-black">What I Bring</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-black/70">
-              <li>End-to-end ML delivery: pipelines, artifacts, APIs (FastAPI), and dashboards (Streamlit/Next.js).</li>
-              <li>Trust-aware systems: calibration, confidence scoring, risk routing, and explainable outputs (e.g., Grad-CAM).</li>
-              <li>Production mindset: reproducibility, training–inference parity, versioned outputs, and clean repo structure.</li>
-              <li>Hands-on breadth: NLP, speech-to-text automation, computer vision, forecasting, and decision intelligence.</li>
+              <li>
+                End-to-end ML delivery: pipelines, artifacts, APIs (FastAPI),
+                and dashboards (Streamlit/Next.js).
+              </li>
+              <li>
+                Trust-aware systems: calibration, confidence scoring, risk
+                routing, and explainable outputs (e.g., Grad-CAM).
+              </li>
+              <li>
+                Production mindset: reproducibility, training–inference parity,
+                versioned outputs, and clean repo structure.
+              </li>
+              <li>
+                Hands-on breadth: NLP, speech-to-text automation, computer
+                vision, forecasting, and decision intelligence.
+              </li>
             </ul>
           </Card>
         </div>
@@ -399,24 +416,27 @@ export default function Home() {
           <Card>
             <h3 className="font-semibold">Production-ready delivery</h3>
             <p className="mt-2 text-sm leading-7 text-black/70">
-              Ship complete systems: data pipelines → model training/eval → persisted artifacts → FastAPI inference →
-              Streamlit/Next.js dashboards, with clear structure and deployment readiness.
+              Ship complete systems: data pipelines → model training/eval →
+              persisted artifacts → FastAPI inference → Streamlit/Next.js
+              dashboards, with clear structure and deployment readiness.
             </p>
           </Card>
 
           <Card>
             <h3 className="font-semibold">Measurable ROI</h3>
             <p className="mt-2 text-sm leading-7 text-black/70">
-              Evidence-led execution: ~15% forecasting improvement, 10%+ cost reduction support, and ~30% automation gains—
-              paired with strong evaluation reporting and decision-focused outputs.
+              Evidence-led execution: ~15% forecasting improvement, 10%+ cost
+              reduction support, and ~30% automation gains— paired with strong
+              evaluation reporting and decision-focused outputs.
             </p>
           </Card>
 
           <Card>
             <h3 className="font-semibold">Reliable & explainable ML</h3>
             <p className="mt-2 text-sm leading-7 text-black/70">
-              Build trust into ML: calibrated confidence, quality gates, explainability (e.g., Grad-CAM),
-              and human-in-the-loop routing to reduce risk in production.
+              Build trust into ML: calibrated confidence, quality gates,
+              explainability (e.g., Grad-CAM), and human-in-the-loop routing to
+              reduce risk in production.
             </p>
           </Card>
         </div>

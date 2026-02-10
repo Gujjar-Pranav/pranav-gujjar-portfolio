@@ -127,13 +127,29 @@ export const certGroups: { title: string; items: string[] }[] = [
   },
 ];
 
-export const achievements: { title: string; note: string; icon: ReactNode }[] = [
-  { title: "Production ML systems", note: "FastAPI + Streamlit/Next.js + Docker + CI/CD pipelines", icon: <ShieldCheck className="h-5 w-5 text-black/70" /> },
-  { title: "Trust-aware ML delivery", note: "Calibration, confidence scoring, risk routing, explainability", icon: <Target className="h-5 w-5 text-black/70" /> },
-  { title: "~15% forecasting improvement", note: "Predictive modeling + evaluation workflows (Python/SQL)", icon: <BarChart3 className="h-5 w-5 text-black/70" /> },
-  { title: "~30% automation gain", note: "Reduced manual processing via repeatable pipelines", icon: <Wrench className="h-5 w-5 text-black/70" /> },
-];
-
+export const achievements: { title: string; note: string; icon: ReactNode }[] =
+  [
+    {
+      title: "Production ML systems",
+      note: "FastAPI + Streamlit/Next.js + Docker + CI/CD pipelines",
+      icon: <ShieldCheck className="h-5 w-5 text-black/70" />,
+    },
+    {
+      title: "Trust-aware ML delivery",
+      note: "Calibration, confidence scoring, risk routing, explainability",
+      icon: <Target className="h-5 w-5 text-black/70" />,
+    },
+    {
+      title: "~15% forecasting improvement",
+      note: "Predictive modeling + evaluation workflows (Python/SQL)",
+      icon: <BarChart3 className="h-5 w-5 text-black/70" />,
+    },
+    {
+      title: "~30% automation gain",
+      note: "Reduced manual processing via repeatable pipelines",
+      icon: <Wrench className="h-5 w-5 text-black/70" />,
+    },
+  ];
 
 export const projects: Project[] = [
   {
