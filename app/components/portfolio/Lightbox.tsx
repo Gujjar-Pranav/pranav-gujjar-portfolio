@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
 
 type Props = {
@@ -24,19 +25,24 @@ export default function Lightbox({
   onClose,
   onIndexChange,
 }: Props) {
-  const hasImages = images?.length > 0;
+  const hasImages = images.length > 0;
+
   const safeIndex = useMemo(
     () => clamp(index, 0, Math.max(0, images.length - 1)),
     [index, images.length],
   );
+
   const src = hasImages ? images[safeIndex] : "";
 
-  // Zoom + pan state
+  // Zoom + pan
   const [scale, setScale] = useState(1);
   const [tx, setTx] = useState(0);
   const [ty, setTy] = useState(0);
 
-  // Gesture refs
+  // 🔑 render-safe pinch state
+  const [isPinching, setIsPinching] = useState(false);
+
+  // refs (gesture only)
   const containerRef = useRef<HTMLDivElement | null>(null);
   const dragging = useRef(false);
   const startX = useRef(0);
@@ -45,36 +51,35 @@ export default function Lightbox({
   const startTy = useRef(0);
 
   const swipeStartX = useRef<number | null>(null);
-  const lastTap = useRef<number>(0);
+  const lastTap = useRef(0);
 
-  // Pinch
   const pointers = useRef<Map<number, { x: number; y: number }>>(new Map());
   const pinchStartDist = useRef<number | null>(null);
   const pinchStartScale = useRef(1);
 
-  function resetView() {
+  const resetView = useCallback(() => {
     setScale(1);
     setTx(0);
     setTy(0);
-  }
+  }, []);
 
-  function prev() {
+  const prev = useCallback(() => {
     if (!images.length) return;
     resetView();
     onIndexChange((safeIndex - 1 + images.length) % images.length);
-  }
+  }, [images.length, onIndexChange, resetView, safeIndex]);
 
-  function next() {
+  const next = useCallback(() => {
     if (!images.length) return;
     resetView();
     onIndexChange((safeIndex + 1) % images.length);
-  }
+  }, [images.length, onIndexChange, resetView, safeIndex]);
 
-  function zoomIn() {
+  const zoomIn = () => {
     setScale((s) => clamp(Number((s + 0.25).toFixed(2)), 1, 3));
-  }
+  };
 
-  function zoomOut() {
+  const zoomOut = () => {
     setScale((s) => {
       const ns = clamp(Number((s - 0.25).toFixed(2)), 1, 3);
       if (ns === 1) {
@@ -83,9 +88,9 @@ export default function Lightbox({
       }
       return ns;
     });
-  }
+  };
 
-  function toggleZoomAtCenter() {
+  const toggleZoomAtCenter = () => {
     setScale((s) => {
       const ns = s === 1 ? 2 : 1;
       if (ns === 1) {
@@ -94,9 +99,9 @@ export default function Lightbox({
       }
       return ns;
     });
-  }
+  };
 
-  // Close on ESC + keyboard nav
+  // Keyboard
   useEffect(() => {
     if (!open) return;
 
@@ -108,21 +113,24 @@ export default function Lightbox({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, safeIndex, images.length]);
+  }, [open, onClose, prev, next]);
 
-  // Reset zoom when opening or switching image
+  // Reset on open / image change
   useEffect(() => {
     if (!open) return;
+    // Intentional: reset zoom/pan when modal opens or image changes
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     resetView();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, safeIndex]);
+  }, [open, safeIndex, resetView]);
 
   if (!open) return null;
 
+  const altText = title
+    ? `${title} screenshot ${safeIndex + 1}`
+    : `Screenshot ${safeIndex + 1}`;
+
   return (
     <div className="fixed inset-0 z-[80]">
-      {/* Backdrop */}
       <button
         aria-label="Close lightbox"
         className="absolute inset-0 bg-black/70"
@@ -130,204 +138,110 @@ export default function Lightbox({
         type="button"
       />
 
-      {/* Panel */}
       <div className="relative mx-auto flex h-full max-w-6xl flex-col px-4 py-4">
         {/* Top bar */}
-        <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white backdrop-blur">
-          <div className="min-w-0">
-            <div className="truncate text-sm font-semibold">
-              {title ? title : "Screenshots"}{" "}
-              {hasImages ? (
-                <span className="text-white/70">
-                  · {safeIndex + 1}/{images.length}
-                </span>
-              ) : null}
-            </div>
-            <div className="text-xs text-white/70">
-              Swipe to navigate · wheel/double click to zoom
-            </div>
+        <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/40 px-4 py-3 text-white backdrop-blur">
+          <div className="truncate text-sm font-semibold">
+            {title ?? "Screenshots"} · {safeIndex + 1}/{images.length}
           </div>
 
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={zoomOut}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-white/10 hover:bg-white/15"
-              aria-label="Zoom out"
-              title="Zoom out"
-            >
-              <ZoomOut className="h-4 w-4" />
+            <button onClick={zoomOut}>
+              <ZoomOut />
             </button>
-
-            <button
-              type="button"
-              onClick={zoomIn}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-white/10 hover:bg-white/15"
-              aria-label="Zoom in"
-              title="Zoom in"
-            >
-              <ZoomIn className="h-4 w-4" />
+            <button onClick={zoomIn}>
+              <ZoomIn />
             </button>
-
-            <button
-              type="button"
-              onClick={onClose}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/15 bg-white/10 hover:bg-white/15"
-              aria-label="Close"
-              title="Close"
-            >
-              <X className="h-4 w-4" />
+            <button onClick={onClose}>
+              <X />
             </button>
           </div>
         </div>
 
         {/* Content */}
-        <div className="relative mt-4 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-black/60">
-          {/* Prev/Next */}
-          {images.length > 1 ? (
+        <div className="relative mt-4 flex-1 overflow-hidden rounded-2xl bg-black/60">
+          {images.length > 1 && (
             <>
-              <button
-                type="button"
-                onClick={prev}
-                className="absolute top-1/2 left-3 z-10 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/15"
-                aria-label="Previous image"
-              >
-                <ChevronLeft className="h-5 w-5" />
+              <button onClick={prev} className="absolute top-1/2 left-3 z-10">
+                <ChevronLeft />
               </button>
-
-              <button
-                type="button"
-                onClick={next}
-                className="absolute top-1/2 right-3 z-10 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/10 p-3 text-white backdrop-blur hover:bg-white/15"
-                aria-label="Next image"
-              >
-                <ChevronRight className="h-5 w-5" />
+              <button onClick={next} className="absolute top-1/2 right-3 z-10">
+                <ChevronRight />
               </button>
             </>
-          ) : null}
+          )}
 
-          {/* Image area */}
           <div
             ref={containerRef}
-            className="absolute inset-0 flex touch-pan-y items-center justify-center"
-            style={{
-              // allow custom gestures
-              touchAction: scale > 1 ? "none" : "pan-y",
-            }}
-            onWheel={(e) => {
-              e.preventDefault();
-              const delta = e.deltaY;
-              if (delta > 0) zoomOut();
-              else zoomIn();
-            }}
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ touchAction: scale > 1 ? "none" : "pan-y" }}
             onPointerDown={(e) => {
-              (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
               pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-              // double tap / double click
               const now = Date.now();
-              if (now - lastTap.current < 280) {
-                toggleZoomAtCenter();
-              }
+              if (now - lastTap.current < 280) toggleZoomAtCenter();
               lastTap.current = now;
 
-              // pinch start
               if (pointers.current.size === 2) {
+                setIsPinching(true);
                 const pts = Array.from(pointers.current.values());
-                const dx = pts[0].x - pts[1].x;
-                const dy = pts[0].y - pts[1].y;
-                pinchStartDist.current = Math.hypot(dx, dy);
+                pinchStartDist.current = Math.hypot(
+                  pts[0].x - pts[1].x,
+                  pts[0].y - pts[1].y,
+                );
                 pinchStartScale.current = scale;
                 dragging.current = false;
                 return;
               }
 
-              // start drag
               dragging.current = true;
               startX.current = e.clientX;
               startY.current = e.clientY;
               startTx.current = tx;
               startTy.current = ty;
 
-              // swipe start (only when not zoomed)
               if (scale === 1) swipeStartX.current = e.clientX;
             }}
             onPointerMove={(e) => {
               if (!pointers.current.has(e.pointerId)) return;
               pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-              // pinch zoom
               if (pointers.current.size === 2 && pinchStartDist.current) {
                 const pts = Array.from(pointers.current.values());
-                const dx = pts[0].x - pts[1].x;
-                const dy = pts[0].y - pts[1].y;
-                const dist = Math.hypot(dx, dy);
-                const ratio = dist / pinchStartDist.current;
-                const nextScale = clamp(pinchStartScale.current * ratio, 1, 3);
-                setScale(nextScale);
-                if (nextScale === 1) {
-                  setTx(0);
-                  setTy(0);
-                }
+                const dist = Math.hypot(
+                  pts[0].x - pts[1].x,
+                  pts[0].y - pts[1].y,
+                );
+                setScale(
+                  clamp(
+                    (pinchStartScale.current * dist) / pinchStartDist.current,
+                    1,
+                    3,
+                  ),
+                );
                 return;
               }
 
-              // pan when zoomed
               if (dragging.current && scale > 1) {
-                const dx = e.clientX - startX.current;
-                const dy = e.clientY - startY.current;
-                setTx(startTx.current + dx);
-                setTy(startTy.current + dy);
+                setTx(startTx.current + (e.clientX - startX.current));
+                setTy(startTy.current + (e.clientY - startY.current));
               }
             }}
             onPointerUp={(e) => {
               pointers.current.delete(e.pointerId);
-
-              if (pointers.current.size < 2) {
-                pinchStartDist.current = null;
-              }
-
-              // swipe to change image only when not zoomed
-              if (scale === 1 && swipeStartX.current !== null) {
-                const dx = e.clientX - swipeStartX.current;
-                swipeStartX.current = null;
-
-                if (Math.abs(dx) > 60 && images.length > 1) {
-                  if (dx < 0) next();
-                  else prev();
-                }
-              }
-
+              if (pointers.current.size < 2) setIsPinching(false);
               dragging.current = false;
             }}
           >
-            {hasImages ? (
-              <img
-                src={src}
-                alt={
-                  title
-                    ? `${title} screenshot ${safeIndex + 1}`
-                    : `Screenshot ${safeIndex + 1}`
-                }
-                className="max-h-[85vh] max-w-[95vw] select-none"
-                draggable={false}
-                style={{
-                  transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
-                  transformOrigin: "center center",
-                  transition:
-                    pointers.current.size === 2
-                      ? "none"
-                      : "transform 80ms linear",
-                  cursor: scale > 1 ? "grab" : "zoom-in",
-                }}
-                onDoubleClick={(e) => {
-                  e.preventDefault();
-                  toggleZoomAtCenter();
-                }}
-              />
-            ) : (
-              <div className="text-sm text-white/80">No screenshots</div>
-            )}
+            <div
+              className="relative h-[85vh] w-[95vw]"
+              style={{
+                transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
+                transition: isPinching ? "none" : "transform 80ms linear",
+              }}
+            >
+              <Image src={src} alt={altText} fill className="object-contain" />
+            </div>
           </div>
         </div>
       </div>
