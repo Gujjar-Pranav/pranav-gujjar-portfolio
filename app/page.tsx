@@ -57,7 +57,7 @@ function normalizeSkillKey(s: string) {
 }
 
 export default function Home() {
-  // ✅ Skill → Related Projects mapping (edit here only in future)
+  //  Skill → Related Projects mapping (edit here only in future)
   // Keys must match EXACT skill text shown in the UI (case-insensitive handled).
   const SKILL_TO_PROJECTS: Record<string, ProjectMini[]> = useMemo(
     () => ({
@@ -330,11 +330,12 @@ export default function Home() {
               </div>
 
               <div className="mt-6 flex flex-wrap gap-2">
+                <Chip>FastAPI + Streamlit + Next.js</Chip>
+                <Chip>CI + Typecheck + Prettier</Chip>
+                <Chip>Confidence scoring + calibration</Chip>
+                <Chip>Grad-CAM explainability</Chip>
+                <Chip>Offline Whisper automation</Chip>
                 <Chip>~15% forecasting improvement</Chip>
-                <Chip>10%+ cost reduction impact</Chip>
-                <Chip>~30% automation gain</Chip>
-                <Chip>ROC-AUC ~0.81 (Diabetes)</Chip>
-                <Chip>APIs + Dashboards + CI/CD</Chip>
               </div>
             </div>
 
@@ -366,37 +367,22 @@ export default function Home() {
             <h3 className="text-base font-semibold text-black">
               Professional Summary
             </h3>
-            <p className="mt-3 text-justify text-sm leading-7 text-black/70">
-              Machine Learning Engineer with an MSc in Data Science
-              (Distinction) and experience delivering end-to-end ML systems
-              (data preprocessing, feature engineering, model training,
-              evaluation, and deployment). Strong in explainability,
-              confidence/risk scoring, and production workflows (FastAPI,
-              Streamlit, Docker, CI/CD). Worked across NLP, speech-to-text,
-              computer vision, and time-series forecasting with a focus on
-              reproducibility and measurable business impact.
+            <p className="mt-3 text-sm leading-7 text-black/70 text-justify">
+              Machine Learning Engineer (MSc Data Science, Distinction) focused on building production-ready ML systems end-to-end:
+              data → modeling → evaluation → deployment. I’ve shipped decision intelligence and segmentation systems (Next.js + FastAPI),
+              trust-aware NLP dashboards with calibrated confidence/risk routing, clinical-style CV workflows with explainability (Grad-CAM)
+              and PDF reporting, and fully local speech-to-text automation pipelines. Strong in reproducibility, clear evaluation,
+              training–inference parity, and deployment using FastAPI, Streamlit, Docker, and CI/CD.
             </p>
           </Card>
 
           <Card>
             <h3 className="text-base font-semibold text-black">What I Bring</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-black/70">
-              <li>
-                Production-ready delivery: APIs, dashboards, persisted
-                artifacts, and clean structure.
-              </li>
-              <li>
-                Trust-aware ML: calibration, confidence scoring, and
-                human-in-the-loop routing.
-              </li>
-              <li>
-                Business-first execution: measurable outcomes and clear
-                decision-support outputs.
-              </li>
-              <li>
-                Engineering mindset: reproducibility, training–inference parity,
-                CI checks.
-              </li>
+              <li>End-to-end ML delivery: pipelines, artifacts, APIs (FastAPI), and dashboards (Streamlit/Next.js).</li>
+              <li>Trust-aware systems: calibration, confidence scoring, risk routing, and explainable outputs (e.g., Grad-CAM).</li>
+              <li>Production mindset: reproducibility, training–inference parity, versioned outputs, and clean repo structure.</li>
+              <li>Hands-on breadth: NLP, speech-to-text automation, computer vision, forecasting, and decision intelligence.</li>
             </ul>
           </Card>
         </div>
@@ -413,25 +399,24 @@ export default function Home() {
           <Card>
             <h3 className="font-semibold">Production-ready delivery</h3>
             <p className="mt-2 text-sm leading-7 text-black/70">
-              End-to-end ML delivery: pipelines → artifacts → FastAPI inference
-              → Streamlit dashboards, built for real usage (not notebook-only).
+              Ship complete systems: data pipelines → model training/eval → persisted artifacts → FastAPI inference →
+              Streamlit/Next.js dashboards, with clear structure and deployment readiness.
             </p>
           </Card>
 
           <Card>
             <h3 className="font-semibold">Measurable ROI</h3>
             <p className="mt-2 text-sm leading-7 text-black/70">
-              Evidence from work: ~15% forecasting improvement, 10%+ operational
-              cost reduction, ~30% automation gain — plus strong evaluation
-              reporting.
+              Evidence-led execution: ~15% forecasting improvement, 10%+ cost reduction support, and ~30% automation gains—
+              paired with strong evaluation reporting and decision-focused outputs.
             </p>
           </Card>
 
           <Card>
             <h3 className="font-semibold">Reliable & explainable ML</h3>
             <p className="mt-2 text-sm leading-7 text-black/70">
-              Confidence scoring, risk routing, and transparent dashboards
-              designed to earn trust and reduce failure risk in production.
+              Build trust into ML: calibrated confidence, quality gates, explainability (e.g., Grad-CAM),
+              and human-in-the-loop routing to reduce risk in production.
             </p>
           </Card>
         </div>
@@ -734,6 +719,9 @@ export default function Home() {
       </Section>
 
       <footer className="border-t border-black/10 py-10 text-center text-sm text-black/50">
+        <p className="text-xs text-black/40">
+          Built with Next.js • FastAPI • Streamlit • Vercel • CI/CD • TypeScript
+        </p>
         © {new Date().getFullYear()} Pranav Gujjar
       </footer>
 
