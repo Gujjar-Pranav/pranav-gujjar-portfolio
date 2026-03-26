@@ -62,17 +62,11 @@ This portfolio reflects how ML systems are designed, built, evaluated, deployed,
    - Lightweight and fast
 
 6. Engineering Highlights
-
    - Production ML pipelines (notebooks → APIs → dashboards)
-     
    - Offline AI assistant with deterministic knowledge base
-     
    - Real-time GitHub API integration
-     
    - CI pipeline with lint + typecheck + formatting + build
-     
    - Fully typed Next.js App Router architecture
-
 
 🛠 Tech Stack
 
