@@ -67,12 +67,13 @@ export const NAV = [
 
 export const experience: Experience[] = [
   {
-    role: "Machine Learning Engineer — Freelance",
-    period: "Aug 2025 — Present",
+    role: "Data Science Intern",
+    company: "Ai Variant"
+    period: "Nov 2025 — Feb 2026",
     bullets: [
-      "Built end-to-end ML pipelines (data prep → modeling → evaluation → deployment) with reproducible artifacts and clean project structure.",
-      "Delivered production-style inference services (FastAPI) and interactive dashboards (Streamlit) for explainability and confidence-based decision support.",
-      "Focused on training–inference parity, versioned outputs, and maintainable code (not notebook-only work).",
+        "Delivered two production-style AI MVPs end-to-end: problem framing, data pipelines, ML modelling, REST APIs, dashboards, and live deployment.",
+        "Built an explainable NLP sentiment platform (TF-IDF + SVM, 85.55% accuracy) and a customer segmentation system with scenario simulation; enabled 50% faster analysis cycles and targeted 10–15% potential ROI uplift.",
+        "Established reproducible ML practices: persisted preprocessing artefacts, model calibration, run-based execution, and CI/CD-driven deployments using Python, scikit-learn, FastAPI, Streamlit, and GitHub Actions.",
     ],
   },
   {

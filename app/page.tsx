@@ -368,7 +368,7 @@ export default function Home() {
               Professional Summary
             </h3>
             <p className="mt-3 text-justify text-sm leading-7 text-black/70">
-              Machine Learning Engineer (MSc Data Science, Distinction) focused
+              Data Science & ML Engineer (MSc Data Science, Distinction) focused
               on building production-ready ML systems end-to-end: data →
               modeling → evaluation → deployment. I’ve shipped decision
               intelligence and segmentation systems (Next.js + FastAPI),
