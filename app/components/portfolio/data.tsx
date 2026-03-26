@@ -68,7 +68,7 @@ export const NAV = [
 export const experience: Experience[] = [
   {
     role: "Data Science Intern",
-    company: "Ai Variant"
+    company: "Ai Variant",
     period: "Nov 2025 — Feb 2026",
     bullets: [
         "Delivered two production-style AI MVPs end-to-end: problem framing, data pipelines, ML modelling, REST APIs, dashboards, and live deployment.",
