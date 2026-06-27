@@ -68,7 +68,8 @@ export const NAV = [
 export const experience: Experience[] = [
   {
     role: "AI/ML Intern",
-    company: "DR.VIKI (Nurtureheal Healthcare Private Limited), Bengaluru (India)",
+    company:
+      "DR.VIKI (Nurtureheal Healthcare Private Limited), Bengaluru (India)",
     period: "May 2026 — Till Date",
     bullets: [
       "Developing and optimizing ForceField, an AI-powered movement intelligence platform leveraging Computer Vision, Pose Estimation, and Generative AI–driven coaching for real-time exercise assessment across 12+ exercise modules.",
