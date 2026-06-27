@@ -67,8 +67,19 @@ export const NAV = [
 
 export const experience: Experience[] = [
   {
-    role: "Machine Learning Engineer — Freelance",
-    period: "Aug 2025 — Present",
+    role: "AI/ML Intern",
+    company: "DR.VIKI (Nurtureheal Healthcare Private Limited), Bengaluru (India)",
+    period: "May 2026 — Till Date",
+    bullets: [
+      "Developing and optimizing ForceField, an AI-powered movement intelligence platform leveraging Computer Vision, Pose Estimation, and Generative AI–driven coaching for real-time exercise assessment across 12+ exercise modules.",
+      "Building end-to-end AI systems for biomechanical analysis, repetition tracking, performance analytics, PDF reporting, and longitudinal progress monitoring, reducing manual movement evaluation effort by 80%+ through automation.",
+      "Engineering production-ready healthcare AI solutions using MediaPipe, JavaScript, GenAI workflows, Git, GitHub, and Vercel, while implementing personalized insights, voice-guided coaching, and adaptive performance recommendations.",
+    ],
+  },
+  {
+    role: "Data Science Intern",
+    company: "AI Variant — AI-Powered Solutions, Bengaluru (India)",
+    period: "Nov 2025 — Feb 2026",
     bullets: [
       "Delivered two production-style AI MVPs end-to-end: problem framing, data pipelines, ML modelling, REST APIs, dashboards, and live deployment.",
       "Built an explainable NLP sentiment platform (TF-IDF + SVM, 85.55% accuracy) and a customer segmentation system with scenario simulation; enabled 50% faster analysis cycles and targeted 10–15% potential ROI uplift.",
@@ -77,12 +88,11 @@ export const experience: Experience[] = [
   },
   {
     role: "Data Science Intern",
-    company: "Vertexblue Pvt Ltd - Ahmedabad (India)",
+    company: "Vertexblue Pvt Ltd, Ahmedabad (India)",
     period: "Jun 2022 — Dec 2022",
     bullets: [
-      "Improved forecasting accuracy by ~15% using Python/SQL predictive modeling and evaluation workflows.",
-      "Supported 10%+ operational cost reduction via data-driven recommendations and insights.",
-      "Reduced manual processing by ~30% by automating reporting and repeatable analytics pipelines.",
+      "Improved forecasting accuracy by 15% using ARIMA and RNN-based time-series models in Python.",
+      "Delivered analytics pipeline contributing to 10%+ cost reduction and reduced manual processing overhead by 30% through automated reporting workflows.",
     ],
   },
 ];
