@@ -67,9 +67,8 @@ export const NAV = [
 
 export const experience: Experience[] = [
   {
-    role: "Data Science Intern",
-    company: "Ai Variant",
-    period: "Nov 2025 — Feb 2026",
+    role: "Machine Learning Engineer — Freelance",
+    period: "Aug 2025 — Present",
     bullets: [
       "Delivered two production-style AI MVPs end-to-end: problem framing, data pipelines, ML modelling, REST APIs, dashboards, and live deployment.",
       "Built an explainable NLP sentiment platform (TF-IDF + SVM, 85.55% accuracy) and a customer segmentation system with scenario simulation; enabled 50% faster analysis cycles and targeted 10–15% potential ROI uplift.",
@@ -78,7 +77,7 @@ export const experience: Experience[] = [
   },
   {
     role: "Data Science Intern",
-    company: "Vertexblue Pvt Ltd (India)",
+    company: "Vertexblue Pvt Ltd - Ahmedabad (India)",
     period: "Jun 2022 — Dec 2022",
     bullets: [
       "Improved forecasting accuracy by ~15% using Python/SQL predictive modeling and evaluation workflows.",
