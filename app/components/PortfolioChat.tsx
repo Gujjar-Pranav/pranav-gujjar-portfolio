@@ -268,6 +268,18 @@ export default function PortfolioChat() {
   async function buildReply(userText: string): Promise<string> {
     const q = normalize(userText);
 
+    // Recognize ForceField project questions before skill matching.
+    if (
+      q.includes("forcefield") ||
+      q.includes("force field") ||
+      q.includes("movement intelligence platform")
+    ) {
+      return (
+        kbById["forcefield"]?.answer ??
+        "Explore ForceField: /projects/forcefield-ai-movement-intelligence-platform"
+      );
+    }
+
     // ✅ Skill → projects comes FIRST so it won’t get swallowed by KB
     if (isSkillIntent(userText)) {
       const skill = extractSkillFromQuery(userText);

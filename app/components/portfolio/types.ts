@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type LinkSet = { code: string; demo?: string; docs?: string };
+export type LinkSet = { code?: string; demo?: string; docs?: string };
 
 export type Project = {
   title: string;

@@ -67,33 +67,41 @@ export const NAV = [
 
 export const experience: Experience[] = [
   {
+    role: "AI Engineer",
+    company: "ForceField Training.AI · West Midlands, UK",
+    period: "Sept 2026 — Present",
+    bullets: [
+      "Engineering a production AI movement-intelligence platform with MediaPipe Pose and real-time computer vision for exercise assessment, scoring and personalized coaching.",
+      "Designed browser-based inference and secure athlete/coach workflows using JavaScript, Supabase, PostgreSQL RLS and Vercel; CV reports 80%+ reduction in manual assessment effort.",
+      "Built AI-driven workout logic across 20+ exercise modules and 31 progressive challenge levels, with adaptive feedback, progression analytics and CI/CD.",
+    ],
+  },
+  {
     role: "AI/ML Intern",
     company:
-      "DR.VIKI (Nurtureheal Healthcare Private Limited), Bengaluru (India)",
-    period: "May 2026 — Till Date",
+      "DR.VIKI (Nurtureheal Healthcare Private Limited) · Bengaluru, India",
+    period: "May 2026 — Sept 2026",
     bullets: [
-      "Developing and optimizing ForceField, an AI-powered movement intelligence platform leveraging Computer Vision, Pose Estimation, and Generative AI–driven coaching for real-time exercise assessment across 12+ exercise modules.",
-      "Building end-to-end AI systems for biomechanical analysis, repetition tracking, performance analytics, PDF reporting, and longitudinal progress monitoring, reducing manual movement evaluation effort by 80%+ through automation.",
-      "Engineering production-ready healthcare AI solutions using MediaPipe, JavaScript, GenAI workflows, Git, GitHub, and Vercel, while implementing personalized insights, voice-guided coaching, and adaptive performance recommendations.",
+      "Developed healthcare AI and computer vision workflows for biomechanical analysis, movement assessment and personalized coaching.",
+      "Contributed to real-time inference, secure data architecture, analytics and deployment workflows; CV reports 80%+ reduction in manual movement evaluation effort.",
     ],
   },
   {
     role: "Data Science Intern",
-    company: "AI Variant — AI-Powered Solutions, Bengaluru (India)",
+    company: "AI Variant · Bengaluru, India",
     period: "Nov 2025 — Feb 2026",
     bullets: [
-      "Delivered two production-style AI MVPs end-to-end: problem framing, data pipelines, ML modelling, REST APIs, dashboards, and live deployment.",
-      "Built an explainable NLP sentiment platform (TF-IDF + SVM, 85.55% accuracy) and a customer segmentation system with scenario simulation; enabled 50% faster analysis cycles and targeted 10–15% potential ROI uplift.",
-      "Established reproducible ML practices: persisted preprocessing artefacts, model calibration, run-based execution, and CI/CD-driven deployments using Python, scikit-learn, FastAPI, Streamlit, and GitHub Actions.",
+      "Delivered two AI/ML systems covering NLP, customer segmentation, REST APIs, analytics dashboards and cloud deployment.",
+      "Implemented reproducible ML pipelines and CI/CD using Python, scikit-learn, FastAPI, Streamlit and GitHub Actions; CV reports 50% faster analysis cycles.",
     ],
   },
   {
     role: "Data Science Intern",
-    company: "Vertexblue Pvt Ltd, Ahmedabad (India)",
+    company: "Vertexblue Pvt Ltd · India",
     period: "Jun 2022 — Dec 2022",
     bullets: [
       "Improved forecasting accuracy by 15% using ARIMA and RNN-based time-series models in Python.",
-      "Delivered analytics pipeline contributing to 10%+ cost reduction and reduced manual processing overhead by 30% through automated reporting workflows.",
+      "Delivered analytics and automated reporting workflows contributing to 10%+ cost reduction and 30% lower manual processing overhead, as reported in CV.",
     ],
   },
 ];
@@ -163,6 +171,41 @@ export const achievements: { title: string; note: string; icon: ReactNode }[] =
   ];
 
 export const projects: Project[] = [
+  {
+    title: "ForceField — AI Movement Intelligence Platform",
+    description:
+      "Professional end-to-end AI product engineering for a UK startup. Translated the founder's vision and Figma designs into a working Computer Vision MVP, delivering frontend, backend, real-time movement assessment, exercise validation, adaptive voice coaching, and secure athlete/coach workflows. The first MVP is being tested in the UK market with more than 60 players using the platform. Designed a cost-conscious architecture using browser-based inference, Vercel Pro, and Supabase Free, with an upgrade path as demand grows.",
+    tags: [
+      "MediaPipe Pose",
+      "Computer Vision",
+      "JavaScript",
+      "Supabase",
+      "PostgreSQL",
+      "RLS",
+      "Vercel",
+      "Voice Coaching",
+      "Full-Stack Engineering",
+      "Figma",
+    ],
+    links: {},
+    highlights: [
+      "Translated the UK startup founder's vision and Figma designs into a functional AI-powered MVP, taking ownership of frontend, backend, and AI integration.",
+      "Engineered browser-based real-time pose estimation, movement validation, repetition and hold detection, scoring, and adaptive voice coaching.",
+      "Built secure athlete and coach workflows using Supabase authentication, PostgreSQL, and row-level security, with data protection considered in the architecture.",
+      "Implemented 20+ exercise modules and 31 progressive challenge levels with automated assessment, progression tracking, and analytics.",
+      "Delivered the first MVP for UK-market testing, with more than 60 players currently using the platform.",
+      "Designed a startup-budget infrastructure strategy using Vercel Pro and Supabase Free, avoiding dedicated GPU/model-serving infrastructure and allowing paid-tier upgrades when required.",
+      "CV-reported outcomes include an 80%+ reduction in manual movement assessment effort and approximately US$45/month initial infrastructure spend.",
+    ],
+    architecture: [
+      "Founder vision and Figma designs → responsive frontend and interactive workout experiences.",
+      "Browser camera input → on-device MediaPipe Pose estimation and biomechanical movement analysis.",
+      "Exercise-specific validation → repetition/hold detection, scoring, and adaptive voice coaching.",
+      "Frontend and backend workflows → Supabase authentication, PostgreSQL, and row-level security for athlete/coach access.",
+      "Progression and analytics → managed infrastructure on Vercel and Supabase, followed by iterative UK-market MVP testing.",
+    ],
+  },
+
   {
     title: "Strategic Intelligence Stack",
     icon: <BarChart3 className="h-5 w-5 text-black/70" />,
@@ -559,12 +602,34 @@ export const SKILL_TO_PROJECTS: SkillToProjectsMap = {
   "Calibration & Confidence Scoring": pick("ReviewSense AI", "Retina-AI"),
   "Hyperparameter Tuning": pick("Glass Identification", "ReviewSense AI"),
 
+  // Voice coaching and browser speech synthesis
+  "Text-to-Speech (TTS)": pick("ForceField — AI Movement Intelligence Platform"),
+  "Adaptive Voice Coaching": pick("ForceField — AI Movement Intelligence Platform"),
+  "Browser Speech Synthesis": pick("ForceField — AI Movement Intelligence Platform"),
+
   // NLP & Speech
   "TF-IDF": pick("ReviewSense AI"),
   "Linear SVM": pick("ReviewSense AI"),
   "Text Preprocessing": pick("ReviewSense AI"),
   "Rule-based NLP": pick("Meeting Task Assignment"),
   "Speech-to-Text (Whisper)": pick("Meeting Task Assignment"),
+
+  // Professional Computer Vision and product engineering
+  "MediaPipe Pose": pick("ForceField — AI Movement Intelligence Platform"),
+  "Pose Estimation": pick("ForceField — AI Movement Intelligence Platform"),
+  "Movement Validation": pick("ForceField — AI Movement Intelligence Platform"),
+  "Biomechanical Analysis": pick("ForceField — AI Movement Intelligence Platform"),
+  "Real-Time Inference": pick("ForceField — AI Movement Intelligence Platform"),
+  "Voice Coaching": pick("ForceField — AI Movement Intelligence Platform"),
+  "Full-Stack Engineering": pick("ForceField — AI Movement Intelligence Platform"),
+  "Figma to Frontend": pick("ForceField — AI Movement Intelligence Platform"),
+  JavaScript: pick("ForceField — AI Movement Intelligence Platform"),
+  Supabase: pick("ForceField — AI Movement Intelligence Platform"),
+  "Row-Level Security": pick("ForceField — AI Movement Intelligence Platform"),
+  Vercel: pick(
+    "ForceField — AI Movement Intelligence Platform",
+    "Strategic Intelligence Stack",
+  ),
 
   // CV
   "U-Net": pick(),
@@ -588,7 +653,7 @@ export const SKILL_TO_PROJECTS: SkillToProjectsMap = {
     "Retina-AI",
     "Glass Identification",
   ),
-  PostgreSQL: pick("Strategic Intelligence Stack"),
+  PostgreSQL: pick("ForceField — AI Movement Intelligence Platform", "Strategic Intelligence Stack"),
   MongoDB: pick(),
   Matplotlib: pick(
     "ReviewSense AI",

@@ -374,10 +374,43 @@ export const KNOWLEDGE_BASE: KBItem[] = [
       "project list",
     ],
     answer:
-      "Projects (quick list):\n- Strategic Intelligence Stack — production-grade customer segmentation + decision intelligence\n- ReviewSense AI — sentiment + calibrated confidence/risk routing\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow\n- Retina-AI — clinical diabetic retinopathy screening (registry → screening → explainability → PDF reports)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “Retina-AI”) for full details + links.",
+      "Projects (quick list):\n- ForceField — AI Movement Intelligence Platform: UK startup MVP, real-time pose assessment, browser-based voice coaching, 60+ players testing the platform\n- Strategic Intelligence Stack — production-grade customer segmentation + decision intelligence\n- ReviewSense AI — sentiment + calibrated confidence/risk routing\n- Glass Identification — stacking ensemble + FastAPI + Docker + CI/CD\n- Diabetes Prediction App — probability + risk level + PDF/Excel workflow\n- Retina-AI — clinical diabetic retinopathy screening (registry → screening → explainability → PDF reports)\n- Meeting Task Assignment — offline Whisper STT → tasks JSON\n\nAsk any project name (e.g., “Retina-AI”) for full details + links.",
   },
 
   // --- Specific projects ---
+
+  {
+    id: "forcefield",
+    title: "ForceField — AI Movement Intelligence Platform",
+    keywords: [
+      "forcefield",
+      "force field",
+      "forcefield project",
+      "forcefield training ai",
+      "forcefield ai",
+      "ai movement intelligence",
+      "real time exercise detection",
+      "mediapipe pose",
+      "uk startup movement platform",
+    ],
+    answer:
+      "**ForceField — AI Movement Intelligence Platform**\n\n" +
+      "**Professional AI Engineering Project | UK Startup**\n\n" +
+      "Pranav worked with a UK startup to turn the founder's product vision and Figma designs into a working AI-powered exercise platform. His responsibilities span frontend development, backend engineering, real-time Computer Vision, movement validation, adaptive voice coaching, and deployment.\n\n" +
+      "**How the system works:**\n" +
+      "- The browser camera captures an athlete's movements.\n" +
+      "- MediaPipe Pose estimates body landmarks directly in the browser.\n" +
+      "- Exercise-specific logic evaluates movement, repetitions, holds, and progression.\n" +
+      "- Browser Speech Synthesis converts coaching feedback into spoken workout instructions.\n" +
+      "- Supabase authentication, PostgreSQL, and row-level security support athlete and coach workflows.\n\n" +
+      "**MVP and engineering outcomes:**\n" +
+      "- 60+ players are using the first MVP for UK-market testing.\n" +
+      "- 20+ exercise modules and 31 progressive challenge levels.\n" +
+      "- Cost-conscious architecture using Vercel Pro and Supabase Free, with browser-based AI inference.\n" +
+      "- Security and data-protection considerations incorporated into the implementation.\n\n" +
+      "**[View ForceField case study](/projects/forcefield-ai-movement-intelligence-platform)**",
+  },
+
   {
     id: "strategic-intelligence",
     title: "Strategic Intelligence Stack",
@@ -435,7 +468,7 @@ export const KNOWLEDGE_BASE: KBItem[] = [
     link: LINKS.retinaAiRepo,
     demo: LINKS.retinaAiDemo,
     answer:
-      "Retina-AI — Clinical Diabetic Retinopathy Screening (MVP):\n- End-to-end workflow: patient/clinician registry → fundus upload → DR/No-DR inference\n- Confidence + image-quality gates + automatic risk stratification\n- Grad-CAM explainability integrated into the workflow\n- One-page clinical PDF reports (patient summary, prediction + confidence, risk factors, quality metrics, Grad-CAM, clinician notes)\n- Role-based authentication (Admin / Registry / Screening / Reports)\n- CI/CD via GitHub Actions (Ruff linting + import smoke tests)\n- Initial login details userid: admin & password: admin123\n\nGitHub: " +
+      "Retina-AI — Clinical Diabetic Retinopathy Screening (MVP):\n- End-to-end workflow: patient/clinician registry → fundus upload → DR/No-DR inference\n- Confidence + image-quality gates + automatic risk stratification\n- Grad-CAM explainability integrated into the workflow\n- One-page clinical PDF reports (patient summary, prediction + confidence, risk factors, quality metrics, Grad-CAM, clinician notes)\n- Role-based authentication (Admin / Registry / Screening / Reports)\n- CI/CD via GitHub Actions (Ruff linting + import smoke tests)\n- Demo Login Credentials (public test account): Username: admin | Password: admin123\n\nGitHub: " +
       LINKS.retinaAiRepo +
       "\nLive Demo: " +
       LINKS.retinaAiDemo,
