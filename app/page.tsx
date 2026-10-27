@@ -128,14 +128,14 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-[360px]">
             <div className="absolute -inset-4 rounded-[30px] border border-[#e8edf5]" />
 
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[20px] bg-[#edf1f7]">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-[20px] bg-[#edf1f7]">
               <Image
-                src="/profile.jpg"
+                src="/images/pranav-gujjar-profile-final.jpg"
                 alt="Pranav Gujjar"
                 fill
                 priority
                 sizes="(max-width:1024px) 85vw, 360px"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
 
