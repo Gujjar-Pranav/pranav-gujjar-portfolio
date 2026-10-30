@@ -603,9 +603,15 @@ export const SKILL_TO_PROJECTS: SkillToProjectsMap = {
   "Hyperparameter Tuning": pick("Glass Identification", "ReviewSense AI"),
 
   // Voice coaching and browser speech synthesis
-  "Text-to-Speech (TTS)": pick("ForceField — AI Movement Intelligence Platform"),
-  "Adaptive Voice Coaching": pick("ForceField — AI Movement Intelligence Platform"),
-  "Browser Speech Synthesis": pick("ForceField — AI Movement Intelligence Platform"),
+  "Text-to-Speech (TTS)": pick(
+    "ForceField — AI Movement Intelligence Platform",
+  ),
+  "Adaptive Voice Coaching": pick(
+    "ForceField — AI Movement Intelligence Platform",
+  ),
+  "Browser Speech Synthesis": pick(
+    "ForceField — AI Movement Intelligence Platform",
+  ),
 
   // NLP & Speech
   "TF-IDF": pick("ReviewSense AI"),
@@ -618,10 +624,14 @@ export const SKILL_TO_PROJECTS: SkillToProjectsMap = {
   "MediaPipe Pose": pick("ForceField — AI Movement Intelligence Platform"),
   "Pose Estimation": pick("ForceField — AI Movement Intelligence Platform"),
   "Movement Validation": pick("ForceField — AI Movement Intelligence Platform"),
-  "Biomechanical Analysis": pick("ForceField — AI Movement Intelligence Platform"),
+  "Biomechanical Analysis": pick(
+    "ForceField — AI Movement Intelligence Platform",
+  ),
   "Real-Time Inference": pick("ForceField — AI Movement Intelligence Platform"),
   "Voice Coaching": pick("ForceField — AI Movement Intelligence Platform"),
-  "Full-Stack Engineering": pick("ForceField — AI Movement Intelligence Platform"),
+  "Full-Stack Engineering": pick(
+    "ForceField — AI Movement Intelligence Platform",
+  ),
   "Figma to Frontend": pick("ForceField — AI Movement Intelligence Platform"),
   JavaScript: pick("ForceField — AI Movement Intelligence Platform"),
   Supabase: pick("ForceField — AI Movement Intelligence Platform"),
@@ -653,7 +663,10 @@ export const SKILL_TO_PROJECTS: SkillToProjectsMap = {
     "Retina-AI",
     "Glass Identification",
   ),
-  PostgreSQL: pick("ForceField — AI Movement Intelligence Platform", "Strategic Intelligence Stack"),
+  PostgreSQL: pick(
+    "ForceField — AI Movement Intelligence Platform",
+    "Strategic Intelligence Stack",
+  ),
   MongoDB: pick(),
   Matplotlib: pick(
     "ReviewSense AI",

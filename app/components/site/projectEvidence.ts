@@ -6,7 +6,12 @@
  */
 export const projectEvidence: Record<
   string,
-  { category: string; value: string; problem: string; facts: [string, string, string] }
+  {
+    category: string;
+    value: string;
+    problem: string;
+    facts: [string, string, string];
+  }
 > = {
   "ForceField — AI Movement Intelligence Platform": {
     category: "Professional AI product / UK startup",
@@ -21,19 +26,17 @@ export const projectEvidence: Record<
     ],
   },
   "Strategic Intelligence Stack": {
-    problem: "Customer data often sits across reports and dashboards without a clear path from segmentation to actionable decisions. Business teams need a repeatable way to understand customer groups, compare commercial patterns, and evaluate alternative strategies.",
+    problem:
+      "Customer data often sits across reports and dashboards without a clear path from segmentation to actionable decisions. Business teams need a repeatable way to understand customer groups, compare commercial patterns, and evaluate alternative strategies.",
     category: "Decision intelligence",
     value:
       "Transform customer data into actionable business insights. Discover customer segments, understand commercial patterns, and evaluate what-if strategies without retraining models.",
-    facts: [
-      "Customer segmentation",
-      "What-if simulation",
-      "FastAPI + Next.js",
-    ],
+    facts: ["Customer segmentation", "What-if simulation", "FastAPI + Next.js"],
   },
 
   "ReviewSense AI": {
-    problem: "Large volumes of customer reviews are difficult to assess consistently. Sentiment predictions alone are not enough when ambiguous or high-risk feedback requires human attention.",
+    problem:
+      "Large volumes of customer reviews are difficult to assess consistently. Sentiment predictions alone are not enough when ambiguous or high-risk feedback requires human attention.",
     category: "NLP / customer intelligence",
     value:
       "Turn unstructured customer feedback into prioritized, decision-ready insights using sentiment classification, calibrated confidence, and risk-aware review routing.",
@@ -45,19 +48,17 @@ export const projectEvidence: Record<
   },
 
   "Diabetes Prediction App": {
-    problem: "Raw predictive-model outputs can be difficult to interpret and document. A practical decision-support workflow needs consistent preprocessing, understandable risk categories, and accessible reporting.",
+    problem:
+      "Raw predictive-model outputs can be difficult to interpret and document. A practical decision-support workflow needs consistent preprocessing, understandable risk categories, and accessible reporting.",
     category: "Predictive healthcare ML",
     value:
       "Demonstrate how predictive machine learning can support structured diabetes risk assessment through probability estimates, risk categories, patient history, and exportable reports.",
-    facts: [
-      "0.813 ROC-AUC",
-      "Risk stratification",
-      "PDF + Excel reporting",
-    ],
+    facts: ["0.813 ROC-AUC", "Risk stratification", "PDF + Excel reporting"],
   },
 
   "Retina-AI": {
-    problem: "An image classifier alone does not provide a complete retinal screening workflow. A usable prototype must also consider image quality, prediction confidence, explainability, user access, and structured reporting.",
+    problem:
+      "An image classifier alone does not provide a complete retinal screening workflow. A usable prototype must also consider image quality, prediction confidence, explainability, user access, and structured reporting.",
     category: "Medical computer vision",
     value:
       "Explore an end-to-end AI-assisted retinal screening prototype that combines image classification, quality checks, explainability, role-based workflows, and automated reporting.",
@@ -69,26 +70,20 @@ export const projectEvidence: Record<
   },
 
   "Glass Identification": {
-    problem: "A trained classification model is difficult to reuse when preprocessing, model artifacts, and inference logic are disconnected. A deployable application needs a reproducible pipeline and a consistent prediction interface.",
+    problem:
+      "A trained classification model is difficult to reuse when preprocessing, model artifacts, and inference logic are disconnected. A deployable application needs a reproducible pipeline and a consistent prediction interface.",
     category: "Production-oriented ML",
     value:
       "Build reliable classification workflows by connecting ensemble machine learning, reproducible preprocessing, REST APIs, containerized services, and automated deployment checks.",
-    facts: [
-      "90.70% test accuracy",
-      "Stacking ensemble",
-      "FastAPI + Docker",
-    ],
+    facts: ["90.70% test accuracy", "Stacking ensemble", "FastAPI + Docker"],
   },
 
   "Meeting Task Assignment": {
-    problem: "Meeting discussions can contain action items that are difficult to capture and organize manually. An offline transcription and extraction workflow can help turn spoken instructions into structured task records.",
+    problem:
+      "Meeting discussions can contain action items that are difficult to capture and organize manually. An offline transcription and extraction workflow can help turn spoken instructions into structured task records.",
     category: "Speech / NLP automation",
     value:
       "Convert meeting audio into structured, actionable task data using offline speech recognition and NLP extraction, without sending recordings to external inference services.",
-    facts: [
-      "Offline Whisper ASR",
-      "Task extraction",
-      "Structured JSON output",
-    ],
+    facts: ["Offline Whisper ASR", "Task extraction", "Structured JSON output"],
   },
 };

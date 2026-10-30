@@ -34,9 +34,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </nav>
-          <div className="hidden md:block">
-
-          </div>
+          <div className="hidden md:block"></div>
           <button
             aria-label="Toggle navigation"
             aria-expanded={menu}

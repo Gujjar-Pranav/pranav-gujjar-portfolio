@@ -163,58 +163,58 @@ export default function ProjectDetail() {
               </div>
             </div>
             {shots.length > 0 && (
-            <div className="case-aside-panel">
-              <p className="case-section-index">IMPLEMENTATION EVIDENCE</p>
-              <h2>Explore the application</h2>
-              <p className="case-aside-copy">
-                Screenshots are supporting material. The engineering details are
-                available directly on this page.
-              </p>
-              {shots.length > 0 ? (
-                <button
-                  className="case-gallery-trigger"
-                  type="button"
-                  onClick={() => {
-                    setActive(0);
-                    setGalleryOpen(true);
-                  }}
-                >
-                  <span>
-                    View product screenshots{" "}
-                    <small>
-                      {shots.length} image{shots.length === 1 ? "" : "s"}
-                    </small>
-                  </span>
-                  <span aria-hidden="true">↗</span>
-                </button>
-              ) : (
+              <div className="case-aside-panel">
+                <p className="case-section-index">IMPLEMENTATION EVIDENCE</p>
+                <h2>Explore the application</h2>
                 <p className="case-aside-copy">
-                  No screenshots are currently available.
+                  Screenshots are supporting material. The engineering details
+                  are available directly on this page.
                 </p>
-              )}
-            </div>
-            )}
-            {(p.links.code || p.links.demo || p.links.docs) && (
-            <div className="case-aside-panel">
-              <p className="case-section-index">PROJECT LINKS</p>
-              <div className="case-resource-links">
-                {p.links.code && (
-                  <a href={p.links.code} target="_blank" rel="noreferrer">
-                    GitHub repository ↗
-                  </a>
-                )}
-                {p.links.demo && (
-                  <a href={p.links.demo} target="_blank" rel="noreferrer">
-                    Live application ↗
-                  </a>
-                )}
-                {p.links.docs && (
-                  <a href={p.links.docs} target="_blank" rel="noreferrer">
-                    API documentation ↗
-                  </a>
+                {shots.length > 0 ? (
+                  <button
+                    className="case-gallery-trigger"
+                    type="button"
+                    onClick={() => {
+                      setActive(0);
+                      setGalleryOpen(true);
+                    }}
+                  >
+                    <span>
+                      View product screenshots{" "}
+                      <small>
+                        {shots.length} image{shots.length === 1 ? "" : "s"}
+                      </small>
+                    </span>
+                    <span aria-hidden="true">↗</span>
+                  </button>
+                ) : (
+                  <p className="case-aside-copy">
+                    No screenshots are currently available.
+                  </p>
                 )}
               </div>
-            </div>
+            )}
+            {(p.links.code || p.links.demo || p.links.docs) && (
+              <div className="case-aside-panel">
+                <p className="case-section-index">PROJECT LINKS</p>
+                <div className="case-resource-links">
+                  {p.links.code && (
+                    <a href={p.links.code} target="_blank" rel="noreferrer">
+                      GitHub repository ↗
+                    </a>
+                  )}
+                  {p.links.demo && (
+                    <a href={p.links.demo} target="_blank" rel="noreferrer">
+                      Live application ↗
+                    </a>
+                  )}
+                  {p.links.docs && (
+                    <a href={p.links.docs} target="_blank" rel="noreferrer">
+                      API documentation ↗
+                    </a>
+                  )}
+                </div>
+              </div>
             )}
           </aside>
         </div>

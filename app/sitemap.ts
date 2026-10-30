@@ -14,16 +14,10 @@ const projectSlugs = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const mainPages = [
-    "/",
-    "/projects",
-    "/expertise",
-    "/about",
-    "/contact",
-  ];
+  const mainPages = ["/", "/projects", "/expertise", "/about", "/contact"];
 
   const projectPages = projectSlugs.map(
-    (projectSlug) => `/projects/${projectSlug}`
+    (projectSlug) => `/projects/${projectSlug}`,
   );
 
   return [...mainPages, ...projectPages].map((path) => ({

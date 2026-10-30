@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { pageMetadata } from "../lib/siteMetadata";
 
 export const metadata: Metadata = pageMetadata(
-  'Expertise',
+  "Expertise",
   "Explore Pranav Gujjar's expertise in applied machine learning, Computer Vision, NLP, speech synthesis, and production engineering.",
-  "/expertise"
+  "/expertise",
 );
 
 export default function PageLayout({

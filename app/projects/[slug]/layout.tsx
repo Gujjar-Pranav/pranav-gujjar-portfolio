@@ -55,9 +55,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = projectSEO[slug];
 
@@ -71,11 +69,7 @@ export async function generateMetadata({
     };
   }
 
-  return pageMetadata(
-    project.title,
-    project.description,
-    `/projects/${slug}`
-  );
+  return pageMetadata(project.title, project.description, `/projects/${slug}`);
 }
 
 export default function ProjectDetailLayout({

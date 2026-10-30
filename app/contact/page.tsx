@@ -52,18 +52,17 @@ export default function Contact() {
 
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
-            <h1 className="max-w-2xl text-[clamp(2.7rem,4.5vw,4.5rem)] font-semibold leading-[1.06] tracking-[-0.065em] text-[#172238]">
+            <h1 className="max-w-2xl text-[clamp(2.7rem,4.5vw,4.5rem)] leading-[1.06] font-semibold tracking-[-0.065em] text-[#172238]">
               Let&apos;s build
               <br />
-              something{" "}
-              <span className="text-[#315db6]">meaningful.</span>
+              something <span className="text-[#315db6]">meaningful.</span>
             </h1>
 
             <p className="mt-5 max-w-lg text-base leading-7 text-[#657286]">
-              I work at the intersection of artificial intelligence,
-              machine learning, and practical software engineering.
-              I&apos;m interested in ambitious ideas that turn complex
-              problems into useful, real-world solutions.
+              I work at the intersection of artificial intelligence, machine
+              learning, and practical software engineering. I&apos;m interested
+              in ambitious ideas that turn complex problems into useful,
+              real-world solutions.
             </p>
 
             <div className="mt-6 border-l-2 border-[#315db6] pl-5">
@@ -72,8 +71,8 @@ export default function Contact() {
               </p>
               <p className="mt-2 max-w-md text-sm leading-7 text-[#657286]">
                 Whether it&apos;s an AI engineering role, an applied ML
-                collaboration, or a technical challenge, I&apos;d be
-                glad to connect.
+                collaboration, or a technical challenge, I&apos;d be glad to
+                connect.
               </p>
             </div>
           </div>
@@ -94,7 +93,11 @@ export default function Contact() {
                   key={link.number}
                   href={link.href}
                   target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  rel={
+                    link.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                   className={`group flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-[#f7f9fd] ${
                     index !== 0 ? "border-t border-[#e7ebf1]" : ""
                   }`}
@@ -120,13 +123,11 @@ export default function Contact() {
             </div>
 
             <p className="mt-3 text-sm leading-6 text-[#8b96a7]">
-              Explore my work and background, or connect directly
-              through LinkedIn.
+              Explore my work and background, or connect directly through
+              LinkedIn.
             </p>
           </div>
         </div>
-
-
       </main>
     </Shell>
   );

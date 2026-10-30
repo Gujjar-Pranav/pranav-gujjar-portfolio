@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { pageMetadata } from "../lib/siteMetadata";
 
 export const metadata: Metadata = pageMetadata(
-  'About',
+  "About",
   "Learn about Pranav Gujjar's AI engineering experience, UK startup product development, education, and end-to-end machine learning work.",
-  "/about"
+  "/about",
 );
 
 export default function PageLayout({

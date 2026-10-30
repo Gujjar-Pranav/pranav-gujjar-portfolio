@@ -7,6 +7,8 @@ import {
   certGroups,
 } from "../components/portfolio/data";
 
+import Link from "next/link";
+
 export default function About() {
   return (
     <Shell>
@@ -32,32 +34,31 @@ export default function About() {
           className="mb-8 rounded-xl border border-[#dfe7f3] bg-[#f8faff] px-6 py-6 sm:px-8"
           aria-labelledby="about-featured-work"
         >
-          <p className="text-[10px] font-bold uppercase tracking-[.14em] text-[#315db6]">
+          <p className="text-[10px] font-bold tracking-[.14em] text-[#315db6] uppercase">
             From product vision to working MVP
           </p>
 
           <h2
             id="about-featured-work"
-            className="mt-3 text-[clamp(1.35rem,2.4vw,1.8rem)] font-semibold leading-tight tracking-[-.04em] text-[#172238]"
+            className="mt-3 text-[clamp(1.35rem,2.4vw,1.8rem)] leading-tight font-semibold tracking-[-.04em] text-[#172238]"
           >
             Engineering AI products beyond the model.
           </h2>
 
           <div className="mt-4 grid gap-4 text-[13px] leading-7 text-[#617188] lg:grid-cols-2 lg:gap-8">
             <p>
-              At ForceField Training.AI, a UK startup, I helped translate
-              the founder&apos;s vision and Figma designs into a working
-              AI movement-intelligence platform. My engineering work spans
-              frontend, backend, real-time Computer Vision, movement
-              validation, adaptive voice coaching, and secure athlete
-              and coach workflows.
+              At ForceField Training.AI, a UK startup, I helped translate the
+              founder&apos;s vision and Figma designs into a working AI
+              movement-intelligence platform. My engineering work spans
+              frontend, backend, real-time Computer Vision, movement validation,
+              adaptive voice coaching, and secure athlete and coach workflows.
             </p>
 
             <p>
               I designed the infrastructure around startup economics:
-              browser-based AI inference, Vercel Pro, and Supabase Free,
-              with an upgrade path as usage grows. The first MVP is now
-              being tested in the UK market by more than 60 players.
+              browser-based AI inference, Vercel Pro, and Supabase Free, with an
+              upgrade path as usage grows. The first MVP is now being tested in
+              the UK market by more than 60 players.
             </p>
           </div>
 
@@ -72,12 +73,12 @@ export default function About() {
               Cost-conscious architecture
             </span>
 
-            <a
+            <Link
               href="/projects/forcefield-ai-movement-intelligence-platform"
               className="text-[11px] font-bold text-[#315db6] hover:underline hover:underline-offset-4 sm:ml-auto"
             >
               Explore ForceField case study ↗
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -173,9 +174,7 @@ export default function About() {
                 key={`${group.title}-${index}`}
               >
                 <div className="about-credential-heading">
-                  <span>
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
                   <h3>{group.title}</h3>
                 </div>
 
@@ -193,7 +192,7 @@ export default function About() {
           <span>
             Applied machine learning. Thoughtful engineering. Measurable impact.
           </span>
-          <a href="/projects">Explore selected projects ↗</a>
+          <Link href="/projects">Explore selected projects ↗</Link>
         </div>
       </div>
     </Shell>

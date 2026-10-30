@@ -14,7 +14,7 @@ export const SITE_DESCRIPTION =
 export function pageMetadata(
   title: string,
   description: string,
-  pathname: string
+  pathname: string,
 ): Metadata {
   return {
     title,
